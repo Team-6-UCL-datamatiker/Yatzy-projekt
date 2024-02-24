@@ -4,8 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-//Lavet det konsistent med frozen/freeze navnene, ændret metodenavnene til uppercase og fjernet en overflødig int fra if-statement i roll()
-
+// Ændringer i Jeppes kode: Lavet det konsistent med frozen/freeze navnene (i stedet for lock), ændret metodenavnene til uppercase og fjernet en overflødig int fra if-statement i Roll().
+// Tilføjet ChangeIsFrozen() og PrintFrozen().
 namespace DieTest
 {
     internal class Die
@@ -39,6 +39,7 @@ namespace DieTest
             isFrozen = false;
         }
 
+        // Metode der sætter isFrozen til det modsatte af, hvad den var:
         public void ChangeIsFrozen()
         {
             if (isFrozen == true)
@@ -51,6 +52,7 @@ namespace DieTest
             }
         }
 
+        // Metode der bruges i konsollen til at vise om en terning er låst eller ej:
         public string PrintFrozen()
         {
             if (isFrozen == true)

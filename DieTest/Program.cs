@@ -4,17 +4,19 @@
     {
         static void Main(string[] args)
         {
-            // Feltvariable
-            Tur s = new Tur();
+            // Feltvariable:
+            Tur t = new Tur();
             string genstart = "y";
 
-            // Programkode:
+            //Velkomstbesked:
             Console.WriteLine("Velkommen til Raflebæger Simulator. Tryk på Enter for at starte.");
             Console.ReadLine();
             Console.Clear();
+
+            //Løkke der starter turen og genstarter løkken, hvis spilleren vil spille igen:
             while (genstart == "y")
             {
-                s.StartTur();
+                t.StartTur();
                 Console.WriteLine("Tast \"y\" for at spille igen, eller tryk på Enter for at afslutte.");
                 genstart = Console.ReadLine();
                 Console.Clear();

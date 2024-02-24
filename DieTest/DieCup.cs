@@ -14,42 +14,35 @@ namespace DieTest
         private Die d3 = new Die();
         private Die d4 = new Die();
         private Die d5 = new Die();
-        private int d1Value = 0;
-        private int d2Value = 0;
-        private int d3Value = 0;
-        private int d4Value = 0;
-        private int d5Value = 0;
-
 
         // Metoder:
         public void Roll()
         {
             d1.Roll();
-            d1Value = d1.GetValue();
             d2.Roll();
-            d2Value = d2.GetValue();
             d3.Roll();
-            d3Value = d3.GetValue();
             d4.Roll();
-            d4Value = d4.GetValue();
             d5.Roll();
-            d5Value = d5.GetValue();
         }
 
+        // Printer låsestatus + nr. terning + værdien af sidste rul:
         public void PrintValue()
         {
-            Console.WriteLine(d1.PrintFrozen() + "1: " + d1Value);
-            Console.WriteLine(d2.PrintFrozen() + "2: " + d2Value);
-            Console.WriteLine(d3.PrintFrozen() + "3: " + d3Value);
-            Console.WriteLine(d4.PrintFrozen() + "4: " + d4Value);
-            Console.WriteLine(d5.PrintFrozen() + "5: " + d5Value);
+            Console.WriteLine(d1.PrintFrozen() + "1: " + d1.GetValue());
+            Console.WriteLine(d2.PrintFrozen() + "2: " + d2.GetValue());
+            Console.WriteLine(d3.PrintFrozen() + "3: " + d3.GetValue());
+            Console.WriteLine(d4.PrintFrozen() + "4: " + d4.GetValue());
+            Console.WriteLine(d5.PrintFrozen() + "5: " + d5.GetValue());
         }
 
+        // Tjekker hvilke cifre, der er indtastet, når spilleren vil låse terninger, og låser de tilsvarende terninger:
         public void FreezeMultipleDie(string s)
         {
+            // Lokale variable for metoden:
             int length = s.Length;
             int i = 0;
 
+            // While-løkke der gennemgår alle chars i strengen og ignorerer alt andet end tallene 1-5:
             while (i < length)
             {
                 char ch1 = s[i];
