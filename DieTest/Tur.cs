@@ -22,18 +22,21 @@ namespace DieTest
             Console.ReadLine();
 
             // Løkke der giver spilleren 3 rul med raflebægeret:
-            // Kalder dc1.Printvalue() efter hver Console.Clear() i løkken for at holde oversigt over terninger synlig i konsollen.
+            // Kalder dc1.Printvalue() efter hver Console.Clear() i løkken for at holde oversigt over terninger konstant synlig i konsollen.
             while (i < 3)
             {
-                Console.Clear();
-                dc1.PrintValue();
+                // MEGET VIGTIG IMMERSION!
+                for (int j = 0; j < 20; j++ )
+                {
+                    dc1.Roll();
+                    Console.Clear();
+                    dc1.PrintValue();
+                    Console.WriteLine("\nRafle rafle rafle...");
+                    Thread.Sleep(75);
+                }
                 dc1.Roll();
-                Thread.Sleep(1000);
-                Console.WriteLine("\nRafle rafle rafle...");
-                Thread.Sleep(2000);
                 Console.Clear();
                 dc1.PrintValue();
-                
                 //Ændrer konsolteksten efter de første 2 rul, da man ikke kan låse (op) eller rafle efter sidste rul:
                 if (i < 2)
                 {
@@ -42,7 +45,7 @@ namespace DieTest
                 }
                 else
                 {
-                    Console.WriteLine("\nKlasse raflet! Tryk på Enter for at fortsætte.");
+                    Console.WriteLine("\nKlasse raflet! Tryk på Enter for at afslutte denne tur.");
                     Console.ReadLine();
                     Console.Clear();
                 }
