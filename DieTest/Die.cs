@@ -52,7 +52,7 @@ namespace DieTest
             }
         }
 
-        // Metode der bruges i konsollen til at vise om en terning er låst eller ej:
+        // Metode der bruges til i konsollen at vise om en terning er låst eller ej:
         public string PrintFrozen()
         {
             if (isFrozen == true)

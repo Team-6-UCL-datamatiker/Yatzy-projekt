@@ -30,7 +30,7 @@ namespace DieTest
                 dc1.Roll();
                 Thread.Sleep(1000);
                 Console.WriteLine("\nRafle rafle rafle...");
-                Thread.Sleep(1500);
+                Thread.Sleep(2000);
                 Console.Clear();
                 dc1.PrintValue();
                 
