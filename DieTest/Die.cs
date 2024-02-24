@@ -4,37 +4,63 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+//Lavet det konsistent med frozen/freeze navnene, ændret metodenavnene til uppercase og fjernet en overflødig int fra if-statement i roll()
+
 namespace DieTest
 {
     internal class Die
     {
+        // Feltvariable:
         private int value;
-        private bool isLocked;
+        private bool isFrozen;
 
-        public void roll()
+        // Metoder:
+        public void Roll()
         {
-            if (this.isLocked == false)
+            if (isFrozen == false)
             {
                 Random r = new Random();
-                int randomValue = r.Next(1, 7);
-                this.value = randomValue;
+                value = r.Next(1, 7);
             }
-
         }
 
-        public int getValue()
+        public int GetValue()
         {
-            return this.value;
+            return value;
         }
 
-        public void freeze()
+        public void Freeze()
         {
-            this.isLocked = true;
+            isFrozen = true;
         }
 
-        public void unlock()
+        public void UnFreeze()
         {
-            this.isLocked = false;
+            isFrozen = false;
+        }
+
+        public void ChangeIsFrozen()
+        {
+            if (isFrozen == true)
+            {
+                UnFreeze();
+            }
+            else
+            {
+                Freeze();
+            }
+        }
+
+        public string PrintFrozen()
+        {
+            if (isFrozen == true)
+            {
+                return "[L] ";
+            }
+            else
+            {
+                return "[ ] ";
+            }
         }
     }
 }

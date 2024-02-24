@@ -4,15 +4,20 @@
     {
         static void Main(string[] args)
         {
-            Die die1 = new Die();
+            // Feltvariable
+            Tur s = new Tur();
+            string genstart = "y";
 
-            int index = 0;
-            while (index < 100)
+            // Programkode:
+            Console.WriteLine("Velkommen til Raflebæger Simulator. Tryk på Enter for at starte.");
+            Console.ReadLine();
+            Console.Clear();
+            while (genstart == "y")
             {
-                die1.roll();
-                //die1.freeze();
-                Console.WriteLine(die1.getValue());
-                index++;
+                s.StartTur();
+                Console.WriteLine("Tast \"y\" for at spille igen, eller tryk på Enter for at afslutte.");
+                genstart = Console.ReadLine();
+                Console.Clear();
             }
         }
     }
