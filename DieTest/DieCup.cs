@@ -25,17 +25,21 @@ namespace DieTest
             d5.Roll();
         }
 
-        // Printer låsestatus + nr. terning + værdien af sidste rul:
-        public void PrintValue()
+        // Tager en int som parameter for at printe om det er 1., 2. eller 3. rul (første WriteLine):
+        // Printer låsestatus + nr. terning + værdien af seneste rul for hver terning:
+        // Clearer terminalen før hvert print, så det kun står der én gang og altid øverst:
+        public void PrintValue(int i)
         {
-            Console.WriteLine(d1.PrintFrozen() + "1: " + d1.GetValue());
-            Console.WriteLine(d2.PrintFrozen() + "2: " + d2.GetValue());
-            Console.WriteLine(d3.PrintFrozen() + "3: " + d3.GetValue());
-            Console.WriteLine(d4.PrintFrozen() + "4: " + d4.GetValue());
-            Console.WriteLine(d5.PrintFrozen() + "5: " + d5.GetValue());
+            Console.Clear();
+            Console.WriteLine((i+1) + ". Rul\n");
+            Console.WriteLine(d1.PrintFrozen() + "Terning 1: " + d1.GetValue());
+            Console.WriteLine(d2.PrintFrozen() + "Terning 2: " + d2.GetValue());
+            Console.WriteLine(d3.PrintFrozen() + "Terning 3: " + d3.GetValue());
+            Console.WriteLine(d4.PrintFrozen() + "Terning 4: " + d4.GetValue());
+            Console.WriteLine(d5.PrintFrozen() + "Terning 5: " + d5.GetValue());
         }
 
-        // Tjekker hvilke cifre, der er indtastet, når spilleren vil låse terninger, og låser de tilsvarende terninger:
+        // Tager en streng som parameter for at tjekke hvilke cifre, der er indtastet, når spilleren vil låse terninger, og låser de tilsvarende terninger:
         public void FreezeMultipleDie(string s)
         {
             // Lokale variable for metoden:
@@ -68,6 +72,16 @@ namespace DieTest
                 }
                 i++;
             }
+        }
+
+        // Låser alle terninger (brugt efter tredje rul):
+        public void FreezeAllDie()
+        {
+            d1.Freeze();
+            d2.Freeze();
+            d3.Freeze();
+            d4.Freeze();
+            d5.Freeze();
         }
     }
 }

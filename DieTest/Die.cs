@@ -57,7 +57,7 @@ namespace DieTest
         {
             if (isFrozen == true)
             {
-                return "[L] ";
+                return "[X] ";
             }
             else
             {
