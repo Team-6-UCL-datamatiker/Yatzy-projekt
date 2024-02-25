@@ -28,15 +28,15 @@ namespace DieTest
         // Tager den int, der styrer hvor mange rul man har, som parameter for at printe om det er 1., 2. eller 3. rul (første WriteLine):
         // Printer låsestatus + nr. terning + værdien af seneste rul for hver terning:
         // Clearer terminalen før hvert print, så det kun står der én gang og altid øverst:
-        public void PrintValue(int i)
+        public void PrintEyes(int i)
         {
             Console.Clear();
             Console.WriteLine((i+1) + ". Rul\n");
-            Console.WriteLine(d1.PrintFrozen() + "Terning 1: " + d1.GetValue());
-            Console.WriteLine(d2.PrintFrozen() + "Terning 2: " + d2.GetValue());
-            Console.WriteLine(d3.PrintFrozen() + "Terning 3: " + d3.GetValue());
-            Console.WriteLine(d4.PrintFrozen() + "Terning 4: " + d4.GetValue());
-            Console.WriteLine(d5.PrintFrozen() + "Terning 5: " + d5.GetValue());
+            Console.WriteLine(d1.PrintFrozen() + "Terning 1: " + d1.Eyes);
+            Console.WriteLine(d2.PrintFrozen() + "Terning 2: " + d2.Eyes);
+            Console.WriteLine(d3.PrintFrozen() + "Terning 3: " + d3.Eyes);
+            Console.WriteLine(d4.PrintFrozen() + "Terning 4: " + d4.Eyes);
+            Console.WriteLine(d5.PrintFrozen() + "Terning 5: " + d5.Eyes);
         }
 
         // Tager en streng som parameter for at tjekke hvilke cifre, der er indtastet, når spilleren vil låse terninger, og låser de tilsvarende terninger:
@@ -53,19 +53,19 @@ namespace DieTest
                 switch (ch1)
                 {
                     case '1':
-                        d1.ChangeIsFrozen();
+                        d1.SwitchIsFrozen();
                         break;
                     case '2':
-                        d2.ChangeIsFrozen();
+                        d2.SwitchIsFrozen();
                         break;
                     case '3':
-                        d3.ChangeIsFrozen();
+                        d3.SwitchIsFrozen();
                         break;
                     case '4':
-                        d4.ChangeIsFrozen();
+                        d4.SwitchIsFrozen();
                         break;
                     case '5':
-                        d5.ChangeIsFrozen();
+                        d5.SwitchIsFrozen();
                         break;
                     default:
                         break;
@@ -77,11 +77,11 @@ namespace DieTest
         // Låser alle terninger (bruges efter tredje rul):
         public void FreezeAllDie()
         {
-            d1.Freeze();
-            d2.Freeze();
-            d3.Freeze();
-            d4.Freeze();
-            d5.Freeze();
+            d1.IsFrozen = true;
+            d2.IsFrozen = true;
+            d3.IsFrozen = true;
+            d4.IsFrozen = true;
+            d5.IsFrozen = true;
         }
     }
 }

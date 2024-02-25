@@ -26,21 +26,21 @@ namespace DieTest
             while (i < 3)
             {
                 // Rafle Version 1
-                // MEGET VIGTIG IMMERSION!
+                // MEGET VIGTIG IMMERSION! ("Rafle-animation")
                 for (int j = 0; j < 20; j++)
                 {
                     dc1.Roll();
-                    dc1.PrintValue(i);
+                    dc1.PrintEyes(i);
                     Console.WriteLine("\nRafle rafle rafle...\n");
                     Thread.Sleep(75);
                 }
 
                 //// Rafle Version 2
-                //// MEGET VIGTIG IMMERSION!
+                //// MEGET VIGTIG IMMERSION! ("Rafle-animation")
                 //dc1.PrintValue(i);
                 //Console.Write("\nRAFLE");
                 //Thread.Sleep(500);
-                //// MEGET VIGTIG IMMERSION!
+                //// MEGET VIGTIG IMMERSION! ("Rafle-animation")
                 //for (int j = 0; j < 20; j++)
                 //{
                 //    dc1.Roll();
@@ -52,7 +52,7 @@ namespace DieTest
                 //}
 
                 dc1.Roll();
-                dc1.PrintValue(i);
+                dc1.PrintEyes(i);
                 //Ændrer konsolteksten efter de første 2 rul, da man ikke kan låse (op) eller rafle efter sidste rul:
                 if (i < 2)
                 {
@@ -66,14 +66,14 @@ namespace DieTest
                     {
                         s = Console.ReadLine();
                         dc1.FreezeMultipleDie(s);
-                        dc1.PrintValue(i);
+                        dc1.PrintEyes(i);
                         Console.WriteLine("\nIndtast numrene på de terninger, du vil låse (op), eller tryk på Enter for at rafle.\n");
                     }
                 }
                 else
                 {
                     dc1.FreezeAllDie();
-                    dc1.PrintValue(i);
+                    dc1.PrintEyes(i);
                     Console.WriteLine("\nKlasse raflet! Tryk på Enter for at afslutte din tur.\n");
                     Console.ReadLine();
                     Console.Clear();
