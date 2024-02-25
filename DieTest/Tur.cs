@@ -25,6 +25,7 @@ namespace DieTest
             // Løkke der giver spilleren 3 rul med raflebægeret:
             while (i < 3)
             {
+                // Rafle Version 1
                 // MEGET VIGTIG IMMERSION!
                 for (int j = 0; j < 20; j++)
                 {
@@ -33,6 +34,23 @@ namespace DieTest
                     Console.WriteLine("\nRafle rafle rafle...\n");
                     Thread.Sleep(75);
                 }
+
+                //// Rafle Version 2
+                //// MEGET VIGTIG IMMERSION!
+                //dc1.PrintValue(i);
+                //Console.Write("\nRAFLE");
+                //Thread.Sleep(500);
+                //// MEGET VIGTIG IMMERSION!
+                //for (int j = 0; j < 20; j++)
+                //{
+                //    dc1.Roll();
+                //    dc1.PrintValue(i);
+                //    Random r = new Random();
+                //    Random rr = new Random();
+                //    Console.Write((String.Concat(Enumerable.Repeat("\n", r.Next(2, 5)))) + ("RAFLE".PadLeft(rr.Next(3, 10))));
+                //    Thread.Sleep(75);
+                //}
+
                 dc1.Roll();
                 dc1.PrintValue(i);
                 //Ændrer konsolteksten efter de første 2 rul, da man ikke kan låse (op) eller rafle efter sidste rul:

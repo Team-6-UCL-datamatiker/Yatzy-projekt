@@ -25,7 +25,7 @@ namespace DieTest
             d5.Roll();
         }
 
-        // Tager en int som parameter for at printe om det er 1., 2. eller 3. rul (første WriteLine):
+        // Tager den int, der styrer hvor mange rul man har, som parameter for at printe om det er 1., 2. eller 3. rul (første WriteLine):
         // Printer låsestatus + nr. terning + værdien af seneste rul for hver terning:
         // Clearer terminalen før hvert print, så det kun står der én gang og altid øverst:
         public void PrintValue(int i)
@@ -74,7 +74,7 @@ namespace DieTest
             }
         }
 
-        // Låser alle terninger (brugt efter tredje rul):
+        // Låser alle terninger (bruges efter tredje rul):
         public void FreezeAllDie()
         {
             d1.Freeze();
