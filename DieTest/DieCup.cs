@@ -14,7 +14,6 @@ namespace DieTest
         private Die d3 = new Die();
         private Die d4 = new Die();
         private Die d5 = new Die();
-
         // Metoder:
         public void Roll()
         {
@@ -32,11 +31,11 @@ namespace DieTest
         {
             Console.Clear();
             Console.WriteLine((i+1) + ". Rul\n");
-            Console.WriteLine(d1.PrintFrozen() + "Terning 1: " + d1.Eyes);
-            Console.WriteLine(d2.PrintFrozen() + "Terning 2: " + d2.Eyes);
-            Console.WriteLine(d3.PrintFrozen() + "Terning 3: " + d3.Eyes);
-            Console.WriteLine(d4.PrintFrozen() + "Terning 4: " + d4.Eyes);
-            Console.WriteLine(d5.PrintFrozen() + "Terning 5: " + d5.Eyes);
+            Console.WriteLine(d1.PrintIsFrozen() + "Terning 1: " + d1.Eyes);
+            Console.WriteLine(d2.PrintIsFrozen() + "Terning 2: " + d2.Eyes);
+            Console.WriteLine(d3.PrintIsFrozen() + "Terning 3: " + d3.Eyes);
+            Console.WriteLine(d4.PrintIsFrozen() + "Terning 4: " + d4.Eyes);
+            Console.WriteLine(d5.PrintIsFrozen() + "Terning 5: " + d5.Eyes);
         }
 
         // Tager en streng som parameter for at tjekke hvilke cifre, der er indtastet, når spilleren vil låse terninger, og låser de tilsvarende terninger:
