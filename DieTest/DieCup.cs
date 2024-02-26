@@ -9,13 +9,13 @@ namespace DieTest
     internal class DieCup
     {
         // Feltvariable:
-        private Die[] dA = new Die[5] { new Die(), new Die(), new Die(), new Die(), new Die() };
+        private Dice[] dieA = new Dice[5] { new Dice(), new Dice(), new Dice(), new Dice(), new Dice() };
 
         // Metoder:
         // Ruller alle terninger i arrayet:
         public void Roll()
         {
-            foreach (Die d in dA)
+            foreach (Dice d in dieA)
             {
                 d.Roll();
             }
@@ -27,9 +27,9 @@ namespace DieTest
         {
             Console.Clear();
             Console.WriteLine((i + 1) + ". Rul\n");
-            foreach (Die d in dA)
+            foreach (Dice d in dieA)
             {
-                Console.WriteLine(d.PrintIsFrozen() + "Terning " + (Array.IndexOf(dA, d) + 1) + ": " + d.Eyes);
+                Console.WriteLine(d.PrintIsFrozen() + "Terning " + (Array.IndexOf(dieA, d) + 1) + ": " + d.Eyes);
             }
         }
 
@@ -40,7 +40,7 @@ namespace DieTest
             {
                 if (s.Contains((i + 1).ToString()))
                 {
-                    dA[i].SwitchIsFrozen();
+                    dieA[i].SwitchIsFrozen();
                 }
             }
         }
@@ -48,7 +48,7 @@ namespace DieTest
         // Låser alle terninger (bruges efter tredje rul):
         public void FreezeAllDie()
         {
-            foreach (Die d in dA)
+            foreach (Dice d in dieA)
             {
                 d.IsFrozen = true;
             }

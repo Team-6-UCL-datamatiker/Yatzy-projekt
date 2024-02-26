@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DieTest
 {
-    internal class Die
+    internal class Dice
     {
         // Feltvariable:
         private Random r = new Random();
