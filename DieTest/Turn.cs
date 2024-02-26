@@ -11,7 +11,7 @@ namespace DieTest
         // Feltvariable:
 
         // Metoder:
-        public void StartTur()
+        public void StartTurn()
         {
             // Lokale variable for metoden:
             DieCup dc1 = new DieCup();
@@ -49,14 +49,14 @@ namespace DieTest
                     while (s != "")
                     {
                         s = Console.ReadLine();
-                        dc1.FreezeMultipleDie(s);
+                        dc1.FreezeMultipleDice(s);
                         dc1.PrintEyes(i);
                         Console.WriteLine("\nIndtast numrene på de terninger, du vil låse (op), eller tryk på Enter for at rafle.\n");
                     }
                 }
                 else
                 {
-                    dc1.FreezeAllDie();
+                    dc1.FreezeAllDice();
                     dc1.PrintEyes(i);
                     Console.WriteLine("\nKlasse raflet! Tryk på Enter for at afslutte din tur.\n");
                     Console.ReadLine();

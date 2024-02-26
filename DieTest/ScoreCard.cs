@@ -9,28 +9,95 @@ namespace DieTest
 {
     internal class ScoreCard
     {
-        public void PrintScoreCard()
+        public void PrintScoreCard(Player[] pA)
         {
-            Console.WriteLine("1’ere: ");
+            Console.Clear();
+            Console.Write("Spillere___________ " + "| ");
+            foreach (Player p in pA)
+            {
+                p.PrintName();
+            }
+            Console.Write("\n1’ere______________ " + "| ");
+            foreach (Player p in pA)
+            {
+                p.PrintProperty(p.Enere);
+            }
+            Console.Write("\n2’ere______________ " + "| ");
+            foreach (Player p in pA)
+            {
+                p.PrintProperty(p.Toere);
+            }
+            Console.Write("\n3’ere______________ " + "| ");
+            foreach (Player p in pA)
+            {
+                p.PrintProperty(p.Treere);
+            }
+            Console.Write("\n4’ere______________ " + "| ");
+            foreach (Player p in pA)
+            {
+                p.PrintProperty(p.Firere);
+            }
+            Console.Write("\n5’ere______________ " + "| ");
+            foreach (Player p in pA)
+            {
+                p.PrintProperty(p.Femmere);
+            }
+            Console.Write("\n6’ere______________ " + "| ");
+            foreach (Player p in pA)
+            {
+                p.PrintProperty(p.Seksere);
+            }
+            Console.Write("\nBonus______________ " + "| ");
+            foreach (Player p in pA)
+            {
+                p.PrintProperty(p.Bonus);
+            }
+            Console.Write("\nEt par_____________ " + "| ");
+            foreach (Player p in pA)
+            {
+                p.PrintProperty(p.EtPar);
+            }
+            Console.Write("\nTo par_____________ " + "| ");
+            foreach (Player p in pA)
+            {
+                p.PrintProperty(p.ToPar);
+            }
+            Console.Write("\nTre ens____________ " + "| ");
+            foreach (Player p in pA)
+            {
+                p.PrintProperty(p.TreEns);
+            }
+            Console.Write("\nFire ens___________ " + "| ");
+            foreach (Player p in pA)
+            {
+                p.PrintProperty(p.FireEns);
+            }
+            Console.Write("\nLille Straight_____ " + "| ");
+            foreach (Player p in pA)
+            {
+                p.PrintProperty(p.LilleStraight);
+            }
+            Console.Write("\nStor Straight______ " + "| ");
+            foreach (Player p in pA)
+            {
+                p.PrintProperty(p.StorStraight);
+            }
+            Console.Write("\nChancen____________ " + "| ");
+            foreach (Player p in pA)
+            {
+                p.PrintProperty(p.Chancen);
+            }
+            Console.Write("\nYatzy______________ " + "| ");
+            foreach (Player p in pA)
+            {
+                p.PrintProperty(p.Yatzy);
+            }
+            Console.Write("\nSamlet Score_______ " + "| ");
+            foreach (Player p in pA)
+            {
+                p.PrintProperty(p.TotalScore);
+            }
+            Console.WriteLine("\n");
         }
-        
-        
-        //1’ere: Summen af alle terninger med 1. 
-        //2’ere: Summen af alle terninger med 2. 
-        //3’ere: Summen af alle terninger med 3. 
-        //4’ere: Summen af alle terninger med 4. 
-        //5’ere: Summen af alle terninger med 5. 
-        //6’ere: Summen af alle terninger med 6.
-        //Bonus:
-        //Et par: To terninger med samme værdi.Summen af terningerne.
-        //To par: To forskellige par.Summen af terningerne.
-        //Tre ens: Tre terninger med samme værdi.Summen af terningerne.
-        //Fire ens: Fire terninger med samme værdi.Summen af terningerne.
-        //Lille straight: Fem terninger i rækkefølge fra 1 til 5. 15 point.
-        //Store straight: Fem terninger i rækkefølge fra 2 til 6. 20 point.
-        //Chancen: Summen af alle fem terninger.
-        //Yatzy: Fem terninger med samme værdi. 50 point.
-
-
     }
 }

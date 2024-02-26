@@ -9,22 +9,30 @@ namespace DieTest
     internal class Game
     {
         // Feltvariable:
-        private string genstart = "";
-        private string antalSpillere;
+        private string genstart;
+
+        private GameHelper gH = new GameHelper();
         private Turn t = new Turn();
+        private ScoreCard s = new ScoreCard();
 
 
         public void Execute()
         {
-            //Velkomstbesked:
-            Console.WriteLine("Velkommen til Raflebæger Simulator. Indtast antallet af spillere.\n");
-            antalSpillere = Console.ReadLine();
+            //Intro
+            Console.WriteLine("Velkommen til Yatzy.");
+            Console.WriteLine("\nIndtast antallet af spillere (2-5).\n");
+            int iPlayers = gH.NoOfPlayers(Console.ReadLine());
+            Player[] playersA = gH.CreatePlayers(iPlayers);
+            s.PrintScoreCard(playersA);
+            Console.ReadLine();
+
+
             Console.Clear();
 
             //Løkke der starter turen og genstarter løkken, hvis spilleren vil spille igen:
             while (genstart != "q")
             {
-                t.StartTur();
+                t.StartTurn();
                 Console.WriteLine("Tryk på Enter for at spille igen, eller tast \"q\" for at afslutte.\n");
                 genstart = Console.ReadLine();
                 Console.Clear();
