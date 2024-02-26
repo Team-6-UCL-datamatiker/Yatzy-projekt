@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DieTest
 {
-    internal class Tur
+    internal class Turn
     {
         // Feltvariable:
 
