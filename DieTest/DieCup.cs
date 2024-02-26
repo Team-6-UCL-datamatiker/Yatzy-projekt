@@ -9,11 +9,17 @@ namespace DieTest
     internal class DieCup
     {
         // Feltvariable:
+        private Die[] dieArray = new Die[5];
         private Die d1 = new Die();
         private Die d2 = new Die();
         private Die d3 = new Die();
         private Die d4 = new Die();
         private Die d5 = new Die();
+        // Constructor:
+        public DieCup()
+        {
+            Die[] dieArray = {d1, d2, d3, d4, d5};
+        }
         // Metoder:
         public void Roll()
         {
