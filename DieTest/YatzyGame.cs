@@ -52,7 +52,7 @@ namespace DieTest
                 {
                     Console.Write("Name of player" + i + ": ");
                     string name = Console.ReadLine();
-                    if (name != null)
+                    if (name != null && name != "")
                     {
                         SetPlayerName(i - 1, name);
                         break;
