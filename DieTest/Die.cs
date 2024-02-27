@@ -27,7 +27,7 @@ namespace DieTest
             return this.value;
         }
 
-        public void freeze()
+        public void Lock()
         {
             this.isLocked = true;
         }
