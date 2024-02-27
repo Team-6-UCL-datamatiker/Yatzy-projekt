@@ -110,7 +110,7 @@ namespace DieTest
                     Console.ForegroundColor = ConsoleColor.Red;
                     dieCup.FreezeAllDice();
                     dieCup.PrintEyes(rollCount);
-                    Console.WriteLine("\nKlasse raflet! Tryk på Enter for at afslutte din tur.\n");
+                    Console.WriteLine("\nKlasse raflet " + currentPlayer.GetName() + "! Tryk på Enter for at afslutte din tur.\n");
                     Console.ReadLine();
                     Console.Clear();
                     Console.ResetColor();
