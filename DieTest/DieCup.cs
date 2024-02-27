@@ -10,6 +10,7 @@ namespace DieTest
     {
         // Feltvariable:
         private Die[] dieA = new Die[5] { new Die(), new Die(), new Die(), new Die(), new Die() };
+        public Die[] DieA { get { return dieA; } }
 
         // Metoder:
         // Ruller alle terninger i arrayet:

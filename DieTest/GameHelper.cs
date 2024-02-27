@@ -11,10 +11,11 @@ namespace DieTest
         public int NoOfPlayers(string s)
         {
             int i = 0;
-            while (i < 2 || i > 5)
+            while (i < 1 || i > 5)
             {
                 switch (s)
                 {
+                    case "1":
                     case "2":
                     case "3":
                     case "4":
@@ -24,7 +25,7 @@ namespace DieTest
                         break;
                     default:
                         Console.Clear();
-                        Console.WriteLine("Indtast et tal mellem 2 og 5.\n");
+                        Console.WriteLine("Indtast et tal mellem 1 og 5.\n");
                         s = Console.ReadLine();
                         break;
                 }
