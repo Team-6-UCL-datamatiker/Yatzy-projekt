@@ -25,7 +25,6 @@ namespace DieTest
         // Printer oversigt over alle terninger i konsollen:
         public void PrintEyes(int i)
         {
-            Console.Clear();
             Console.WriteLine((i + 1) + ". Rul\n");
             foreach (Die d in dieA)
             {

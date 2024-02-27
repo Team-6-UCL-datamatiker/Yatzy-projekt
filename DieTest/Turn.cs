@@ -11,58 +11,74 @@ namespace DieTest
         // Feltvariable:
 
         // Metoder:
-        public void StartTurn()
+        public void StartTurn(Player[] pA, ScoreCard sC)
         {
-            // Lokale variable for metoden:
-            DieCup dc1 = new DieCup();
-            int i = 0;
-            string s = "";
-
-            // Starter turen:
-            Console.WriteLine("Tryk på Enter for at rafle.\n");
-            Console.ReadLine();
-
-            // Løkke der giver spilleren 3 rul med raflebægeret:
-            while (i < 3)
+            foreach (Player p in pA)
             {
-                // Rafle Version 1
-                // MEGET VIGTIG IMMERSION! ("Rafle-animation")
-                for (int j = 0; j < 20; j++)
-                {
-                    dc1.Roll();
-                    dc1.PrintEyes(i);
-                    Console.WriteLine("\nRafle rafle rafle...\n");
-                    Thread.Sleep(75);
-                }
+                // Lokale variable for metoden:
+                DieCup dc1 = new DieCup();
+                int i = 0;
+                string s = "";
 
-                dc1.Roll();
-                dc1.PrintEyes(i);
-                //Ændrer konsolteksten efter de første 2 rul, da man ikke kan låse (op) eller rafle efter sidste rul:
-                if (i < 2)
+                // Starter turen:
+                sC.PrintScoreCard(pA);
+                Console.Write(p.Name + "s tur:\n\n");
+                Console.WriteLine("Tryk på Enter for at rafle.\n");
+                Console.ReadLine();
+
+                // Løkke der giver spilleren 3 rul med raflebægeret:
+                while (i < 3)
                 {
-                    //While-løkken gør, at man skal bekræfte sit valg af låste terninger, før spillet fortsætter:
-                    //Spillet fortsætter ikke, så længe der indtastes noget i terminalen (!= ""):
-                    //Derfor sættes strengen s til ikke at være tom (arbitrært sat til "a") før hver løkke:
-                    //Spillet fortsætter når der trykkes Enter uden input:
-                    s = "a";
-                    Console.WriteLine("\nIndtast numrene på de terninger, du vil låse (op), eller tryk på Enter for at rafle.\n");
-                    while (s != "")
+                    // Rafle Version 1
+                    // MEGET VIGTIG IMMERSION! ("Rafle-animation")
+                    for (int j = 0; j < 20; j++)
                     {
-                        s = Console.ReadLine();
-                        dc1.FreezeMultipleDice(s);
+                        dc1.Roll();
+                        sC.PrintScoreCard(pA);
+                        Console.Write(p.Name + "s tur:\n\n");
                         dc1.PrintEyes(i);
-                        Console.WriteLine("\nIndtast numrene på de terninger, du vil låse (op), eller tryk på Enter for at rafle.\n");
+                        Console.WriteLine("\nRafle rafle rafle...\n");
+                        Thread.Sleep(75);
                     }
-                }
-                else
-                {
-                    dc1.FreezeAllDice();
+
+                    dc1.Roll();
+                    sC.PrintScoreCard(pA);
+                    Console.Write(p.Name + "s tur:\n\n");
                     dc1.PrintEyes(i);
-                    Console.WriteLine("\nKlasse raflet! Tryk på Enter for at afslutte din tur.\n");
-                    Console.ReadLine();
-                    Console.Clear();
+                    //Ændrer konsolteksten efter de første 2 rul, da man ikke kan låse (op) eller rafle efter sidste rul:
+                    if (i < 2)
+                    {
+                        //While-løkken gør, at man skal bekræfte sit valg af låste terninger, før spillet fortsætter:
+                        //Spillet fortsætter ikke, så længe der indtastes noget i terminalen (!= ""):
+                        //Derfor sættes strengen s til ikke at være tom (arbitrært sat til "a") før hver løkke:
+                        //Spillet fortsætter når der trykkes Enter uden input:
+                        s = "a";
+                        Console.WriteLine("\n\n\n\n\n\n\n\n\n\n\n");
+                        Console.WriteLine("\nIndtast numrene på de terninger, du vil låse (op), eller tryk på Enter for at rafle.\n");
+                        while (s != "")
+                        {
+                            s = Console.ReadLine();
+                            dc1.FreezeMultipleDice(s);
+                            sC.PrintScoreCard(pA);
+                            Console.Write(p.Name + "s tur:\n\n");
+                            dc1.PrintEyes(i);
+                            Console.WriteLine("\n\n\n\n\n\n\n\n\n\n\n");
+                            Console.WriteLine("\nIndtast numrene på de terninger, du vil låse (op), eller tryk på Enter for at rafle.\n");
+                        }
+                    }
+                    else
+                    {
+                        dc1.FreezeAllDice();
+                        sC.PrintScoreCard(pA);
+                        Console.Write(p.Name + "s tur:\n\n");
+                        dc1.PrintEyes(i);
+                        Console.WriteLine("\n\n\n\n\n\n\n\n\n\n\n");
+                        Console.WriteLine("\nKlasse raflet! Tryk på Enter for at afslutte din tur.\n");
+                        Console.ReadLine();
+                        sC.PrintScoreCard(pA);
+                    }
+                    i++;
                 }
-                i++;
             }
         }
     }

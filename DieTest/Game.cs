@@ -9,10 +9,10 @@ namespace DieTest
     internal class Game
     {
         // Feltvariable:
-        private string genstart;
+        private int genstart;
         private GameHelper gH = new GameHelper();
         private Turn t = new Turn();
-        private ScoreCard s = new ScoreCard();
+        private ScoreCard sC = new ScoreCard();
 
 
         public void Execute()
@@ -22,17 +22,15 @@ namespace DieTest
             Console.WriteLine("\nIndtast antallet af spillere (2-5).\n");
             int iPlayers = gH.NoOfPlayers(Console.ReadLine());
             Player[] playersA = gH.CreatePlayers(iPlayers);
-            s.PrintScoreCard(playersA);
-            //Console.WriteLine("aposkda");
-            Console.ReadLine();
 
             //Løkke der starter turen og genstarter løkken, hvis spilleren vil spille igen:
-            while (genstart != "q")
+            while (genstart < 15)
             {
-                t.StartTurn();
+                t.StartTurn(playersA, sC);
                 Console.WriteLine("Tryk på Enter for at spille igen, eller tast \"q\" for at afslutte.\n");
-                genstart = Console.ReadLine();
-                Console.Clear();
+                sC.PrintScoreCard(playersA);
+                genstart++;
+
             }
         }
 
