@@ -10,7 +10,6 @@ namespace DieTest
     {
         // Feltvariable:
         private string genstart;
-
         private GameHelper gH = new GameHelper();
         private Turn t = new Turn();
         private ScoreCard s = new ScoreCard();
@@ -24,10 +23,8 @@ namespace DieTest
             int iPlayers = gH.NoOfPlayers(Console.ReadLine());
             Player[] playersA = gH.CreatePlayers(iPlayers);
             s.PrintScoreCard(playersA);
+            //Console.WriteLine("aposkda");
             Console.ReadLine();
-
-
-            Console.Clear();
 
             //Løkke der starter turen og genstarter løkken, hvis spilleren vil spille igen:
             while (genstart != "q")
