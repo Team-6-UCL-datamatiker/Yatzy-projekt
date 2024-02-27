@@ -81,7 +81,7 @@ namespace DieTest
                     dieCup.Roll();
                     dieCup.PrintEyes(rollCount);
                     Console.WriteLine("\nRafle rafle rafle...\n");
-                    Thread.Sleep(75);
+                    Thread.Sleep(25);
                 }
                 Console.WriteLine(currentPlayer.GetName() + "'s turn");
                 Console.WriteLine("Round: " + currentRound);
