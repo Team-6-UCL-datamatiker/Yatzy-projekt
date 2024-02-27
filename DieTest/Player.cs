@@ -15,12 +15,12 @@ namespace DieTest
             this.name = "";
         }
 
-        public string getName()
+        public string GetName()
         {
             return this.name;
         }
 
-        public void setName(string name)
+        public void SetName(string name)
         {
             this.name = name;
         }

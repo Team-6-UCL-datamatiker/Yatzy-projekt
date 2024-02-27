@@ -29,21 +29,21 @@ namespace DieTest
             currentPlayer = players[0];
         }
 
-        public void startGame()
+        public void StartGame()
         {
-            registerNames();
+            RegisterNames();
             for (int i = currentRound; i <= 14; currentRound++) //Round (14 total)
             {
                 for (int j = 0; j < players.Count; j++) //Turn (1 for each player per round)
                 {
-                    playTurn();
-                    changeTurn();
+                    PlayTurn();
+                    ChangeTurn();
                 }
             }
         }
 
         //sets name of each player 
-        public void registerNames()
+        public void RegisterNames()
         {
             Console.Clear();
             for (int i = 1; i <= players.Count; i++)
@@ -54,7 +54,7 @@ namespace DieTest
                     string name = Console.ReadLine();
                     if (name != null)
                     {
-                        setPlayerName(i - 1, name);
+                        SetPlayerName(i - 1, name);
                         break;
                     }
                     else
@@ -65,10 +65,10 @@ namespace DieTest
             }
         }
 
-        public void playTurn()
+        public void PlayTurn()
         {
             Console.Clear();
-            dieCup.unfreezeAllDice(); //starts with unfrozen dice on new turn
+            dieCup.UnfreezeAllDice(); //starts with unfrozen dice on new turn
             String s = "";
 
 
@@ -78,12 +78,12 @@ namespace DieTest
                
                 for (int j = 0; j < 20; j++)
                 {
-                    dieCup.roll();
-                    dieCup.printEyes(rollCount);
+                    dieCup.Roll();
+                    dieCup.PrintEyes(rollCount);
                     Console.WriteLine("\nRafle rafle rafle...\n");
                     Thread.Sleep(75);
                 }
-                Console.WriteLine(currentPlayer.getName() + "'s turn");
+                Console.WriteLine(currentPlayer.GetName() + "'s turn");
                 Console.WriteLine("Round: " + currentRound);
 
                 if (rollCount < 2)
@@ -97,18 +97,18 @@ namespace DieTest
                     while (s != "")
                     {
                         s = Console.ReadLine();
-                        dieCup.freezeMultipleDice(s);
-                        dieCup.printEyes(rollCount);
+                        dieCup.FreezeMultipleDice(s);
+                        dieCup.PrintEyes(rollCount);
                         Console.WriteLine("\nIndtast numrene på de terninger, du vil låse (op), eller tryk på Enter for at rafle.\n");
-                        Console.WriteLine(currentPlayer.getName() + "'s turn");
+                        Console.WriteLine(currentPlayer.GetName() + "'s turn");
                         Console.WriteLine("Round: " + currentRound);
 
                     }
                 }
                 else
                 {
-                    dieCup.freezeAllDice();
-                    dieCup.printEyes(rollCount);
+                    dieCup.FreezeAllDice();
+                    dieCup.PrintEyes(rollCount);
                     Console.WriteLine("\nKlasse raflet! Tryk på Enter for at afslutte din tur.\n");
                     Console.ReadLine();
                     Console.Clear();
@@ -124,7 +124,7 @@ namespace DieTest
 
         }
 
-        public void changeTurn()
+        public void ChangeTurn()
         {
             int currentIndex = players.IndexOf(currentPlayer);
             currentIndex++;
@@ -137,32 +137,11 @@ namespace DieTest
             currentPlayer = players[currentIndex];
         }
 
-        public void setPlayerName(int index, string name)
+        public void SetPlayerName(int index, string name)
         {
-            players[index].setName(name);
+            players[index].SetName(name);
         }
-
-        //handles the freeze part of playing turn
-        public void handleFreeze()
-        {
-            Console.WriteLine("\nIndtast numrene på de terninger, du vil låse (op), eller tryk på Enter for at rafle.\n");
-            while (true)
-            {
-                string input = Console.ReadLine();
-                if (input != "")
-                {
-                    dieCup.freezeMultipleDice(input);
-                    dieCup.printEyes(1);
-                    Console.WriteLine("\nIndtast numrene på de terninger, du vil låse (op), eller tryk på Enter for at rafle.\n");
-                    break;
-                }
-                else
-                {
-                    Console.WriteLine("Press something");
-                }
-            }
-            Console.Clear();
-        }
+      
 
     }
 }

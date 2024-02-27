@@ -25,25 +25,25 @@ namespace DieTest
             dice[4] = die5;
         }
 
-        public void roll()
+        public void Roll()
         {
             foreach (Die d in dice)
             {
-                d.roll();
+                d.Roll();
             }
         }
 
-        public void freezeMultipleDice(string s)
+        public void FreezeMultipleDice(string s)
         {
             for (int i = 0; i < 5; i++)
             {
                 if (s.Contains((i + 1).ToString()))
                 {
-                    dice[i].switchIsFrozen();
+                    dice[i].SwitchIsFrozen();
                 }
             }
         }
-        public void freezeAllDice()
+        public void FreezeAllDice()
         {
             foreach (Die d in dice)
             {
@@ -51,7 +51,7 @@ namespace DieTest
             }
         }
 
-        public void unfreezeAllDice()
+        public void UnfreezeAllDice()
         {
             foreach (Die d in dice) 
             {
@@ -59,13 +59,13 @@ namespace DieTest
             }
         }
 
-        public void printEyes(int i)
+        public void PrintEyes(int i)
         {
             Console.Clear();
             Console.WriteLine((2 - i) + ". Rerolls left\n");
             foreach (Die d in dice)
             {
-                Console.WriteLine(d.printIsFrozen() + "Terning " + (Array.IndexOf(dice, d) + 1) + ": " + d.Eyes);
+                Console.WriteLine(d.PrintIsFrozen() + "Terning " + (Array.IndexOf(dice, d) + 1) + ": " + d.Eyes);
             }
         }
 

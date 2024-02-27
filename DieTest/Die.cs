@@ -14,7 +14,7 @@ namespace DieTest
         public int Eyes { get; set; }
         public bool IsFrozen { get; set; }
         // Metoder:
-        public void roll()
+        public void Roll()
         {
             if (IsFrozen == false)
             {
@@ -22,7 +22,7 @@ namespace DieTest
             }
         }
 
-        public void switchIsFrozen()
+        public void SwitchIsFrozen()
         {
             if (IsFrozen == true)
             {
@@ -34,7 +34,7 @@ namespace DieTest
             }
         }
 
-        public string printIsFrozen()
+        public string PrintIsFrozen()
         {
             if (IsFrozen == true)
             {

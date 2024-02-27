@@ -21,7 +21,7 @@ namespace DieTest
 
         }
 
-        public void setScore(string catagory, int[] diceValues)
+        public void SetScore(string catagory, int[] diceValues)
         {
             int index = Array.IndexOf(this.catagoryNames, catagory); //the index of the selected catagory in the catagory array. retuns -1 if not found
 
@@ -30,59 +30,59 @@ namespace DieTest
                 switch (catagory)
                 {
                     case "Ones":
-                        this.scores[index] = calculateOnesToSixes(1, diceValues);
+                        this.scores[index] = CalculateOnesToSixes(1, diceValues);
                         this.catagoryUpdated[index] = true;
                         break;
                     case "Twos":
-                        this.scores[index] = calculateOnesToSixes(2, diceValues);
+                        this.scores[index] = CalculateOnesToSixes(2, diceValues);
                         this.catagoryUpdated[index] = true;
                         break;
                     case "Threes":
-                        this.scores[index] = calculateOnesToSixes(3, diceValues);
+                        this.scores[index] = CalculateOnesToSixes(3, diceValues);
                         this.catagoryUpdated[index] = true;
                         break;
                     case "Fours":
-                        this.scores[index] = calculateOnesToSixes(4, diceValues);
+                        this.scores[index] = CalculateOnesToSixes(4, diceValues);
                         this.catagoryUpdated[index] = true;
                         break;
                     case "Fives":
-                        this.scores[index] = calculateOnesToSixes(5, diceValues);
+                        this.scores[index] = CalculateOnesToSixes(5, diceValues);
                         this.catagoryUpdated[index] = true;
                         break;
                     case "Sixes":
-                        this.scores[index] = calculateOnesToSixes(6, diceValues);
+                        this.scores[index] = CalculateOnesToSixes(6, diceValues);
                         this.catagoryUpdated[index] = true;
                         break;
                     case "Pair":
-                        this.scores[index] = calculatePair(diceValues);
+                        this.scores[index] = CalculatePair(diceValues);
                         this.catagoryUpdated[index] = true;
                         break;
                     case "Two Pairs":
-                        this.scores[index] = calculateTwoPairs(diceValues);
+                        this.scores[index] = CalculateTwoPairs(diceValues);
                         this.catagoryUpdated[index] = true;
                         break;
                     case "Three of a kind":
-                        this.scores[index] = calculateTreeOfAKind(diceValues);
+                        this.scores[index] = CalculateTreeOfAKind(diceValues);
                         this.catagoryUpdated[index] = true;
                         break;
                     case "Four of a kind":
-                        this.scores[index] = calculateFourOfAKind(diceValues);
+                        this.scores[index] = CalculateFourOfAKind(diceValues);
                         this.catagoryUpdated[index] = true;
                         break;
                     case "Small Straight":
-                        this.scores[index] = calculateSmallStraight(diceValues);
+                        this.scores[index] = CalculateSmallStraight(diceValues);
                         this.catagoryUpdated[index] = true;
                         break;
                     case "Big Straight":
-                        this.scores[index] = calculateBigStraight(diceValues);
+                        this.scores[index] = CalculateBigStraight(diceValues);
                         this.catagoryUpdated[index] = true;
                         break;
                     case "Chance":
-                        this.scores[index] = calculateChance(diceValues);
+                        this.scores[index] = CalculateChance(diceValues);
                         this.catagoryUpdated[index] = true;
                         break;
                     case "Yatzy":
-                        this.scores[index] = calculateYatzy(diceValues);
+                        this.scores[index] = CalculateYatzy(diceValues);
                         this.catagoryUpdated[index] = true;
                         break;
                 }
@@ -93,7 +93,7 @@ namespace DieTest
             }
         }
 
-        public void upDateTotalScore()
+        public void UpDateTotalScore()
         {
             foreach (int score in this.scores)
             {
@@ -101,7 +101,7 @@ namespace DieTest
             }
         }
 
-        private int calculateOnesToSixes(int catagoryValue, int[] diceValues) //check outofbouds erorors
+        private int CalculateOnesToSixes(int catagoryValue, int[] diceValues) //check outofbouds erorors
         {
             int sum = 0;
 
@@ -115,7 +115,7 @@ namespace DieTest
             return sum;
         }
 
-        private int calculatePair(int[] diceValues)
+        private int CalculatePair(int[] diceValues)
         {
             Array.Sort(diceValues); //sort by value
             Array.Reverse(diceValues); //get the highest value first
@@ -130,7 +130,7 @@ namespace DieTest
             return 0;
         }
 
-        private int calculateTwoPairs(int[] diceValues)
+        private int CalculateTwoPairs(int[] diceValues)
         {
             int sum = 0;
             int pairCount = 0;
@@ -161,7 +161,7 @@ namespace DieTest
             }
         }//check outofbouds errors
 
-        private int calculateTreeOfAKind(int[] diceValues)
+        private int CalculateTreeOfAKind(int[] diceValues)
         {
             Array.Sort(diceValues);
 
@@ -175,7 +175,7 @@ namespace DieTest
             return 0;
         } //check outofbouds erros
 
-        private int calculateFourOfAKind(int[] diceValues)
+        private int CalculateFourOfAKind(int[] diceValues)
         {
             Array.Sort(diceValues);
 
@@ -189,7 +189,7 @@ namespace DieTest
             return 0;
         }
 
-        private int calculateYatzy(int[] diceValues)
+        private int CalculateYatzy(int[] diceValues)
         {
 
             if (diceValues[0] == diceValues[1] && diceValues[0] == diceValues[2] && diceValues[0] == diceValues[3] && diceValues[0] == diceValues[4])
@@ -200,7 +200,7 @@ namespace DieTest
             return 0;
         }
 
-        private int calculateSmallStraight(int[] diceValues)
+        private int CalculateSmallStraight(int[] diceValues)
         {
             Array.Sort(diceValues);
 
@@ -214,7 +214,7 @@ namespace DieTest
             return 0;
         }
 
-        private int calculateBigStraight(int[] diceValues)
+        private int CalculateBigStraight(int[] diceValues)
         {
             for (int i = 0; i < 5; i++)
             {
@@ -226,7 +226,7 @@ namespace DieTest
             return 0;
         }
 
-        private int calculateChance(int[] diceValues)
+        private int CalculateChance(int[] diceValues)
         {
             int sum = 0;
             foreach (int value in diceValues)
@@ -236,7 +236,7 @@ namespace DieTest
             return sum;
         }
 
-        public void printScoreboard()
+        public void PrintScoreboard()
         {
             Console.Clear();
             Console.WriteLine("SCOREBOARD");

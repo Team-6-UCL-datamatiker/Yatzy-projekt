@@ -22,7 +22,7 @@
             }
 
             YatzyGame game = new YatzyGame(numberOfPlayers);
-            game.startGame();
+            game.StartGame();
 
         }
     }
