@@ -8,33 +8,43 @@ namespace DieTest
 {
     internal class Die
     {
-        private int value;
-        private bool isLocked;
-
+        // Feltvariable:
+        private Random r = new Random();
+        // Properties:
+        public int Eyes { get; set; }
+        public bool IsFrozen { get; set; }
+        // Metoder:
         public void roll()
         {
-            if (this.isLocked == false)
+            if (IsFrozen == false)
             {
-                Random r = new Random();
-                int randomValue = r.Next(1, 7);
-                this.value = randomValue;
+                Eyes = r.Next(1, 7);
             }
-
         }
 
-        public int getValue()
+        public void switchIsFrozen()
         {
-            return this.value;
+            if (IsFrozen == true)
+            {
+                IsFrozen = false;
+            }
+            else
+            {
+                IsFrozen = true;
+            }
         }
 
-        public void freeze()
+        public string printIsFrozen()
         {
-            this.isLocked = true;
+            if (IsFrozen == true)
+            {
+                return "[X] ";
+            }
+            else
+            {
+                return "[ ] ";
+            }
         }
 
-        public void unlock()
-        {
-            this.isLocked = false;
-        }
     }
 }

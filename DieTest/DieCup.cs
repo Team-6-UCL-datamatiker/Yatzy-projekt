@@ -33,36 +33,41 @@ namespace DieTest
             }
         }
 
-        public void lockDie(int index)
+        public void freezeMultipleDice(string s)
         {
-            if (index >= 0 && index < dice.Length)
+            for (int i = 0; i < 5; i++)
             {
-                dice[index].freeze();
+                if (s.Contains((i + 1).ToString()))
+                {
+                    dice[i].switchIsFrozen();
+                }
             }
         }
-
-        public void unlockDie(int index)
-        {
-            if (index >= 0 && index < dice.Length)
-            {
-                dice[index].unlock();
-            }
-        }
-
-        public void unlockAllDice()
+        public void freezeAllDice()
         {
             foreach (Die d in dice)
             {
-                d.unlock();
+                d.IsFrozen = true;
             }
         }
 
-        public void printResults()
+        public void unfreezeAllDice()
         {
-            foreach (Die d in dice)
+            foreach (Die d in dice) 
             {
-                Console.WriteLine(d.getValue());
+                d.IsFrozen = false;
             }
         }
+
+        public void printEyes(int i)
+        {
+            Console.Clear();
+            Console.WriteLine((2 - i) + ". Rerolls left\n");
+            foreach (Die d in dice)
+            {
+                Console.WriteLine(d.printIsFrozen() + "Terning " + (Array.IndexOf(dice, d) + 1) + ": " + d.Eyes);
+            }
+        }
+
     }
 }
