@@ -9,76 +9,43 @@ namespace DieTest
     internal class Player
     {
         public string Name { get; set; }
-
         public int Enere { get; set; }
-        private bool enereB;
         public bool EnereB { get; set; }
-
         public int Toere { get; set; }
-        private bool toereB;
         public bool ToereB { get; set; }
-
         public int Treere { get; set; }
-        private bool treereB;
         public bool TreereB { get; set; }
-
         public int Firere { get; set; }
-        private bool firereB;
         public bool FirereB { get; set; }
-
         public int Femmere { get; set; }
-        private bool femmereB;
         public bool FemmereB { get; set; }
-
         public int Seksere { get; set; }
-        private bool seksereB;
         public bool SeksereB { get; set; }
-
         public int Bonus { get; set; }
-
         public int EtPar { get; set; }
-        private bool etParB;
         public bool EtParB { get; set; }
-
         public int ToPar { get; set; }
-        private bool toParB;
         public bool ToParB { get; set; }
-
         public int TreEns { get; set; }
-        private bool treEnsB;
         public bool TreEnsB { get; set; }
-
         public int FireEns { get; set; }
-        private bool fireEnsB;
         public bool FireEnsB { get; set; }
-
         public int LilleStraight { get; set; }
-        private bool lilleStraightB;
         public bool LilleStraightB { get; set; }
-
         public int StorStraight { get; set; }
-        private bool storStraightB;
         public bool StorStraightB { get; set; }
-
         public int Chancen { get; set; }
-        private bool chancenB;
         public bool ChancenB { get; set; }
-
         public int Yatzy { get; set; }
-        private bool yatzyB;
         public bool YatzyB { get; set; }
-
         public int TotalScore { get; set; }
-
-        private bool blankB;
         public bool BlankB { get; set; }
-
-
+        
         public Player()
         {
             Name = Console.ReadLine();
         }
-
+        
         public void PrintName()
         {
             int l = 10 - Name.Length;
@@ -103,7 +70,6 @@ namespace DieTest
                 Console.Write(new string(' ', hl - 1) + "[" + i + "]" + new string(' ', hl + ml - 2) + " | ");
             }
         }
-
         public void CalculateBonus()
         {
             if (Enere + Toere + Treere + Firere + Femmere + Seksere >= 63 && Bonus == 0)
@@ -112,7 +78,6 @@ namespace DieTest
                 TotalScore = TotalScore + Bonus;
             }
         }
-
         public void SetScore(DieCup dC)
         {
             Calculator c = new Calculator();
@@ -127,7 +92,7 @@ namespace DieTest
                     case "1":
                         if (EnereB == true)
                         {
-                            Console.WriteLine("Du har allerede valgt 1'ere\n");
+                            Console.WriteLine("\nDu har allerede valgt 1'ere");
                             b = false;
                         }
                         else
@@ -159,7 +124,7 @@ namespace DieTest
                     case "2":
                         if (ToereB == true)
                         {
-                            Console.WriteLine("Du har allerede valgt 2'ere\n");
+                            Console.WriteLine("\nDu har allerede valgt 2'ere");
                             b = false;
                         }
                         else
@@ -191,7 +156,7 @@ namespace DieTest
                     case "3":
                         if (TreereB == true)
                         {
-                            Console.WriteLine("Du har allerede valgt 3'ere\n");
+                            Console.WriteLine("\nDu har allerede valgt 3'ere");
                             b = false;
                         }
                         else
@@ -223,7 +188,7 @@ namespace DieTest
                     case "4":
                         if (FirereB == true)
                         {
-                            Console.WriteLine("Du har allerede valgt 4'ere\n");
+                            Console.WriteLine("\nDu har allerede valgt 4'ere");
                             b = false;
                         }
                         else
@@ -255,7 +220,7 @@ namespace DieTest
                     case "5":
                         if (FemmereB == true)
                         {
-                            Console.WriteLine("Du har allerede valgt 5'ere\n");
+                            Console.WriteLine("\nDu har allerede valgt 5'ere");
                             b = false;
                         }
                         else
@@ -287,7 +252,7 @@ namespace DieTest
                     case "6":
                         if (SeksereB == true)
                         {
-                            Console.WriteLine("Du har allerede valgt 6'ere\n");
+                            Console.WriteLine("\nDu har allerede valgt 6'ere");
                             b = false;
                         }
                         else
@@ -319,7 +284,7 @@ namespace DieTest
                     case "7":
                         if (EtParB == true)
                         {
-                            Console.WriteLine("Du har allerede valgt Et par\n");
+                            Console.WriteLine("\nDu har allerede valgt Et par");
                             b = false;
                         }
                         else
@@ -350,7 +315,7 @@ namespace DieTest
                     case "8":
                         if (ToParB == true)
                         {
-                            Console.WriteLine("Du har allerede valgt To par\n");
+                            Console.WriteLine("\nDu har allerede valgt To par");
                             b = false;
                         }
                         else
@@ -381,7 +346,7 @@ namespace DieTest
                     case "9":
                         if (TreEnsB == true)
                         {
-                            Console.WriteLine("Du har allerede valgt Tre ens\n");
+                            Console.WriteLine("\nDu har allerede valgt Tre ens");
                             b = false;
                         }
                         else
@@ -412,7 +377,7 @@ namespace DieTest
                     case "10":
                         if (FireEnsB == true)
                         {
-                            Console.WriteLine("Du har allerede valgt Fire ens\n");
+                            Console.WriteLine("\nDu har allerede valgt Fire ens");
                             b = false;
                         }
                         else
@@ -443,7 +408,7 @@ namespace DieTest
                     case "11":
                         if (LilleStraightB == true)
                         {
-                            Console.WriteLine("Du har allerede valgt Lille straight\n");
+                            Console.WriteLine("\nDu har allerede valgt Lille straight");
                             b = false;
                         }
                         else
@@ -474,7 +439,7 @@ namespace DieTest
                     case "12":
                         if (StorStraightB == true)
                         {
-                            Console.WriteLine("Du har allerede valgt Stor straight\n");
+                            Console.WriteLine("\nDu har allerede valgt Stor straight");
                             b = false;
                         }
                         else
@@ -505,7 +470,7 @@ namespace DieTest
                     case "13":
                         if (ChancenB == true)
                         {
-                            Console.WriteLine("Du har allerede valgt Chancen.\n");
+                            Console.WriteLine("\nDu har allerede valgt Chancen.");
                             b = false;
                         }
                         else
@@ -536,7 +501,7 @@ namespace DieTest
                     case "14":
                         if (YatzyB == true)
                         {
-                            Console.WriteLine("Du har allerede valgt Yatzy.\n");
+                            Console.WriteLine("\nDu har allerede valgt Yatzy.");
                             b = false;
                         }
                         else
