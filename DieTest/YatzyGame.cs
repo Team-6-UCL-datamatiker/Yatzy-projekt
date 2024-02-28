@@ -152,6 +152,7 @@ namespace DieTest
         //Takes input from player returns the catagory.
         public string GetCatagory()
         {
+            currentPlayer.PlayerScoreboard.PrintScoreboard();
             Console.WriteLine("Choose a catagory (Ones, Twos, ... Yatzy)");
             string catagory = Console.ReadLine().ToUpper();
             return catagory;
