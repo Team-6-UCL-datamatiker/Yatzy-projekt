@@ -10,6 +10,8 @@ namespace DieTest
 {
     internal class DataCruncher
     {
+        // Metoder:
+        //
         public int Calculate(DieCup dC, string s)
         {
             switch (s)
