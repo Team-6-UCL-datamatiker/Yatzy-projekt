@@ -12,15 +12,12 @@ namespace DieTest
         private Player currentPlayer;
         private DieCup dieCup;
         private int currentRound;
-        private Scoreboard scoreboard;
 
         public YatzyGame(int numberOfPlayers)
         {
             players = new List<Player>();
             dieCup = new DieCup();
             currentRound = 1;
-
-            scoreboard = new Scoreboard();
 
             for (int i = 0; i < numberOfPlayers; i++)
             {
@@ -32,7 +29,7 @@ namespace DieTest
         public void StartGame()
         {
             RegisterNames();
-            for (int i = currentRound; i <= 14; currentRound++) //Round (14 total)
+            for (int i = currentRound; i <= 14; i++) //Round (14 total)
             {
                 for (int j = 0; j < players.Count; j++) //Turn (1 for each player per round)
                 {
@@ -118,7 +115,7 @@ namespace DieTest
                     Console.ResetColor();
                     //set scoreboard
                     string selectedCategory = GetCatagory(); // Get the category from the player
-                    HandleScoreboardUpdate(selectedCategory, diceValues);
+                    HandleScoreboardUpdate(selectedCategory, diceValues); //updates scoreboard
                 }
                 rollCount++;
 
@@ -143,14 +140,16 @@ namespace DieTest
             players[index].SetName(name);
         }
 
+        //Updates and prints scoreboard of current player
         public void HandleScoreboardUpdate(string catagory, int[] diceValues)
         {
             Scoreboard playerScoreboard = currentPlayer.PlayerScoreboard;
-            playerScoreboard.SetScore(catagory, diceValues); ;
+            playerScoreboard.SetScore(catagory, diceValues);
             playerScoreboard.PrintScoreboard();
             Console.ReadLine();
         }
 
+        //Takes input from player returns the catagory.
         public string GetCatagory()
         {
             Console.WriteLine("Choose a catagory (Ones, Twos, ... Yatzy)");
