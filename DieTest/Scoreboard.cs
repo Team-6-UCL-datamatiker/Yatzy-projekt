@@ -46,7 +46,7 @@ namespace DieTest
                         case "FIVES":
                             this.scores[index] = CalculateOnesToSixes(5, diceValues);
                             break;
-                        case "Sixes":
+                        case "SIXES":
                             this.scores[index] = CalculateOnesToSixes(6, diceValues);
                             break;
                         case "PAIR":
@@ -82,13 +82,13 @@ namespace DieTest
                 else //if catagory does exist but already has been updated
                 {
                     Console.WriteLine("Catagory already updated!");
-                    SetScore(Console.ReadLine(), diceValues);
+                    SetScore(Console.ReadLine().ToUpper(), diceValues);
                 }
             }
             else
             {
                 Console.WriteLine("Catagory not found!");
-                SetScore(Console.ReadLine(), diceValues);
+                SetScore(Console.ReadLine().ToUpper(), diceValues);
             }
         }
 
