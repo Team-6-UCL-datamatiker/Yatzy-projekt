@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -57,6 +58,17 @@ namespace DieTest
             {
                 d.IsFrozen = false;
             }
+        }
+
+        //tilføjet
+        public int[] GetDiceValues()
+        {
+            int[] values = new int[5];
+            for(int i = 0;i < 5;i++)
+            {
+                values[i] = dice[i].Eyes;
+            }
+            return values;         
         }
 
         public void PrintEyes(int i)
