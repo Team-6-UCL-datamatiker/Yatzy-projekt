@@ -73,6 +73,7 @@ namespace DieTest
             int rollCount = 0;
             while (rollCount < 3) //1. roll
             {
+                SetPlayerColor(currentPlayer);
 
                 for (int j = 0; j < 20; j++)
                 {
@@ -140,6 +141,31 @@ namespace DieTest
             players[index].SetName(name);
         }
 
+        public void SetPlayerColor(Player player)
+        {
+            switch (players.IndexOf(player))
+            {
+                case 0:
+                    Console.ForegroundColor = ConsoleColor.Blue;
+                    break;
+                case 1:
+                    Console.ForegroundColor = ConsoleColor.Green;
+                    break;
+                case 2:
+                    Console.ForegroundColor = ConsoleColor.Yellow;
+                    break;
+                case 3:
+                    Console.ForegroundColor = ConsoleColor.Cyan;
+                    break;
+                case 4:
+                    Console.ForegroundColor = ConsoleColor.Magenta;
+                    break;
+                default:
+                    Console.ForegroundColor = ConsoleColor.White;
+                    break;
+            }
+        }
+
         //Updates and prints scoreboard of current player
         public void HandleScoreboardUpdate(string catagory, int[] diceValues)
         {
@@ -199,8 +225,10 @@ namespace DieTest
             Player[] sortedPlayersArray = players.OrderByDescending(player => player.PlayerScoreboard.GetTotalScore()).ToArray();
             for (int i = 0; i < sortedPlayersArray.Length; i++)
             {
+                SetPlayerColor(sortedPlayersArray[i]);
                 Console.WriteLine(i + 1 + ". place: " + sortedPlayersArray[i].GetName() + " (" + sortedPlayersArray[i].PlayerScoreboard.GetTotalScore() + " points)");
             }
+            Console.ResetColor();
         }
     }
 }
