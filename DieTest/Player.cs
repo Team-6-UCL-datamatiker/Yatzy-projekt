@@ -9,10 +9,11 @@ namespace DieTest
     internal class Player
     {
         private string name;
-        private int finalScore;
+        public Scoreboard PlayerScoreboard { get; set; }
         public Player()
         {
             this.name = "";
+            PlayerScoreboard = new Scoreboard();
         }
 
         public string GetName()
