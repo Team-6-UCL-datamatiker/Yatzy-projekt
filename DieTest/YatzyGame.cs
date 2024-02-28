@@ -199,7 +199,7 @@ namespace DieTest
             Player[] sortedPlayersArray = players.OrderByDescending(player => player.PlayerScoreboard.GetTotalScore()).ToArray();
             for (int i = 0; i < sortedPlayersArray.Length; i++)
             {
-                Console.WriteLine(i + 1 + ". place: " + sortedPlayersArray[i].GetName() + " with " + sortedPlayersArray[i].PlayerScoreboard.GetTotalScore() + " points");
+                Console.WriteLine(i + 1 + ". place: " + sortedPlayersArray[i].GetName() + " (" + sortedPlayersArray[i].PlayerScoreboard.GetTotalScore() + " points)");
             }
         }
     }
