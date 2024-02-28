@@ -4,9 +4,6 @@
     {
         static void Main(string[] args)
         {
-            //Scoreboard scoreboard = new Scoreboard();
-            //int[] values = { 4, 5, 4, 5, 2 };
-
             int numberOfPlayers;
             Console.WriteLine("Welome to yatzy!");
             Console.Write("How many players? ");
