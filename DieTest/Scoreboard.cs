@@ -193,9 +193,8 @@ namespace DieTest
 
             if (diceValues[0] == diceValues[1] && diceValues[0] == diceValues[2] && diceValues[0] == diceValues[3] && diceValues[0] == diceValues[4])
             {
-                return diceValues[0] * 5;
+                return 50;
             }
-
             return 0;
         }
 
@@ -205,24 +204,26 @@ namespace DieTest
 
             for (int i = 0; i < 5; i++)
             {
-                if (diceValues[i] == i + 1) //checking if dice1 = 1, dice 2 = 2 and so on..
+                if (diceValues[i] != i + 1) //checking if dice1 = 1, dice 2 = 2 and so on..
                 {
-                    return 15;
+                    return 0;
                 }
             }
-            return 0;
+            return 15;
         }
 
         private int CalculateBigStraight(int[] diceValues)
         {
+            Array.Sort(diceValues);
+
             for (int i = 0; i < 5; i++)
             {
-                if (diceValues[i] == i + 2) //checking if dice1 = 2, dice 2 = 3 and so on..
+                if (diceValues[i] != i + 2) //checking if dice1 = 2, dice 2 = 3 and so on..
                 {
-                    return 20;
+                    return 0;
                 }
             }
-            return 0;
+            return 20;
         }
 
         private int CalculateChance(int[] diceValues)
@@ -253,13 +254,15 @@ namespace DieTest
         {
             Console.Clear();
             Console.WriteLine("SCOREBOARD");
-            Console.WriteLine("----------------");
+            Console.WriteLine("----------------------------------");
+
             for (int i = 0; i < this.catagoryNames.Length; i++)
             {
-                Console.WriteLine(this.catagoryNames[i] + "-------------------" + this.scores[i]);
+                Console.WriteLine(String.Format("{0,-25} {1,-5}", this.catagoryNames[i], this.scores[i])); //-25 means minimum width of 25 chars (the '-' means left allignment)
             }
-            Console.WriteLine("________________________________\n");
-            Console.WriteLine("Total score ---------------" + this.totalScore);
+
+            Console.WriteLine("----------------------------------");
+            Console.WriteLine($"Total score: {this.totalScore}");
             Console.WriteLine();
         }
 
