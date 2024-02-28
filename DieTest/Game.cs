@@ -31,7 +31,7 @@ namespace DieTest
             players[1].SetScore("1'ere", 10);
             players[1].SetScore("1'ere", 16);
 
-            Console.WriteLine(players[1].GetScore);
+            Console.WriteLine(players[1].GetScore("1'ere"));
         }
 
 
