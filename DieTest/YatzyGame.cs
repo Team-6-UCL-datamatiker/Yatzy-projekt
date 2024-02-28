@@ -29,7 +29,7 @@ namespace DieTest
         public void StartGame()
         {
             RegisterNames();
-            for (int i = currentRound; i <= 14; i++) //Round (14 total)
+            for (int i = currentRound; i == 1; i++) //Round (14 total)
             {
                 for (int j = 0; j < players.Count; j++) //Turn (1 for each player per round)
                 {
@@ -37,7 +37,7 @@ namespace DieTest
                     ChangeTurn();
                 }
             }
-            EndGame();
+            EndGame(); //Prints winner
         }
 
         //sets name of each player 
@@ -174,7 +174,7 @@ namespace DieTest
         public void EndGame()
         {
             Player winner = CalculateWinner();
-            for (int i = 0; i < 100; i++)
+            for (int i = 0; i < 10; i++)
             {
                 Console.Clear();
                 Console.ForegroundColor = ConsoleColor.Red;
@@ -192,6 +192,13 @@ namespace DieTest
                 Console.ForegroundColor = ConsoleColor.Yellow;
                 Console.WriteLine("\nCONGRATULATIONS " + winner.GetName() + " YOU WON!!!!!! \n Points: " + winner.PlayerScoreboard.GetTotalScore());
                 System.Threading.Thread.Sleep(10);
+            }
+            Console.Clear();
+            Console.ResetColor();
+            Player[] sortedPlayersArray = players.OrderByDescending(player => player.PlayerScoreboard.GetTotalScore()).ToArray();
+            for (int i = 0; i < sortedPlayersArray.Length; i++)
+            {
+                Console.WriteLine(i + 1 + ". place: " + sortedPlayersArray[i].GetName() + " with " + sortedPlayersArray[i].PlayerScoreboard.GetTotalScore() + " points");
             }
         }
     }
