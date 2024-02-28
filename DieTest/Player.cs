@@ -11,37 +11,28 @@ namespace DieTest
         // Feltvariable/Properties:
         //
         public string Name { get; set; }
-        public int Enere { get; set; }
-        public bool EnereB { get; set; }
-        public int Toere { get; set; }
-        public bool ToereB { get; set; }
-        public int Treere { get; set; }
-        public bool TreereB { get; set; }
-        public int Firere { get; set; }
-        public bool FirereB { get; set; }
-        public int Femmere { get; set; }
-        public bool FemmereB { get; set; }
-        public int Seksere { get; set; }
-        public bool SeksereB { get; set; }
         public int Bonus { get; set; }
-        public int EtPar { get; set; }
-        public bool EtParB { get; set; }
-        public int ToPar { get; set; }
-        public bool ToParB { get; set; }
-        public int TreEns { get; set; }
-        public bool TreEnsB { get; set; }
-        public int FireEns { get; set; }
-        public bool FireEnsB { get; set; }
-        public int LilleStraight { get; set; }
-        public bool LilleStraightB { get; set; }
-        public int StorStraight { get; set; }
-        public bool StorStraightB { get; set; }
-        public int Chancen { get; set; }
-        public bool ChancenB { get; set; }
-        public int Yatzy { get; set; }
-        public bool YatzyB { get; set; }
         public int TotalScore { get; set; }
-        public bool BlankB { get; set; }
+        public bool FillerB { get; set; }
+        private int[] scoreArray = new int[14];
+        public int[] ScoreArray { get { return scoreArray; } }
+        private bool[] boolArray = new bool[14];
+        public bool[] BoolArray { get { return boolArray; } }
+        //Oversigt over arrays
+        // 0 = Enere
+        // 1 = Toere
+        // 2 = Treere
+        // 3 = Firere
+        // 4 = Femmere
+        // 5 = Seksere
+        // 6 = Et par
+        // 7 = To par
+        // 8 = Tre ens
+        // 9 = Fire ens
+        // 10 = Lille Straight
+        // 11 = Stor Straight
+        // 12 = Chancen
+        // 13 = Yatzy
 
         // Constructor:
         //
@@ -78,13 +69,47 @@ namespace DieTest
         }
         public void CalculateBonus()
         {
-            if (Enere + Toere + Treere + Firere + Femmere + Seksere >= 63 && Bonus == 0)
+            if (Bonus == 0 && scoreArray[0] + scoreArray[1] + scoreArray[2] + scoreArray[3] + scoreArray[4] + scoreArray[5] >= 63 )
             {
                 Bonus = 50;
-                TotalScore = TotalScore + Bonus;
+                TotalScore += Bonus;
             }
         }
-        public void SetScore(DieCup dC)
+        public bool SetScore(string s, string scoreNavn, DataCruncher c, bool b, DieCup dC)
+        {
+            int i = int.Parse(s) - 1;
+            if (boolArray[i] == true)
+            {
+                Console.WriteLine("\nDu har allerede valgt {0}", scoreNavn);
+                b = false;
+            }
+            else
+            {
+                Console.Write("\nDin {0} score er {1}. \n\nTryk Enter for at bekræfte eller indtast \"hov vent\" for at vælge en anden kombination: ", scoreNavn, c.Calculate(dC, s));
+                while (true)
+                {
+                    string a = Console.ReadLine();
+                    if (a == "hov vent")
+                    {
+                        b = false;
+                        break;
+                    }
+                    else if (a != "")
+                    {
+                        Console.WriteLine("\n\"hov vent\" eller Enter, makker.\n");
+                    }
+                    else
+                    {
+                        scoreArray[i] = c.Calculate(dC, s);
+                        boolArray[i] = true;
+                        TotalScore += scoreArray[i];
+                        break;
+                    }
+                }
+            }
+            return b;
+        }
+        public void SetScoreSorter(DieCup dC)
         {
             DataCruncher c = new DataCruncher();
             bool b = true;
@@ -92,448 +117,71 @@ namespace DieTest
             {
                 Console.Write("\nIndtast et tal mellem 1 og 14 for at vælge kombination: ");
                 string s = Console.ReadLine();
+                string scoreNavn = "";
                 b = true;
                 switch (s)
                 {
                     case "1":
-                        if (EnereB == true)
-                        {
-                            Console.WriteLine("\nDu har allerede valgt 1'ere");
-                            b = false;
-                        }
-                        else
-                        {
-                            Console.Write("\nDin 1'ere score er {0}. \n\nTryk Enter for at bekræfte eller indtast \"hov vent\" for at vælge en anden kombination: ", c.Enere(dC));
-                            while (true)
-                            {
-                                s = Console.ReadLine();
-                                if (s == "hov vent")
-                                {
-                                    b = false;
-                                    break;
-                                }
-                                else if (s != "")
-                                {
-                                    Console.WriteLine("\n\"hov vent\" eller Enter, makker.\n");
-                                }
-                                else
-                                {
-                                    Enere = c.Enere(dC);
-                                    EnereB = true;
-                                    CalculateBonus();
-                                    TotalScore = TotalScore + Enere;
-                                    break;
-                                }
-                            }
-                        }
+                        scoreNavn = "1'ere";
+                        b = SetScore(s, scoreNavn, c, b, dC);
+                        CalculateBonus();
                         break;
                     case "2":
-                        if (ToereB == true)
-                        {
-                            Console.WriteLine("\nDu har allerede valgt 2'ere");
-                            b = false;
-                        }
-                        else
-                        {
-                            Console.Write("\nDin 2'ere score er {0}. \n\nTryk Enter for at bekræfte eller indtast \"hov vent\" for at vælge en anden kombination: ", c.Toere(dC));
-                            while (true)
-                            {
-                                s = Console.ReadLine();
-                                if (s == "hov vent")
-                                {
-                                    b = false;
-                                    break;
-                                }
-                                else if (s != "")
-                                {
-                                    Console.WriteLine("\n\"hov vent\" eller Enter, makker.\n");
-                                }
-                                else
-                                {
-                                    Toere = c.Toere(dC);
-                                    ToereB = true;
-                                    CalculateBonus();
-                                    TotalScore = TotalScore + Toere;
-                                    break;
-                                }
-                            }
-                        }
+                        scoreNavn = "2'ere";
+                        b = SetScore(s, scoreNavn, c, b, dC);
+                        CalculateBonus();
                         break;
                     case "3":
-                        if (TreereB == true)
-                        {
-                            Console.WriteLine("\nDu har allerede valgt 3'ere");
-                            b = false;
-                        }
-                        else
-                        {
-                            Console.Write("\nDin 3'ere score er {0}. \n\nTryk Enter for at bekræfte eller indtast \"hov vent\" for at vælge en anden kombination: ", c.Treere(dC));
-                            while (true)
-                            {
-                                s = Console.ReadLine();
-                                if (s == "hov vent")
-                                {
-                                    b = false;
-                                    break;
-                                }
-                                else if (s != "")
-                                {
-                                    Console.WriteLine("\n\"hov vent\" eller Enter, makker.\n");
-                                }
-                                else
-                                {
-                                    Treere = c.Treere(dC);
-                                    TreereB = true;
-                                    CalculateBonus();
-                                    TotalScore = TotalScore + Treere;
-                                    break;
-                                }
-                            }
-                        }
+                        scoreNavn = "3'ere";
+                        b = SetScore(s, scoreNavn, c, b, dC);
+                        CalculateBonus();
                         break;
                     case "4":
-                        if (FirereB == true)
-                        {
-                            Console.WriteLine("\nDu har allerede valgt 4'ere");
-                            b = false;
-                        }
-                        else
-                        {
-                            Console.Write("\nDin 4'ere score er {0}. \n\nTryk Enter for at bekræfte eller indtast \"hov vent\" for at vælge en anden kombination: ", c.Firere(dC));
-                            while (true)
-                            {
-                                s = Console.ReadLine();
-                                if (s == "hov vent")
-                                {
-                                    b = false;
-                                    break;
-                                }
-                                else if (s != "")
-                                {
-                                    Console.WriteLine("\n\"hov vent\" eller Enter, makker.\n");
-                                }
-                                else
-                                {
-                                    Firere = c.Firere(dC);
-                                    FirereB = true;
-                                    CalculateBonus();
-                                    TotalScore = TotalScore + Firere;
-                                    break;
-                                }
-                            }
-                        }
+                        scoreNavn = "4'ere";
+                        b = SetScore(s, scoreNavn, c, b, dC);
+                        CalculateBonus();
                         break;
                     case "5":
-                        if (FemmereB == true)
-                        {
-                            Console.WriteLine("\nDu har allerede valgt 5'ere");
-                            b = false;
-                        }
-                        else
-                        {
-                            Console.Write("\nDin 5'ere score er {0}. \n\nTryk Enter for at bekræfte eller indtast \"hov vent\" for at vælge en anden kombination: ", c.Femmere(dC));
-                            while (true)
-                            {
-                                s = Console.ReadLine();
-                                if (s == "hov vent")
-                                {
-                                    b = false;
-                                    break;
-                                }
-                                else if (s != "")
-                                {
-                                    Console.WriteLine("\n\"hov vent\" eller Enter, makker.\n");
-                                }
-                                else
-                                {
-                                    Femmere = c.Femmere(dC);
-                                    FemmereB = true;
-                                    CalculateBonus();
-                                    TotalScore = TotalScore + Femmere;
-                                    break;
-                                }
-                            }
-                        }
+                        scoreNavn = "5'ere";
+                        b = SetScore(s, scoreNavn, c, b, dC);
+                        CalculateBonus();
                         break;
                     case "6":
-                        if (SeksereB == true)
-                        {
-                            Console.WriteLine("\nDu har allerede valgt 6'ere");
-                            b = false;
-                        }
-                        else
-                        {
-                            Console.Write("\nDin 6'ere score er {0}. \n\nTryk Enter for at bekræfte eller indtast \"hov vent\" for at vælge en anden kombination: ", c.Seksere(dC));
-                            while (true)
-                            {
-                                s = Console.ReadLine();
-                                if (s == "hov vent")
-                                {
-                                    b = false;
-                                    break;
-                                }
-                                else if (s != "")
-                                {
-                                    Console.WriteLine("\n\"hov vent\" eller Enter, makker.\n");
-                                }
-                                else
-                                {
-                                    Seksere = c.Seksere(dC);
-                                    SeksereB = true;
-                                    CalculateBonus();
-                                    TotalScore = TotalScore + Seksere;
-                                    break;
-                                }
-                            }
-                        }
+                        scoreNavn = "6'ere";
+                        b = SetScore(s, scoreNavn, c, b, dC);
+                        CalculateBonus();
                         break;
                     case "7":
-                        if (EtParB == true)
-                        {
-                            Console.WriteLine("\nDu har allerede valgt Et par");
-                            b = false;
-                        }
-                        else
-                        {
-                            Console.Write("\nDin Et par score er {0}. \n\nTryk Enter for at bekræfte eller indtast \"hov vent\" for at vælge en anden kombination: ", c.EtPar(dC));
-                            while (true)
-                            {
-                                s = Console.ReadLine();
-                                if (s == "hov vent")
-                                {
-                                    b = false;
-                                    break;
-                                }
-                                else if (s != "")
-                                {
-                                    Console.WriteLine("\n\"hov vent\" eller Enter, makker.\n");
-                                }
-                                else
-                                {
-                                    EtPar = c.EtPar(dC);
-                                    EtParB = true;
-                                    TotalScore = TotalScore + EtPar;
-                                    break;
-                                }
-                            }
-                        }
+                        scoreNavn = "Et par";
+                        b = SetScore(s, scoreNavn, c, b, dC);
                         break;
                     case "8":
-                        if (ToParB == true)
-                        {
-                            Console.WriteLine("\nDu har allerede valgt To par");
-                            b = false;
-                        }
-                        else
-                        {
-                            Console.Write("\nDin To par score er {0}. \n\nTryk Enter for at bekræfte eller indtast \"hov vent\" for at vælge en anden kombination: ", c.ToPar(dC));
-                            while (true)
-                            {
-                                s = Console.ReadLine();
-                                if (s == "hov vent")
-                                {
-                                    b = false;
-                                    break;
-                                }
-                                else if (s != "")
-                                {
-                                    Console.WriteLine("\n\"hov vent\" eller Enter, makker.\n");
-                                }
-                                else
-                                {
-                                    ToPar = c.ToPar(dC);
-                                    ToParB = true;
-                                    TotalScore = TotalScore + ToPar;
-                                    break;
-                                }
-                            }
-                        }
+                        scoreNavn = "To par";
+                        b = SetScore(s, scoreNavn, c, b, dC);
                         break;
                     case "9":
-                        if (TreEnsB == true)
-                        {
-                            Console.WriteLine("\nDu har allerede valgt Tre ens");
-                            b = false;
-                        }
-                        else
-                        {
-                            Console.Write("\nDin Tre ens score er {0}. \n\nTryk Enter for at bekræfte eller indtast \"hov vent\" for at vælge en anden kombination: ", c.TreEns(dC));
-                            while (true)
-                            {
-                                s = Console.ReadLine();
-                                if (s == "hov vent")
-                                {
-                                    b = false;
-                                    break;
-                                }
-                                else if (s != "")
-                                {
-                                    Console.WriteLine("\n\"hov vent\" eller Enter, makker.\n");
-                                }
-                                else
-                                {
-                                    TreEns = c.TreEns(dC);
-                                    TreEnsB = true;
-                                    TotalScore = TotalScore + TreEns;
-                                    break;
-                                }
-                            }
-                        }
+                        scoreNavn = "Tre ens";
+                        b = SetScore(s, scoreNavn, c, b, dC);
                         break;
                     case "10":
-                        if (FireEnsB == true)
-                        {
-                            Console.WriteLine("\nDu har allerede valgt Fire ens");
-                            b = false;
-                        }
-                        else
-                        {
-                            Console.Write("\nDin Fire ens score er {0}. \n\nTryk Enter for at bekræfte eller indtast \"hov vent\" for at vælge en anden kombination: ", c.FireEns(dC));
-                            while (true)
-                            {
-                                s = Console.ReadLine();
-                                if (s == "hov vent")
-                                {
-                                    b = false;
-                                    break;
-                                }
-                                else if (s != "")
-                                {
-                                    Console.WriteLine("\n\"hov vent\" eller Enter, makker.\n");
-                                }
-                                else
-                                {
-                                    FireEns = c.FireEns(dC);
-                                    FireEnsB = true;
-                                    TotalScore = TotalScore + FireEns;
-                                    break;
-                                }
-                            }
-                        }
+                        scoreNavn = "Fire ens";
+                        b = SetScore(s, scoreNavn, c, b, dC);
                         break;
                     case "11":
-                        if (LilleStraightB == true)
-                        {
-                            Console.WriteLine("\nDu har allerede valgt Lille straight");
-                            b = false;
-                        }
-                        else
-                        {
-                            Console.Write("\nDin Lille Straight score er {0}. \n\nTryk Enter for at bekræfte eller indtast \"hov vent\" for at vælge en anden kombination: ", c.LilleStraight(dC));
-                            while (true)
-                            {
-                                s = Console.ReadLine();
-                                if (s == "hov vent")
-                                {
-                                    b = false;
-                                    break;
-                                }
-                                else if (s != "")
-                                {
-                                    Console.WriteLine("\n\"hov vent\" eller Enter, makker.\n");
-                                }
-                                else
-                                {
-                                    LilleStraight = c.LilleStraight(dC);
-                                    LilleStraightB = true;
-                                    TotalScore = TotalScore + LilleStraight;
-                                    break;
-                                }
-                            }
-                        }
+                        scoreNavn = "Lille straight";
+                        b = SetScore(s, scoreNavn, c, b, dC);
                         break;
                     case "12":
-                        if (StorStraightB == true)
-                        {
-                            Console.WriteLine("\nDu har allerede valgt Stor straight");
-                            b = false;
-                        }
-                        else
-                        {
-                            Console.Write("\nDin Stor Straight score er {0}. \n\nTryk Enter for at bekræfte eller indtast \"hov vent\" for at vælge en anden kombination: ", c.StorStraight(dC));
-                            while (true)
-                            {
-                                s = Console.ReadLine();
-                                if (s == "hov vent")
-                                {
-                                    b = false;
-                                    break;
-                                }
-                                else if (s != "")
-                                {
-                                    Console.WriteLine("\n\"hov vent\" eller Enter, makker.\n");
-                                }
-                                else
-                                {
-                                    StorStraight = c.StorStraight(dC);
-                                    StorStraightB = true;
-                                    TotalScore = TotalScore + StorStraight;
-                                    break;
-                                }
-                            }
-                        }
+                        scoreNavn = "Stor straight";
+                        b = SetScore(s, scoreNavn, c, b, dC);
                         break;
                     case "13":
-                        if (ChancenB == true)
-                        {
-                            Console.WriteLine("\nDu har allerede valgt Chancen.");
-                            b = false;
-                        }
-                        else
-                        {
-                            Console.Write("\nDin Chancen score er {0}. \n\nTryk Enter for at bekræfte eller indtast \"hov vent\" for at vælge en anden kombination: ", c.Chancen(dC));
-                            while (true)
-                            {
-                                s = Console.ReadLine();
-                                if (s == "hov vent")
-                                {
-                                    b = false;
-                                    break;
-                                }
-                                else if (s != "")
-                                {
-                                    Console.WriteLine("\n\"hov vent\" eller Enter, makker.\n");
-                                }
-                                else
-                                {
-                                    Chancen = c.Chancen(dC);
-                                    ChancenB = true;
-                                    TotalScore = TotalScore + Chancen;
-                                    break;
-                                }
-                            }
-                        }
+                        scoreNavn = "Chancen";
+                        b = SetScore(s, scoreNavn, c, b, dC);
                         break;
                     case "14":
-                        if (YatzyB == true)
-                        {
-                            Console.WriteLine("\nDu har allerede valgt Yatzy.");
-                            b = false;
-                        }
-                        else
-                        {
-                            Console.Write("\nDin Yatzy score er {0}. \n\nTryk Enter for at bekræfte eller indtast \"hov vent\" for at vælge en anden kombination: ", c.Yatzy(dC));
-                            while (true)
-                            {
-                                s = Console.ReadLine();
-                                if (s == "hov vent")
-                                {
-                                    b = false;
-                                    break;
-                                }
-                                else if (s != "")
-                                {
-                                    Console.WriteLine("\n\"hov vent\" eller Enter, makker.\n");
-                                }
-                                else
-                                {
-                                    Yatzy = c.Yatzy(dC);
-                                    YatzyB = true;
-                                    TotalScore = TotalScore + Yatzy;
-                                    break;
-                                }
-                            }
-                        }
+                        scoreNavn = "Yatzy";
+                        b = SetScore(s, scoreNavn, c, b, dC);
                         break;
                     default:
                         b = false;

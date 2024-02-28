@@ -10,6 +10,57 @@ namespace DieTest
 {
     internal class DataCruncher
     {
+        public int Calculate(DieCup dC, string s)
+        {
+            switch (s)
+            {
+                case "1":
+                    return Enere(dC);
+                    break;
+                case "2":
+                    return Toere(dC);
+                    break;
+                case "3":
+                    return Treere(dC);
+                    break;
+                case "4":
+                    return Firere(dC);
+                    break;
+                case "5":
+                    return Femmere(dC);
+                    break;
+                case "6":
+                    return Seksere(dC);
+                    break;
+                case "7":
+                    return EtPar(dC);
+                    break;
+                case "8":
+                    return ToPar(dC);
+                    break;
+                case "9":
+                    return TreEns(dC);
+                    break;
+                case "10":
+                    return FireEns(dC);
+                    break;
+                case "11":
+                    return LilleStraight(dC);
+                    break;
+                case "12":
+                    return StorStraight(dC);
+                    break;
+                case "13":
+                    return Chancen(dC);
+                    break;
+                case "14":
+                    return Yatzy(dC);
+                    break;
+                default:
+                    return 1000000;
+                    break;
+            }
+        }
         public int Enere(DieCup dC)
         {
             int i = 0;
@@ -22,7 +73,6 @@ namespace DieTest
             }
             return i;
         }
-
         public int Toere(DieCup dC)
         {
             int i = 0;
@@ -35,7 +85,6 @@ namespace DieTest
             }
             return i * 2;
         }
-
         public int Treere(DieCup dC)
         {
             int i = 0;
@@ -48,7 +97,6 @@ namespace DieTest
             }
             return i * 3;
         }
-
         public int Firere(DieCup dC)
         {
             int i = 0;
@@ -61,7 +109,6 @@ namespace DieTest
             }
             return i * 4;
         }
-
         public int Femmere(DieCup dC)
         {
             int i = 0;
@@ -74,7 +121,6 @@ namespace DieTest
             }
             return i * 5;
         }
-
         public int Seksere(DieCup dC)
         {
             int i = 0;
@@ -87,7 +133,6 @@ namespace DieTest
             }
             return i * 6;
         }
-
         public int EtPar(DieCup dC)
         {
             int enere = 0;
@@ -159,7 +204,6 @@ namespace DieTest
             else if (score1 != 0) { return score1; }
             else { return 0; }
         }
-
         public int ToPar(DieCup dC)
         {
             int enere = 0;
@@ -290,7 +334,6 @@ namespace DieTest
                 return 0;
             }
         }
-
         public int TreEns(DieCup dC)
         {
             int enere = 0;
@@ -352,7 +395,6 @@ namespace DieTest
             }
             return 0;
         }
-
         public int FireEns(DieCup dC)
         {
             int enere = 0;
@@ -414,7 +456,6 @@ namespace DieTest
             }
             return 0;
         }
-
         public int LilleStraight(DieCup dC)
         {
             int enere = 0;
@@ -453,7 +494,6 @@ namespace DieTest
             }
             return 0;
         }
-
         public int StorStraight(DieCup dC)
         {
             int enere = 0;
@@ -496,7 +536,6 @@ namespace DieTest
             }
             return 0;
         }
-
         public int Chancen(DieCup dC)
         {
             int i = 0;
@@ -506,7 +545,6 @@ namespace DieTest
             }
             return i;
         }
-
         public int Yatzy(DieCup dC)
         {
             int i = dC.DieA[0].Eyes;
@@ -519,7 +557,6 @@ namespace DieTest
             }
             return 50;
         }
-
         public int NoOfPlayers(string s)
         {
             int i = 0;
@@ -544,7 +581,6 @@ namespace DieTest
             }
             return i;
         }
-
         public Player[] CreatePlayers(int i)
         {                                // Metodetype: Player Array (hvilket vil sige metoden SKAL returne et player Array) - Tager int i (som er det antal spillere, der angives) som parameter.
             Player[] pA = new Player[i]; // Opretter nyt Player Array
@@ -563,7 +599,6 @@ namespace DieTest
             }
             return pA;
         }
-
         public void PrintScoreCard(Player[] pA)
         {
             Console.Clear();
@@ -580,77 +615,77 @@ namespace DieTest
             Console.Write("\n" + new string(' ', 40) + "1:  1’ere__________ " + "| ");
             foreach (Player p in pA)
             {
-                p.PrintProperty(p.Enere, p.EnereB);
+                p.PrintProperty(p.ScoreArray[0], p.BoolArray[0]);
             }
             Console.Write("\n" + new string(' ', 40) + "2:  2’ere__________ " + "| ");
             foreach (Player p in pA)
             {
-                p.PrintProperty(p.Toere, p.ToereB);
+                p.PrintProperty(p.ScoreArray[1], p.BoolArray[1]);
             }
             Console.Write("\n" + new string(' ', 40) + "3:  3’ere__________ " + "| ");
             foreach (Player p in pA)
             {
-                p.PrintProperty(p.Treere, p.TreereB);
+                p.PrintProperty(p.ScoreArray[2], p.BoolArray[2]);
             }
             Console.Write("\n" + new string(' ', 40) + "4:  4’ere__________ " + "| ");
             foreach (Player p in pA)
             {
-                p.PrintProperty(p.Firere, p.FirereB);
+                p.PrintProperty(p.ScoreArray[3], p.BoolArray[3]);
             }
             Console.Write("\n" + new string(' ', 40) + "5:  5’ere__________ " + "| ");
             foreach (Player p in pA)
             {
-                p.PrintProperty(p.Femmere, p.FemmereB);
+                p.PrintProperty(p.ScoreArray[4], p.BoolArray[4]);
             }
             Console.Write("\n" + new string(' ', 40) + "6:  6’ere__________ " + "| ");
             foreach (Player p in pA)
             {
-                p.PrintProperty(p.Seksere, p.SeksereB);
+                p.PrintProperty(p.ScoreArray[5], p.BoolArray[5]);
             }
             Console.Write("\n" + new string(' ', 40) + "    Bonus__________ " + "| ");
             foreach (Player p in pA)
             {
-                p.PrintProperty(p.Bonus, p.BlankB);
+                p.PrintProperty(p.Bonus, p.FillerB);
             }
             Console.Write("\n" + new string(' ', 40) + "7:  Et par_________ " + "| ");
             foreach (Player p in pA)
             {
-                p.PrintProperty(p.EtPar, p.EtParB);
+                p.PrintProperty(p.ScoreArray[6], p.BoolArray[6]);
             }
             Console.Write("\n" + new string(' ', 40) + "8:  To par_________ " + "| ");
             foreach (Player p in pA)
             {
-                p.PrintProperty(p.ToPar, p.ToParB);
+                p.PrintProperty(p.ScoreArray[7], p.BoolArray[7]);
             }
             Console.Write("\n" + new string(' ', 40) + "9:  Tre ens________ " + "| ");
             foreach (Player p in pA)
             {
-                p.PrintProperty(p.TreEns, p.TreEnsB);
+                p.PrintProperty(p.ScoreArray[8], p.BoolArray[8]);
             }
             Console.Write("\n" + new string(' ', 40) + "10: Fire ens_______ " + "| ");
             foreach (Player p in pA)
             {
-                p.PrintProperty(p.FireEns, p.FireEnsB);
+                p.PrintProperty(p.ScoreArray[9], p.BoolArray[9]);
             }
             Console.Write("\n" + new string(' ', 40) + "11: Lille Straight_ " + "| ");
             foreach (Player p in pA)
             {
-                p.PrintProperty(p.LilleStraight, p.LilleStraightB);
+                p.PrintProperty(p.ScoreArray[10], p.BoolArray[10]);
             }
             Console.Write("\n" + new string(' ', 40) + "12: Stor Straight__ " + "| ");
             foreach (Player p in pA)
             {
-                p.PrintProperty(p.StorStraight, p.StorStraightB);
+                p.PrintProperty(p.ScoreArray[11], p.BoolArray[11]);
             }
             Console.Write("\n" + new string(' ', 40) + "13: Chancen________ " + "| ");
             foreach (Player p in pA)
             {
-                p.PrintProperty(p.Chancen, p.ChancenB);
+                p.PrintProperty(p.ScoreArray[12], p.BoolArray[12]);
             }
             Console.Write("\n" + new string(' ', 40) + "14: Yatzy__________ " + "| ");
             foreach (Player p in pA)
             {
-                p.PrintProperty(p.Yatzy, p.YatzyB);
+                p.PrintProperty(p.ScoreArray[13], p.BoolArray[13]);
             }
             Console.Write("\n" + new string(' ', 60) + "| ");
             foreach (Player p in pA)
@@ -660,11 +695,10 @@ namespace DieTest
             Console.Write("\n" + new string(' ', 40) + "Samlet Score:       " + "| ");
             foreach (Player p in pA)
             {
-                p.PrintProperty(p.TotalScore, p.BlankB);
+                p.PrintProperty(p.TotalScore, p.FillerB);
             }
             Console.SetCursorPosition(0, 0);
         }
-
         public void PrintTurn(Player[] pA, Player p)
         {
             Console.Clear();

@@ -81,7 +81,7 @@
                             crunch.PrintTurn(pArray, p);
                             dc1.PrintEyes(i);
                             Console.WriteLine("\n\n\n\n\n\n\n\n\n\n");
-                            p.SetScore(dc1);
+                            p.SetScoreSorter(dc1);
                             Console.Clear();
                             crunch.PrintScoreCard(pArray);
                         }
