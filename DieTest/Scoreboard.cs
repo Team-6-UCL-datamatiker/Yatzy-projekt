@@ -258,9 +258,18 @@ namespace DieTest
 
             for (int i = 0; i < this.catagoryNames.Length; i++)
             {
+                if (this.catagoryUpdated[i] == true)
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                }
+                else
+                {
+                    Console.ResetColor();
+                }
                 Console.WriteLine(String.Format("{0,-25} {1,-5}", this.catagoryNames[i], this.scores[i])); //-25 means minimum width of 25 chars (the '-' means left allignment)
             }
 
+            Console.ResetColor();
             Console.WriteLine("----------------------------------");
             Console.WriteLine($"Total score: {this.totalScore}");
             Console.WriteLine();
