@@ -8,6 +8,8 @@ namespace DieTest
 {
     internal class Player
     {
+        // Feltvariable/Properties:
+        //
         public string Name { get; set; }
         public int Enere { get; set; }
         public bool EnereB { get; set; }
@@ -40,12 +42,16 @@ namespace DieTest
         public bool YatzyB { get; set; }
         public int TotalScore { get; set; }
         public bool BlankB { get; set; }
-        
+
+        // Constructor:
+        //
         public Player()
         {
             Name = Console.ReadLine();
         }
-        
+
+        // Metoder:
+        //
         public void PrintName()
         {
             int l = 10 - Name.Length;
@@ -80,7 +86,7 @@ namespace DieTest
         }
         public void SetScore(DieCup dC)
         {
-            Calculator c = new Calculator();
+            DataCruncher c = new DataCruncher();
             bool b = true;
             do
             {

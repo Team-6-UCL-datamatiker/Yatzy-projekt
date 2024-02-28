@@ -4,10 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using static System.Formats.Asn1.AsnWriter;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace DieTest
 {
-    internal class Calculator
+    internal class DataCruncher
     {
         public int Enere(DieCup dC)
         {
@@ -517,6 +518,158 @@ namespace DieTest
                 }
             }
             return 50;
+        }
+
+        public int NoOfPlayers(string s)
+        {
+            int i = 0;
+            while (i < 1 || i > 5)
+            {
+                switch (s)
+                {
+                    case "1":
+                    case "2":
+                    case "3":
+                    case "4":
+                    case "5":
+                        Console.Clear();
+                        i = int.Parse(s);
+                        break;
+                    default:
+                        Console.Clear();
+                        Console.WriteLine("Indtast et tal mellem 1 og 5.\n");
+                        s = Console.ReadLine();
+                        break;
+                }
+            }
+            return i;
+        }
+
+        public Player[] CreatePlayers(int i)
+        {                                // Metodetype: Player Array (hvilket vil sige metoden SKAL returne et player Array) - Tager int i (som er det antal spillere, der angives) som parameter.
+            Player[] pA = new Player[i]; // Opretter nyt Player Array
+            for (int j = i; j > 0; j--)  // Lad os sige vi har fået 4 ind som i. Sætter j = 4 og trækker 1 fra j hver gang løkken kører efter 1. run.
+            {
+                int k = i - j; // I første loop gennemgang bliver k = 4-4 = 0
+                Console.WriteLine("Indtast et navn på mellem 3 og 9 tegn på spiller {0}:\n", (k + 1)); //Spørger om navn på spiller k + 1 = spiller 1
+                pA[k] = new Player(); // Opretter en ny spiller på plads k = 0 i arrayet
+                while (((pA[k]).Name).Length > 9 || ((pA[k]).Name).Length < 3) // Løkke der tjekker for længden af det indtastede navn.
+                {                                                              // Ift. til at tegne scoreboardet senere, ville det være et problem, hvis folk indtaster ingenting eller 30 siders tekst.
+                    Console.Clear();
+                    Console.WriteLine("Indtast et navn på mellem 3 og 9 tegn:\n");
+                    pA[k].Name = Console.ReadLine(); // Når navnet opfylder kriterierne, gives navnet til Player 0 i arrayet, whileløkken dør og koden fortsætter til næste Player.
+                }                                    // j er nu 3 og k = i-j bliver 1, og vi kan derfor navngive Player 1 i arrayet nu i stedet for Player 0.
+                Console.Clear();                     // For-løkken stopper når j ikke længere er større end 0, fordi vi så har navngivet det ønskede antal spillere.
+            }
+            return pA;
+        }
+
+        public void PrintScoreCard(Player[] pA)
+        {
+            Console.Clear();
+            Console.Write(new string(' ', 40) + "Spillere:           " + "| ");
+            foreach (Player p in pA)
+            {
+                p.PrintName();
+            }
+            Console.Write("\n" + new string(' ', 60) + "| ");
+            foreach (Player p in pA)
+            {
+                Console.Write(new string(' ', 10) + "| ");
+            }
+            Console.Write("\n" + new string(' ', 40) + "1:  1’ere__________ " + "| ");
+            foreach (Player p in pA)
+            {
+                p.PrintProperty(p.Enere, p.EnereB);
+            }
+            Console.Write("\n" + new string(' ', 40) + "2:  2’ere__________ " + "| ");
+            foreach (Player p in pA)
+            {
+                p.PrintProperty(p.Toere, p.ToereB);
+            }
+            Console.Write("\n" + new string(' ', 40) + "3:  3’ere__________ " + "| ");
+            foreach (Player p in pA)
+            {
+                p.PrintProperty(p.Treere, p.TreereB);
+            }
+            Console.Write("\n" + new string(' ', 40) + "4:  4’ere__________ " + "| ");
+            foreach (Player p in pA)
+            {
+                p.PrintProperty(p.Firere, p.FirereB);
+            }
+            Console.Write("\n" + new string(' ', 40) + "5:  5’ere__________ " + "| ");
+            foreach (Player p in pA)
+            {
+                p.PrintProperty(p.Femmere, p.FemmereB);
+            }
+            Console.Write("\n" + new string(' ', 40) + "6:  6’ere__________ " + "| ");
+            foreach (Player p in pA)
+            {
+                p.PrintProperty(p.Seksere, p.SeksereB);
+            }
+            Console.Write("\n" + new string(' ', 40) + "    Bonus__________ " + "| ");
+            foreach (Player p in pA)
+            {
+                p.PrintProperty(p.Bonus, p.BlankB);
+            }
+            Console.Write("\n" + new string(' ', 40) + "7:  Et par_________ " + "| ");
+            foreach (Player p in pA)
+            {
+                p.PrintProperty(p.EtPar, p.EtParB);
+            }
+            Console.Write("\n" + new string(' ', 40) + "8:  To par_________ " + "| ");
+            foreach (Player p in pA)
+            {
+                p.PrintProperty(p.ToPar, p.ToParB);
+            }
+            Console.Write("\n" + new string(' ', 40) + "9:  Tre ens________ " + "| ");
+            foreach (Player p in pA)
+            {
+                p.PrintProperty(p.TreEns, p.TreEnsB);
+            }
+            Console.Write("\n" + new string(' ', 40) + "10: Fire ens_______ " + "| ");
+            foreach (Player p in pA)
+            {
+                p.PrintProperty(p.FireEns, p.FireEnsB);
+            }
+            Console.Write("\n" + new string(' ', 40) + "11: Lille Straight_ " + "| ");
+            foreach (Player p in pA)
+            {
+                p.PrintProperty(p.LilleStraight, p.LilleStraightB);
+            }
+            Console.Write("\n" + new string(' ', 40) + "12: Stor Straight__ " + "| ");
+            foreach (Player p in pA)
+            {
+                p.PrintProperty(p.StorStraight, p.StorStraightB);
+            }
+            Console.Write("\n" + new string(' ', 40) + "13: Chancen________ " + "| ");
+            foreach (Player p in pA)
+            {
+                p.PrintProperty(p.Chancen, p.ChancenB);
+            }
+            Console.Write("\n" + new string(' ', 40) + "14: Yatzy__________ " + "| ");
+            foreach (Player p in pA)
+            {
+                p.PrintProperty(p.Yatzy, p.YatzyB);
+            }
+            Console.Write("\n" + new string(' ', 60) + "| ");
+            foreach (Player p in pA)
+            {
+                Console.Write(new string(' ', 10) + "| ");
+            }
+            Console.Write("\n" + new string(' ', 40) + "Samlet Score:       " + "| ");
+            foreach (Player p in pA)
+            {
+                p.PrintProperty(p.TotalScore, p.BlankB);
+            }
+            Console.SetCursorPosition(0, 0);
+        }
+
+        public void PrintTurn(Player[] pA, Player p)
+        {
+            Console.Clear();
+            PrintScoreCard(pA);
+            Console.Write(p.Name + "s tur:\n\n");
         }
     }
 }
