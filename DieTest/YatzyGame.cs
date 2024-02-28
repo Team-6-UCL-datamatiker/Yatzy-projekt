@@ -40,6 +40,7 @@ namespace DieTest
                     ChangeTurn();
                 }
             }
+            EndGame();
         }
 
         //sets name of each player 
@@ -73,9 +74,9 @@ namespace DieTest
 
 
             int rollCount = 0;
-            while (rollCount < 3)
+            while (rollCount < 3) //1. roll
             {
-               
+
                 for (int j = 0; j < 20; j++)
                 {
                     dieCup.Roll();
@@ -86,9 +87,10 @@ namespace DieTest
                 Console.WriteLine(currentPlayer.GetName() + "'s turn");
                 Console.WriteLine("Round: " + currentRound);
 
-                if (rollCount < 2)
+                int[] diceValues = dieCup.GetDiceValues();
+
+                if (rollCount < 2) //next 2 rolls
                 {
-                    //While-løkken gør, at man skal bekræfte sit valg af låste terninger, før spillet fortsætter:
                     //Spillet fortsætter ikke, så længe der indtastes noget i terminalen (!= ""):
                     //Derfor sættes strengen s til ikke at være tom (arbitrært sat til "a") før hver løkke:
                     //Spillet fortsætter når der trykkes Enter uden input:
@@ -110,20 +112,17 @@ namespace DieTest
                     Console.ForegroundColor = ConsoleColor.Red;
                     dieCup.FreezeAllDice();
                     dieCup.PrintEyes(rollCount);
-                    Console.WriteLine("\nKlasse raflet " + currentPlayer.GetName() + "! Tryk på Enter for at afslutte din tur.\n");
+                    Console.WriteLine("\nKlasse raflet " + currentPlayer.GetName() + "! Tryk på Enter for at vælge katagori.\n");
                     Console.ReadLine();
                     Console.Clear();
                     Console.ResetColor();
+                    //set scoreboard
+                    string selectedCategory = GetCatagory(); // Get the category from the player
+                    HandleScoreboardUpdate(selectedCategory, diceValues);
                 }
                 rollCount++;
 
-                //if (rollCount < 3)
-                //{
-                //    handleFreeze();
-                //}
             }
-
-
         }
 
         public void ChangeTurn()
@@ -143,7 +142,58 @@ namespace DieTest
         {
             players[index].SetName(name);
         }
-      
 
+        public void HandleScoreboardUpdate(string catagory, int[] diceValues)
+        {
+            Scoreboard playerScoreboard = currentPlayer.PlayerScoreboard;
+            playerScoreboard.SetScore(catagory, diceValues); ;
+            playerScoreboard.PrintScoreboard();
+            Console.ReadLine();
+        }
+
+        public string GetCatagory()
+        {
+            Console.WriteLine("Choose a catagory (Ones, Twos, ... Yatzy)");
+            string catagory = Console.ReadLine().ToUpper();
+            return catagory;
+        }
+
+        public Player CalculateWinner()
+        {
+            Player winner = players[0];
+
+            foreach (Player player in players)
+            {
+                if (player.PlayerScoreboard.GetTotalScore() > winner.PlayerScoreboard.GetTotalScore())
+                {
+                    winner = player;
+                }
+            }
+            return winner;
+        }
+
+        public void EndGame()
+        {
+            Player winner = CalculateWinner();
+            for (int i = 0; i < 100; i++)
+            {
+                Console.Clear();
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("CONGRATULATIONS " + winner.GetName() + " YOU WON!!!!!! \n Points: " + winner.PlayerScoreboard.GetTotalScore());
+                System.Threading.Thread.Sleep(10);
+                Console.Clear();
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine("\nCONGRATULATIONS " + winner.GetName() + " YOU WON!!!!!! \n Points: " + winner.PlayerScoreboard.GetTotalScore());
+                System.Threading.Thread.Sleep(10);
+                Console.Clear();
+                Console.ForegroundColor = ConsoleColor.Blue;
+                Console.WriteLine("\n\nCONGRATULATIONS " + winner.GetName() + " YOU WON!!!!!! \n Points: " + winner.PlayerScoreboard.GetTotalScore());
+                System.Threading.Thread.Sleep(10);
+                Console.Clear();
+                Console.ForegroundColor = ConsoleColor.Yellow;
+                Console.WriteLine("\nCONGRATULATIONS " + winner.GetName() + " YOU WON!!!!!! \n Points: " + winner.PlayerScoreboard.GetTotalScore());
+                System.Threading.Thread.Sleep(10);
+            }
+        }
     }
 }
