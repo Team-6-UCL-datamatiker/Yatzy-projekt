@@ -6,7 +6,15 @@ using System.Threading.Tasks;
 
 namespace DieTest
 {
-    internal class Scoreboard
+    public class Scoreboard
     {
+        public static void showScoreboard(Player[] players) 
+        {
+            foreach (var player in players)
+            {
+
+            }
+
+        }
     }
 }

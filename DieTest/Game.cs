@@ -25,13 +25,9 @@ namespace DieTest
                 players[i] = new Player(x, i);
             }
 
-            Console.WriteLine(players[1].name);
-            Console.WriteLine(players[1].scores["1'ere"]);
+            Console.Clear();
+            Scoreboard.showScoreboard(players);
 
-            players[1].SetScore("1'ere", 10);
-            players[1].SetScore("1'ere", 16);
-
-            Console.WriteLine(players[1].GetScore("1'ere"));
         }
 
 

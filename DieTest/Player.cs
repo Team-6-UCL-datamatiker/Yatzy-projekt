@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace DieTest
 {
-    internal class Player
+    public class Player
     {
         public Dictionary<string, int> scores = new Dictionary<string, int>();
-        private Dictionary<string, bool> scoresModified = new Dictionary<string, bool>();
+        public Dictionary<string, bool> scoresModified = new Dictionary<string, bool>();
         public string name;
         public int number;
 
