@@ -16,16 +16,22 @@ namespace DieTest
         {
             Console.WriteLine("How many players?");
             int numberofplayers = int.Parse(Console.ReadLine());
+            Player[] players = new Player[numberofplayers];
 
             for (int i = 0; i < numberofplayers; i++)
             {
-                
-                Console.WriteLine("Name of player " + (i+1) + "?:");
+               Console.WriteLine("Name of player " + (i+1) + "?:");
                 string x = Console.ReadLine();
-                Player  = new Player(x, i);
+                players[i] = new Player(x, i);
             }
 
+            Console.WriteLine(players[1].name);
+            Console.WriteLine(players[1].scores["1'ere"]);
 
+            players[1].SetScore("1'ere", 10);
+            players[1].SetScore("1'ere", 16);
+
+            Console.WriteLine(players[1].GetScore);
         }
 
 
