@@ -59,6 +59,7 @@ namespace DieTest
         // Scoreberegning:
         public int CalculateSpecifiedScore(DieCup dieCup, string s)
         {
+            int[] dieArrayEyes = dieCup.GetDiceValues();
             switch (s)
             {
                 case "1":
