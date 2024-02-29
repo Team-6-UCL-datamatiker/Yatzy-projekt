@@ -9,7 +9,7 @@
             int genstart = 0;
             DataCruncher crunch = new DataCruncher();
 
-            //Intro:
+            //Opret spillere:
             //
             Console.WriteLine("Velkommen til Yatzy.");
             Console.WriteLine("\nIndtast antallet af spillere (1-5).\n");
