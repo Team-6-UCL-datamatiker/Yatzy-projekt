@@ -84,6 +84,8 @@
                         i++;
                     }
                 }
+                Console.Clear();
+                Console.SetCursorPosition(0, 0);
                 crunch.PrintScoreCard(playerArray);
             }
             

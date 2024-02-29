@@ -42,7 +42,7 @@ namespace DieTest
             Player[] playerArray = new Player[iNumberOfPlayers];
             for (int i = iNumberOfPlayers; i > 0; i--)
             {
-                Console.WriteLine("Spiller {0}:\n", iNumberOfPlayers - i + 1);
+                Console.Write("Spiller {0}: ", iNumberOfPlayers - i + 1);
                 playerArray[iNumberOfPlayers - i] = new Player();
                 
                 while (playerArray[iNumberOfPlayers - i].Name.Length > 9 || playerArray[iNumberOfPlayers - i].Name.Length < 3)
@@ -68,67 +68,67 @@ namespace DieTest
                 case "4":
                 case "5":
                 case "6":
-                    return OnesToSixes(s, dieCup);
+                    return OnesToSixes(s, dieArrayEyes);
                 case "7":
-                    return Pair(dieCup);
+                    return Pair(dieArrayEyes);
                 case "8":
-                    return TwoPairs(dieCup);
+                    return TwoPairs(dieArrayEyes);
                 case "9":
-                    return ThreeOfAKind(dieCup);
+                    return ThreeOfAKind(dieArrayEyes);
                 case "10":
-                    return FourOfAKind(dieCup);
+                    return FourOfAKind(dieArrayEyes);
                 case "11":
-                    return SmallStraight(dieCup);
+                    return SmallStraight(dieArrayEyes);
                 case "12":
-                    return BigStraight(dieCup);
+                    return BigStraight(dieArrayEyes);
                 case "13":
-                    return Chance(dieCup);
+                    return Chance(dieArrayEyes);
                 case "14":
                     return Yatzy(dieCup);
                 default:
                     return 1000000;
             }
         }
-        public int OnesToSixes(string s, DieCup dC) //check outofbouds erorors
+        public int OnesToSixes(string s, int[] dieArrayEyes) //check outofbouds erorors
         {
             int sum = 0;
-            int categoryValue = int.Parse(s) - 1;
+            int categoryValue = int.Parse(s);
 
-            foreach (Die d in dC.DieArray)
+            foreach (int i in dieArrayEyes)
             {
-                if (d.Eyes == categoryValue)
+                if (i == categoryValue)
                 {
-                    sum += d.Eyes;
+                    sum += i;
                 }
             }
             return sum;
         }
-        private int Pair(DieCup dieCup)
+        public int Pair(int[] dieArrayEyes)
         {
-            Array.Sort(dieCup.DieArray); //sort by value
-            Array.Reverse(dieCup.DieArray); //get the highest value first
+            Array.Sort(dieArrayEyes); //sort by value
+            Array.Reverse(dieArrayEyes); //get the highest value first
 
-            for (int i = 0; i < dieCup.DieArray.Length; i++)
+            for (int i = 0; i < dieArrayEyes.Length; i++)
             {
-                if (dieCup.DieArray[i] == dieCup.DieArray[i + 1])
+                if (dieArrayEyes[i] == dieArrayEyes[i + 1])
                 {
-                    return dieCup.DieArray[i].Eyes * 2;
+                    return dieArrayEyes[i] * 2;
                 }
             }
             return 0;
         }
-        private int TwoPairs(DieCup dieCup)
+        public int TwoPairs(int[] dieArrayEyes)
         {
             int sum = 0;
             int pairCount = 0;
-            Array.Sort(dieCup.DieArray);
-            Array.Reverse(dieCup.DieArray);
+            Array.Sort(dieArrayEyes);
+            Array.Reverse(dieArrayEyes);
 
-            for (int i = 0; i < dieCup.DieArray.Length; i++)
+            for (int i = 0; i < dieArrayEyes.Length; i++)
             {
-                if (dieCup.DieArray[i] == dieCup.DieArray[i + 1])
+                if (dieArrayEyes[i] == dieArrayEyes[i + 1])
                 {
-                    sum += dieCup.DieArray[i].Eyes * 2;
+                    sum += dieArrayEyes[i] * 2;
                     pairCount++;
 
                     if (pairCount == 2)
@@ -147,64 +147,64 @@ namespace DieTest
                 return 0;
             }
         }//check outofbouds errors
-        private int ThreeOfAKind(DieCup dieCup)
+        public int ThreeOfAKind(int[] dieArrayEyes)
         {
-            Array.Sort(dieCup.DieArray);
+            Array.Sort(dieArrayEyes);
 
-            for (int i = 0; i < dieCup.DieArray.Length; i++)
+            for (int i = 0; i < dieArrayEyes.Length; i++)
             {
-                if (dieCup.DieArray[i] == dieCup.DieArray[i + 1] && dieCup.DieArray[i] == dieCup.DieArray[i + 2])
+                if (dieArrayEyes[i] == dieArrayEyes[i + 1] && dieArrayEyes[i] == dieArrayEyes[i + 2])
                 {
-                    return dieCup.DieArray[i].Eyes * 3;
+                    return dieArrayEyes[i] * 3;
                 }
             }
             return 0;
-        } //check outofbouds erros
-        private int FourOfAKind(DieCup dieCup)
+        } //check outofbouds erros outofbouds erros
+        public int FourOfAKind(int[] dieArrayEyes)
         {
-            Array.Sort(dieCup.DieArray);
+            Array.Sort(dieArrayEyes);
 
-            for (int i = 0; i < dieCup.DieArray.Length; i++)
+            for (int i = 0; i < dieArrayEyes.Length; i++)
             {
-                if (dieCup.DieArray[i] == dieCup.DieArray[i + 1] && dieCup.DieArray[i] == dieCup.DieArray[i + 2] && dieCup.DieArray[i] == dieCup.DieArray[i + 3])
+                if (dieArrayEyes[i] == dieArrayEyes[i + 1] && dieArrayEyes[i] == dieArrayEyes[i + 2] && dieArrayEyes[i] == dieArrayEyes[i + 3])
                 {
-                    return dieCup.DieArray[i].Eyes * 4;
+                    return dieArrayEyes[i] * 4;
                 }
             }
             return 0;
         }
-        private int SmallStraight(DieCup dieCup)
+        public int SmallStraight(int[] dieArrayEyes)
         {
-            Array.Sort(dieCup.DieArray);
+            Array.Sort(dieArrayEyes);
 
             for (int i = 0; i < 5; i++)
             {
-                if (dieCup.DieArray[i].Eyes != i + 1) //checking if dice1 = 1, dice 2 = 2 and so on..
+                if (dieArrayEyes[i] != i + 1) //checking if dice1 = 1, dice 2 = 2 and so on..
                 {
                     return 0;
                 }
             }
             return 15;
         }
-        private int BigStraight(DieCup dieCup)
+        public int BigStraight(int[] dieArrayEyes)
         {
-            Array.Sort(dieCup.DieArray);
+            Array.Sort(dieArrayEyes);
 
             for (int i = 0; i < 5; i++)
             {
-                if (dieCup.DieArray[i].Eyes != i + 2) //checking if dice1 = 2, dice 2 = 3 and so on..
+                if (dieArrayEyes[i] != i + 2) //checking if dice1 = 2, dice 2 = 3 and so on..
                 {
                     return 0;
                 }
             }
             return 20;
         }
-        public int Chance(DieCup dC)
+        public int Chance(int[] dieArrayEyes)
         {
             int sum = 0;
-            foreach (Die d in dC.DieArray)
+            foreach (int value in dieArrayEyes)
             {
-                sum += d.Eyes;
+                sum += value;
             }
             return sum;
         }
