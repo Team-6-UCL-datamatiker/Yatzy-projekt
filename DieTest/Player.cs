@@ -69,7 +69,7 @@ namespace DieTest
         }
         public void CalculateBonus()
         {
-            if (Bonus == 0 && scoreArray[0] + scoreArray[1] + scoreArray[2] + scoreArray[3] + scoreArray[4] + scoreArray[5] >= 63 )
+            if (Bonus == 0 && scoreArray[0] + scoreArray[1] + scoreArray[2] + scoreArray[3] + scoreArray[4] + scoreArray[5] >= 63)
             {
                 Bonus = 50;
                 TotalScore += Bonus;
@@ -81,7 +81,7 @@ namespace DieTest
             if (boolArray[i] == true)
             {
                 Console.WriteLine("\nDu har allerede valgt {0}", scoreNavn);
-                b = false;
+                b = true;
             }
             else
             {
@@ -91,7 +91,7 @@ namespace DieTest
                     string a = Console.ReadLine();
                     if (a == "hov vent")
                     {
-                        b = false;
+                        b = true;
                         break;
                     }
                     else if (a != "")
@@ -113,12 +113,12 @@ namespace DieTest
         {
             DataCruncher c = new DataCruncher();
             bool b = true;
-            do
+            while (b == true)
             {
                 Console.Write("\nIndtast et tal mellem 1 og 14 for at vælge kombination: ");
                 string s = Console.ReadLine();
                 string scoreNavn = "";
-                b = true;
+                b = false;
                 switch (s)
                 {
                     case "1":
@@ -184,10 +184,11 @@ namespace DieTest
                         b = SetScore(s, scoreNavn, c, b, dC);
                         break;
                     default:
-                        b = false;
+                        b = true;
                         break;
                 }
-            } while (b == false);
+
+            }
         }
     }
 }
