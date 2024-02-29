@@ -35,16 +35,5 @@ namespace DieTest
                 IsFrozen = true;
             }
         }
-        public string PrintIsFrozen()
-        {
-            if (IsFrozen == true)
-            {
-                return "[X] ";
-            }
-            else
-            {
-                return "[ ] ";
-            }
-        }
     }
 }

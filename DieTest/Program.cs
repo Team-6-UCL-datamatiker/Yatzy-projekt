@@ -18,7 +18,7 @@
 
             //Løkke der kører 14 runder af spillet:
             //
-            while (genstart < 14)
+            while (genstart < 1)
             {
                 genstart++;
                 Console.WriteLine("Get ready for round {0}\n", genstart);
@@ -50,7 +50,7 @@
                         {
                             dc1.Roll();
                             crunch.PrintTurn(pArray, p);
-                            dc1.PrintEyes(i);
+                            crunch.PrintDieEyes(i, dc1);
                             Console.WriteLine("\n\n\n\n\n\n\n\n\n\n\n\nRafle rafle rafle...\n");
                             Console.SetCursorPosition(0, 0);
                             Thread.Sleep(75);
@@ -58,7 +58,7 @@
                         }
                         dc1.Roll();
                         crunch.PrintTurn(pArray, p);
-                        dc1.PrintEyes(i);
+                        crunch.PrintDieEyes(i, dc1);
 
                         // If else-løkken ændrer, hvad der sker efter det sidste kast:
                         //
@@ -71,7 +71,7 @@
                                 s = Console.ReadLine();
                                 dc1.FreezeMultipleDice(s);
                                 crunch.PrintTurn(pArray, p);
-                                dc1.PrintEyes(i);
+                                crunch.PrintDieEyes(i, dc1);
                                 Console.WriteLine("\n\n\n\n\n\n\n\n\n\n\n\nIndtast numrene på de terninger, du vil låse (op), eller tryk på Enter for at rafle.\n");
                             }
                         }
@@ -79,9 +79,9 @@
                         {
                             dc1.FreezeAllDice();
                             crunch.PrintTurn(pArray, p);
-                            dc1.PrintEyes(i);
+                            crunch.PrintDieEyes(i, dc1);
                             Console.WriteLine("\n\n\n\n\n\n\n\n\n\n");
-                            p.SetScoreSorter(dc1);
+                            crunch.SetScoreSorter(dc1, p);
                             Console.Clear();
                             crunch.PrintScoreCard(pArray);
                         }
@@ -97,9 +97,9 @@
             Player winner = new Player();
             foreach (Player p in pArray)
             {
-                if (p.TotalScore > v)
+                if (p.ScoreArray[15] > v)
                 {
-                    v = p.TotalScore;
+                    v = p.ScoreArray[15];
                     winner = p;
                 }
             }

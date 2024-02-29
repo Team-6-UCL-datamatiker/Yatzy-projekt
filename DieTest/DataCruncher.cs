@@ -18,49 +18,34 @@ namespace DieTest
             {
                 case "1":
                     return Enere(dC);
-                    break;
                 case "2":
                     return Toere(dC);
-                    break;
                 case "3":
                     return Treere(dC);
-                    break;
                 case "4":
                     return Firere(dC);
-                    break;
                 case "5":
                     return Femmere(dC);
-                    break;
                 case "6":
                     return Seksere(dC);
-                    break;
                 case "7":
                     return EtPar(dC);
-                    break;
                 case "8":
                     return ToPar(dC);
-                    break;
                 case "9":
                     return TreEns(dC);
-                    break;
                 case "10":
                     return FireEns(dC);
-                    break;
                 case "11":
                     return LilleStraight(dC);
-                    break;
                 case "12":
                     return StorStraight(dC);
-                    break;
                 case "13":
                     return Chancen(dC);
-                    break;
                 case "14":
                     return Yatzy(dC);
-                    break;
                 default:
                     return 1000000;
-                    break;
             }
         }
         public int Enere(DieCup dC)
@@ -607,7 +592,7 @@ namespace DieTest
             Console.Write(new string(' ', 40) + "Spillere:           " + "| ");
             foreach (Player p in pA)
             {
-                p.PrintName();
+                PrintName(p);
             }
             Console.Write("\n" + new string(' ', 60) + "| ");
             foreach (Player p in pA)
@@ -617,77 +602,77 @@ namespace DieTest
             Console.Write("\n" + new string(' ', 40) + "1:  1’ere__________ " + "| ");
             foreach (Player p in pA)
             {
-                p.PrintProperty(p.ScoreArray[0], p.BoolArray[0]);
+                PrintSingleScore(p.ScoreArray[0], p.BoolArray[0]);
             }
             Console.Write("\n" + new string(' ', 40) + "2:  2’ere__________ " + "| ");
             foreach (Player p in pA)
             {
-                p.PrintProperty(p.ScoreArray[1], p.BoolArray[1]);
+                PrintSingleScore(p.ScoreArray[1], p.BoolArray[1]);
             }
             Console.Write("\n" + new string(' ', 40) + "3:  3’ere__________ " + "| ");
             foreach (Player p in pA)
             {
-                p.PrintProperty(p.ScoreArray[2], p.BoolArray[2]);
+                PrintSingleScore(p.ScoreArray[2], p.BoolArray[2]);
             }
             Console.Write("\n" + new string(' ', 40) + "4:  4’ere__________ " + "| ");
             foreach (Player p in pA)
             {
-                p.PrintProperty(p.ScoreArray[3], p.BoolArray[3]);
+                PrintSingleScore(p.ScoreArray[3], p.BoolArray[3]);
             }
             Console.Write("\n" + new string(' ', 40) + "5:  5’ere__________ " + "| ");
             foreach (Player p in pA)
             {
-                p.PrintProperty(p.ScoreArray[4], p.BoolArray[4]);
+                PrintSingleScore(p.ScoreArray[4], p.BoolArray[4]);
             }
             Console.Write("\n" + new string(' ', 40) + "6:  6’ere__________ " + "| ");
             foreach (Player p in pA)
             {
-                p.PrintProperty(p.ScoreArray[5], p.BoolArray[5]);
+                PrintSingleScore(p.ScoreArray[5], p.BoolArray[5]);
             }
             Console.Write("\n" + new string(' ', 40) + "    Bonus__________ " + "| ");
             foreach (Player p in pA)
             {
-                p.PrintProperty(p.Bonus, p.FillerB);
+                PrintSingleScore(p.ScoreArray[14], p.BoolArray[14]);
             }
             Console.Write("\n" + new string(' ', 40) + "7:  Et par_________ " + "| ");
             foreach (Player p in pA)
             {
-                p.PrintProperty(p.ScoreArray[6], p.BoolArray[6]);
+                PrintSingleScore(p.ScoreArray[6], p.BoolArray[6]);
             }
             Console.Write("\n" + new string(' ', 40) + "8:  To par_________ " + "| ");
             foreach (Player p in pA)
             {
-                p.PrintProperty(p.ScoreArray[7], p.BoolArray[7]);
+                PrintSingleScore(p.ScoreArray[7], p.BoolArray[7]);
             }
             Console.Write("\n" + new string(' ', 40) + "9:  Tre ens________ " + "| ");
             foreach (Player p in pA)
             {
-                p.PrintProperty(p.ScoreArray[8], p.BoolArray[8]);
+                PrintSingleScore(p.ScoreArray[8], p.BoolArray[8]);
             }
             Console.Write("\n" + new string(' ', 40) + "10: Fire ens_______ " + "| ");
             foreach (Player p in pA)
             {
-                p.PrintProperty(p.ScoreArray[9], p.BoolArray[9]);
+                PrintSingleScore(p.ScoreArray[9], p.BoolArray[9]);
             }
             Console.Write("\n" + new string(' ', 40) + "11: Lille Straight_ " + "| ");
             foreach (Player p in pA)
             {
-                p.PrintProperty(p.ScoreArray[10], p.BoolArray[10]);
+                PrintSingleScore(p.ScoreArray[10], p.BoolArray[10]);
             }
             Console.Write("\n" + new string(' ', 40) + "12: Stor Straight__ " + "| ");
             foreach (Player p in pA)
             {
-                p.PrintProperty(p.ScoreArray[11], p.BoolArray[11]);
+                PrintSingleScore(p.ScoreArray[11], p.BoolArray[11]);
             }
             Console.Write("\n" + new string(' ', 40) + "13: Chancen________ " + "| ");
             foreach (Player p in pA)
             {
-                p.PrintProperty(p.ScoreArray[12], p.BoolArray[12]);
+                PrintSingleScore(p.ScoreArray[12], p.BoolArray[12]);
             }
             Console.Write("\n" + new string(' ', 40) + "14: Yatzy__________ " + "| ");
             foreach (Player p in pA)
             {
-                p.PrintProperty(p.ScoreArray[13], p.BoolArray[13]);
+                PrintSingleScore(p.ScoreArray[13], p.BoolArray[13]);
             }
             Console.Write("\n" + new string(' ', 60) + "| ");
             foreach (Player p in pA)
@@ -697,7 +682,7 @@ namespace DieTest
             Console.Write("\n" + new string(' ', 40) + "Samlet Score:       " + "| ");
             foreach (Player p in pA)
             {
-                p.PrintProperty(p.TotalScore, p.FillerB);
+                PrintSingleScore(p.ScoreArray[15], p.BoolArray[15]);
             }
             Console.SetCursorPosition(0, 0);
         }
@@ -706,6 +691,171 @@ namespace DieTest
             Console.Clear();
             PrintScoreCard(pA);
             Console.Write(p.Name + "s tur:\n\n");
+        }
+        public void PrintSingleScore(int i, bool b)
+        {
+            if (b == false)
+            {
+                int l = 10 - (i.ToString()).Length;
+                int hl = l / 2;
+                int ml = l % 2;
+                Console.Write(new string(' ', hl - 1) + " " + i + " " + new string(' ', hl + ml - 2) + " | ");
+            }
+            else
+            {
+                int l = 10 - (i.ToString()).Length;
+                int hl = l / 2;
+                int ml = l % 2;
+                Console.Write(new string(' ', hl - 1) + "[" + i + "]" + new string(' ', hl + ml - 2) + " | ");
+            }
+        }
+        public void CalculateBonus(Player p)
+        {
+            if (p.ScoreArray[14] == 0 && p.ScoreArray[0] + p.ScoreArray[1] + p.ScoreArray[2] + p.ScoreArray[3] + p.ScoreArray[4] + p.ScoreArray[5] >= 63)
+            {
+                p.ScoreArray[14] = 50;
+                p.ScoreArray[15] += p.ScoreArray[14];
+            }
+        }
+        public bool SetScore(string s, string scoreNavn, bool b, DieCup dC, Player p)
+        {
+            int i = int.Parse(s) - 1;
+            if (p.BoolArray[i] == true)
+            {
+                Console.WriteLine("\nDu har allerede valgt {0}", scoreNavn);
+                b = true;
+            }
+            else
+            {
+                Console.Write("\nDin {0} score er {1}. \n\nTryk Enter for at bekræfte eller indtast \"hov vent\" for at vælge en anden kombination: ", scoreNavn, Calculate(dC, s));
+                while (true)
+                {
+                    string a = Console.ReadLine();
+                    if (a == "hov vent")
+                    {
+                        b = true;
+                        break;
+                    }
+                    else if (a != "")
+                    {
+                        Console.WriteLine("\n\"hov vent\" eller Enter, makker.\n");
+                    }
+                    else
+                    {
+                        p.ScoreArray[i] = Calculate(dC, s);
+                        p.BoolArray[i] = true;
+                        p.ScoreArray[15] += p.ScoreArray[i];
+                        break;
+                    }
+                }
+            }
+            return b;
+        }
+        public void SetScoreSorter(DieCup dC, Player p)
+        {
+            bool b = true;
+            while (b == true)
+            {
+                Console.Write("\nIndtast et tal mellem 1 og 14 for at vælge kombination: ");
+                string s = Console.ReadLine();
+                string scoreNavn = "";
+                b = false;
+                switch (s)
+                {
+                    case "1":
+                        scoreNavn = "1'ere";
+                        b = SetScore(s, scoreNavn, b, dC, p);
+                        CalculateBonus(p);
+                        break;
+                    case "2":
+                        scoreNavn = "2'ere";
+                        b = SetScore(s, scoreNavn, b, dC, p);
+                        CalculateBonus(p);
+                        break;
+                    case "3":
+                        scoreNavn = "3'ere";
+                        b = SetScore(s, scoreNavn, b, dC, p);
+                        CalculateBonus(p);
+                        break;
+                    case "4":
+                        scoreNavn = "4'ere";
+                        b = SetScore(s, scoreNavn, b, dC, p);
+                        CalculateBonus(p);
+                        break;
+                    case "5":
+                        scoreNavn = "5'ere";
+                        b = SetScore(s, scoreNavn, b, dC, p);
+                        CalculateBonus(p);
+                        break;
+                    case "6":
+                        scoreNavn = "6'ere";
+                        b = SetScore(s, scoreNavn, b, dC, p);
+                        CalculateBonus(p);
+                        break;
+                    case "7":
+                        scoreNavn = "Et par";
+                        b = SetScore(s, scoreNavn, b, dC, p);
+                        break;
+                    case "8":
+                        scoreNavn = "To par";
+                        b = SetScore(s, scoreNavn, b, dC, p);
+                        break;
+                    case "9":
+                        scoreNavn = "Tre ens";
+                        b = SetScore(s, scoreNavn, b, dC, p);
+                        break;
+                    case "10":
+                        scoreNavn = "Fire ens";
+                        b = SetScore(s, scoreNavn, b, dC, p);
+                        break;
+                    case "11":
+                        scoreNavn = "Lille straight";
+                        b = SetScore(s, scoreNavn, b, dC, p);
+                        break;
+                    case "12":
+                        scoreNavn = "Stor straight";
+                        b = SetScore(s, scoreNavn, b, dC, p);
+                        break;
+                    case "13":
+                        scoreNavn = "Chancen";
+                        b = SetScore(s, scoreNavn, b, dC, p);
+                        break;
+                    case "14":
+                        scoreNavn = "Yatzy";
+                        b = SetScore(s, scoreNavn, b, dC, p);
+                        break;
+                    default:
+                        b = true;
+                        break;
+                }
+
+            }
+        }
+        public void PrintDieEyes(int i, DieCup dC)
+        {
+            Console.WriteLine((i + 1) + ". Rul\n");
+            foreach (Die d in dC.DieA)
+            {
+                Console.WriteLine(PrintIsFrozen(d) + "Terning " + (Array.IndexOf(dC.DieA, d) + 1) + ": " + d.Eyes);
+            }
+        }
+        public void PrintName(Player p)
+        {
+            int l = 10 - p.Name.Length;
+            int hl = l / 2;
+            int ml = l % 2;
+            Console.Write(new string(' ', hl) + p.Name + new string(' ', hl + ml - 1) + " | ");
+        }
+        public string PrintIsFrozen(Die d)
+        {
+            if (d.IsFrozen == true)
+            {
+                return "[X] ";
+            }
+            else
+            {
+                return "[ ] ";
+            }
         }
     }
 }

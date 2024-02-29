@@ -23,14 +23,6 @@ namespace DieTest
             }
 
         }
-        public void PrintEyes(int i)
-        {
-            Console.WriteLine((i + 1) + ". Rul\n");
-            foreach (Die d in dieA)
-            {
-                Console.WriteLine(d.PrintIsFrozen() + "Terning " + (Array.IndexOf(dieA, d) + 1) + ": " + d.Eyes);
-            }
-        }
         public void FreezeMultipleDice(string s)
         {
             for (int i = 0; i < 5; i++)
