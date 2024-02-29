@@ -5,16 +5,12 @@
         static void Main(string[] args)
         {
             // Lokale variable:
-            //
             int genstart = 0;
             DataCruncher crunch = new DataCruncher();
 
             //Opret spillere:
-            //
-            Console.WriteLine("Velkommen til Yatzy.");
-            Console.WriteLine("\nIndtast antallet af spillere (1-5).\n");
-            int iPlayers = crunch.NoOfPlayers(Console.ReadLine());
-            Player[] pArray = crunch.CreatePlayers(iPlayers);
+            Player[] playerArray = crunch.CreateNumberOfPlayers();
+            
 
             //Løkke der kører 14 runder af spillet:
             //
@@ -26,7 +22,7 @@
 
                 // Foreach-løkken sørger for at alle spillere får en tur hver af de 14 runder:
                 //
-                foreach (Player p in pArray)
+                foreach (Player p in playerArray)
                 {
                     // Lokale variable for metoden:
                     //
@@ -36,7 +32,7 @@
 
                     // Starter den enkelte spillers tur:
                     //
-                    crunch.PrintTurn(pArray, p);
+                    crunch.PrintTurn(playerArray, p);
                     Console.WriteLine("Tryk på Enter for at rafle.\n");
                     Console.ReadLine();
 
@@ -49,7 +45,7 @@
                         for (int j = 0; j < 20; j++)
                         {
                             dc1.Roll();
-                            crunch.PrintTurn(pArray, p);
+                            crunch.PrintTurn(playerArray, p);
                             crunch.PrintDieEyes(i, dc1);
                             Console.WriteLine("\n\n\n\n\n\n\n\n\n\n\n\nRafle rafle rafle...\n");
                             Console.SetCursorPosition(0, 0);
@@ -57,7 +53,7 @@
                             Console.SetCursorPosition(0, 0);
                         }
                         dc1.Roll();
-                        crunch.PrintTurn(pArray, p);
+                        crunch.PrintTurn(playerArray, p);
                         crunch.PrintDieEyes(i, dc1);
 
                         // If else-løkken ændrer, hvad der sker efter det sidste kast:
@@ -70,7 +66,7 @@
                             {
                                 s = Console.ReadLine();
                                 dc1.FreezeMultipleDice(s);
-                                crunch.PrintTurn(pArray, p);
+                                crunch.PrintTurn(playerArray, p);
                                 crunch.PrintDieEyes(i, dc1);
                                 Console.WriteLine("\n\n\n\n\n\n\n\n\n\n\n\nIndtast numrene på de terninger, du vil låse (op), eller tryk på Enter for at rafle.\n");
                             }
@@ -78,24 +74,24 @@
                         else
                         {
                             dc1.FreezeAllDice();
-                            crunch.PrintTurn(pArray, p);
+                            crunch.PrintTurn(playerArray, p);
                             crunch.PrintDieEyes(i, dc1);
                             Console.WriteLine("\n\n\n\n\n\n\n\n\n\n");
                             crunch.SetScoreSorter(dc1, p);
                             Console.Clear();
-                            crunch.PrintScoreCard(pArray);
+                            crunch.PrintScoreCard(playerArray);
                         }
                         i++;
                     }
                 }
-                crunch.PrintScoreCard(pArray);
+                crunch.PrintScoreCard(playerArray);
             }
             
             // Vinderanimation:
             //
             int v = 0;
             Player winner = new Player();
-            foreach (Player p in pArray)
+            foreach (Player p in playerArray)
             {
                 if (p.ScoreArray[15] > v)
                 {
@@ -104,7 +100,7 @@
                 }
             }
             Console.Clear();
-            crunch.PrintScoreCard(pArray);
+            crunch.PrintScoreCard(playerArray);
             Console.WriteLine(winner.Name + " VINDER MED " + v + " POINT!");
             Thread.Sleep(1500);
             Console.SetCursorPosition(0, 2);

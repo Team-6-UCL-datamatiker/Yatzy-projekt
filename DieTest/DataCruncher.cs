@@ -14,12 +14,15 @@ namespace DieTest
         //
 
         // Spilleroprettelse:
-        public int NoOfPlayers(string s)
+        public Player[] CreateNumberOfPlayers()
         {
-            int i = 0;
-            while (i < 1 || i > 5)
+            Console.WriteLine("Velkommen til Yatzy.");
+            Console.WriteLine("\nIndtast antallet af spillere (1-5).\n");
+            string sDeclaredPlayers = Console.ReadLine();
+            int iNumberOfPlayers = 0;
+            while (iNumberOfPlayers < 1 || iNumberOfPlayers > 5)
             {
-                switch (s)
+                switch (sDeclaredPlayers)
                 {
                     case "1":
                     case "2":
@@ -27,38 +30,34 @@ namespace DieTest
                     case "4":
                     case "5":
                         Console.Clear();
-                        i = int.Parse(s);
+                        iNumberOfPlayers = int.Parse(sDeclaredPlayers);
                         break;
                     default:
                         Console.Clear();
                         Console.WriteLine("Indtast et tal mellem 1 og 5.\n");
-                        s = Console.ReadLine();
+                        sDeclaredPlayers = Console.ReadLine();
                         break;
                 }
             }
-            return i;
-        }
-        public Player[] CreatePlayers(int i)
-        {
-            Player[] pA = new Player[i];
-            for (int j = i; j > 0; j--)
+            Player[] playerArray = new Player[iNumberOfPlayers];
+            for (int i = iNumberOfPlayers; i > 0; i--)
             {
-                int k = i - j;
-                Console.WriteLine("Indtast et navn på mellem 3 og 9 tegn på spiller {0}:\n", (k + 1));
-                pA[k] = new Player();
-                while (((pA[k]).Name).Length > 9 || ((pA[k]).Name).Length < 3)
+                Console.WriteLine("Spiller {0}:\n", iNumberOfPlayers - i + 1);
+                playerArray[iNumberOfPlayers - i] = new Player();
+                
+                while (playerArray[iNumberOfPlayers - i].Name.Length > 9 || playerArray[iNumberOfPlayers - i].Name.Length < 3)
                 {
                     Console.Clear();
-                    Console.WriteLine("Indtast et navn på mellem 3 og 9 tegn:\n");
-                    pA[k].Name = Console.ReadLine();
+                    Console.WriteLine("Indtast et navn på mellem 3 og 9 tegn, spiller {0}:\n", iNumberOfPlayers - i + 1);
+                    playerArray[iNumberOfPlayers - i].Name = Console.ReadLine();
                 }
                 Console.Clear();
             }
-            return pA;
+            return playerArray;
         }
 
         // Scoreberegning:
-        public int CalculateSpecifiedScore(DieCup dC, string s)
+        public int CalculateSpecifiedScore(DieCup dieCup, string s)
         {
             switch (s)
             {
@@ -68,33 +67,33 @@ namespace DieTest
                 case "4":
                 case "5":
                 case "6":
-                    return EtTilSeks(s, dC);
+                    return OnesToSixes(s, dieCup);
                 case "7":
-                    return EtPar(dC);
+                    return Pair(dieCup);
                 case "8":
-                    return ToPar(dC);
+                    return TwoPairs(dieCup);
                 case "9":
-                    return TreEns(dC);
+                    return ThreeOfAKind(dieCup);
                 case "10":
-                    return FireEns(dC);
+                    return FourOfAKind(dieCup);
                 case "11":
-                    return LilleStraight(dC);
+                    return SmallStraight(dieCup);
                 case "12":
-                    return StorStraight(dC);
+                    return BigStraight(dieCup);
                 case "13":
-                    return Chancen(dC);
+                    return Chance(dieCup);
                 case "14":
-                    return Yatzy(dC);
+                    return Yatzy(dieCup);
                 default:
                     return 1000000;
             }
         }
-        public int EtTilSeks(string s, DieCup dC) //check outofbouds erorors
+        public int OnesToSixes(string s, DieCup dC) //check outofbouds erorors
         {
             int sum = 0;
             int categoryValue = int.Parse(s) - 1;
 
-            foreach (Die d in dC.DieA)
+            foreach (Die d in dC.DieArray)
             {
                 if (d.Eyes == categoryValue)
                 {
@@ -103,424 +102,117 @@ namespace DieTest
             }
             return sum;
         }
-        public int EtPar(DieCup dC)
+        private int Pair(DieCup dieCup)
         {
-            int enere = 0;
-            int toere = 0;
-            int treere = 0;
-            int firere = 0;
-            int femmere = 0;
-            int seksere = 0;
-            int score1 = 0;
-            int score2 = 0;
-            int score3 = 0;
-            int score4 = 0;
-            int score5 = 0;
-            foreach (Die d in dC.DieA)
+            Array.Sort(dieCup.DieArray); //sort by value
+            Array.Reverse(dieCup.DieArray); //get the highest value first
+
+            for (int i = 0; i < dieCup.DieArray.Length; i++)
             {
-                if (d.Eyes == 1)
+                if (dieCup.DieArray[i] == dieCup.DieArray[i + 1])
                 {
-                    enere++;
-                    if (enere > 1)
-                    {
-                        score1 = 2;
-                    }
-                }
-                if (d.Eyes == 2)
-                {
-                    toere++;
-                    if (toere > 1)
-                    {
-                        score2 = 4;
-                    }
-                }
-                if (d.Eyes == 3)
-                {
-                    treere++;
-                    if (treere > 1)
-                    {
-                        score3 = 6;
-                    }
-                }
-                if (d.Eyes == 4)
-                {
-                    firere++;
-                    if (firere > 1)
-                    {
-                        score4 = 8;
-                    }
-                }
-                if (d.Eyes == 5)
-                {
-                    femmere++;
-                    if (femmere > 1)
-                    {
-                        score5 = 10;
-                    }
-                }
-                if (d.Eyes == 6)
-                {
-                    seksere++;
-                    if (seksere > 1)
-                    {
-                        return 12;
-                    }
+                    return dieCup.DieArray[i].Eyes * 2;
                 }
             }
-            if (score5 != 0) { return score5; }
-            else if (score4 != 0) { return score4; }
-            else if (score3 != 0) { return score3; }
-            else if (score2 != 0) { return score2; }
-            else if (score1 != 0) { return score1; }
-            else { return 0; }
-        } //Skriv en lille beskrivelse af hver metode
-        public int ToPar(DieCup dC)
+            return 0;
+        }
+        private int TwoPairs(DieCup dieCup)
         {
-            int enere = 0;
-            int toere = 0;
-            int treere = 0;
-            int firere = 0;
-            int femmere = 0;
-            int seksere = 0;
-            int score1 = 0;
-            int score2 = 0;
-            int score3 = 0;
-            int score4 = 0;
-            int score5 = 0;
-            int score6 = 0;
-            int score = 0;
-            foreach (Die d in dC.DieA)
+            int sum = 0;
+            int pairCount = 0;
+            Array.Sort(dieCup.DieArray);
+            Array.Reverse(dieCup.DieArray);
+
+            for (int i = 0; i < dieCup.DieArray.Length; i++)
             {
-                if (d.Eyes == 1)
+                if (dieCup.DieArray[i] == dieCup.DieArray[i + 1])
                 {
-                    enere++;
-                    if (enere > 1)
+                    sum += dieCup.DieArray[i].Eyes * 2;
+                    pairCount++;
+
+                    if (pairCount == 2)
                     {
-                        score1 = 2;
+                        break;
                     }
-                }
-                if (d.Eyes == 2)
-                {
-                    toere++;
-                    if (toere > 1)
-                    {
-                        score2 = 4;
-                    }
-                }
-                if (d.Eyes == 3)
-                {
-                    treere++;
-                    if (treere > 1)
-                    {
-                        score3 = 6;
-                    }
-                }
-                if (d.Eyes == 4)
-                {
-                    firere++;
-                    if (firere > 1)
-                    {
-                        score4 = 8;
-                    }
-                }
-                if (d.Eyes == 5)
-                {
-                    femmere++;
-                    if (femmere > 1)
-                    {
-                        score5 = 10;
-                    }
-                }
-                if (d.Eyes == 6)
-                {
-                    seksere++;
-                    if (seksere > 1)
-                    {
-                        score6 = 12;
-                    }
+                    i++;
                 }
             }
-            if (score6 != 0)
+            if (pairCount == 2)
             {
-                score = score6;
-            }
-            if (score5 != 0)
-            {
-                if (score != 0)
-                {
-                    return score + score5;
-                }
-                else
-                {
-                    score = score5;
-                }
-            }
-            if (score4 != 0)
-            {
-                if (score != 0)
-                {
-                    return score + score4;
-                }
-                else
-                {
-                    score = score4;
-                }
-            }
-            if (score3 != 0)
-            {
-                if (score != 0)
-                {
-                    return score + score3;
-                }
-                else
-                {
-                    score = score3;
-                }
-            }
-            if (score2 != 0)
-            {
-                if (score != 0)
-                {
-                    return score + score2;
-                }
-                else
-                {
-                    score = score2;
-                }
-            }
-            if (score1 != 0)
-            {
-                if (score != 0)
-                {
-                    return score + score1;
-                }
-                else
-                {
-                    return 0;
-                }
+                return sum;
             }
             else
             {
                 return 0;
             }
-        }
-        public int TreEns(DieCup dC)
+        }//check outofbouds errors
+        private int ThreeOfAKind(DieCup dieCup)
         {
-            int enere = 0;
-            int toere = 0;
-            int treere = 0;
-            int firere = 0;
-            int femmere = 0;
-            int seksere = 0;
-            foreach (Die d in dC.DieA)
+            Array.Sort(dieCup.DieArray);
+
+            for (int i = 0; i < dieCup.DieArray.Length; i++)
             {
-                if (d.Eyes == 1)
+                if (dieCup.DieArray[i] == dieCup.DieArray[i + 1] && dieCup.DieArray[i] == dieCup.DieArray[i + 2])
                 {
-                    enere++;
-                    if (enere > 2)
-                    {
-                        return enere;
-                    }
+                    return dieCup.DieArray[i].Eyes * 3;
                 }
-                if (d.Eyes == 2)
+            }
+            return 0;
+        } //check outofbouds erros
+        private int FourOfAKind(DieCup dieCup)
+        {
+            Array.Sort(dieCup.DieArray);
+
+            for (int i = 0; i < dieCup.DieArray.Length; i++)
+            {
+                if (dieCup.DieArray[i] == dieCup.DieArray[i + 1] && dieCup.DieArray[i] == dieCup.DieArray[i + 2] && dieCup.DieArray[i] == dieCup.DieArray[i + 3])
                 {
-                    toere++;
-                    if (toere > 2)
-                    {
-                        return toere * 2;
-                    }
-                }
-                if (d.Eyes == 3)
-                {
-                    treere++;
-                    if (treere > 2)
-                    {
-                        return treere * 3;
-                    }
-                }
-                if (d.Eyes == 4)
-                {
-                    firere++;
-                    if (firere > 2)
-                    {
-                        return firere * 4;
-                    }
-                }
-                if (d.Eyes == 5)
-                {
-                    femmere++;
-                    if (femmere > 2)
-                    {
-                        return femmere * 5;
-                    }
-                }
-                if (d.Eyes == 6)
-                {
-                    seksere++;
-                    if (seksere > 2)
-                    {
-                        return seksere * 6;
-                    }
+                    return dieCup.DieArray[i].Eyes * 4;
                 }
             }
             return 0;
         }
-        public int FireEns(DieCup dC)
+        private int SmallStraight(DieCup dieCup)
         {
-            int enere = 0;
-            int toere = 0;
-            int treere = 0;
-            int firere = 0;
-            int femmere = 0;
-            int seksere = 0;
-            foreach (Die d in dC.DieA)
+            Array.Sort(dieCup.DieArray);
+
+            for (int i = 0; i < 5; i++)
             {
-                if (d.Eyes == 1)
+                if (dieCup.DieArray[i].Eyes != i + 1) //checking if dice1 = 1, dice 2 = 2 and so on..
                 {
-                    enere++;
-                    if (enere > 3)
-                    {
-                        return enere;
-                    }
-                }
-                if (d.Eyes == 2)
-                {
-                    toere++;
-                    if (toere > 3)
-                    {
-                        return toere * 2;
-                    }
-                }
-                if (d.Eyes == 3)
-                {
-                    treere++;
-                    if (treere > 3)
-                    {
-                        return treere * 3;
-                    }
-                }
-                if (d.Eyes == 4)
-                {
-                    firere++;
-                    if (firere > 3)
-                    {
-                        return firere * 4;
-                    }
-                }
-                if (d.Eyes == 5)
-                {
-                    femmere++;
-                    if (femmere > 3)
-                    {
-                        return femmere * 5;
-                    }
-                }
-                if (d.Eyes == 6)
-                {
-                    seksere++;
-                    if (seksere > 3)
-                    {
-                        return seksere * 6;
-                    }
+                    return 0;
                 }
             }
-            return 0;
+            return 15;
         }
-        public int LilleStraight(DieCup dC)
+        private int BigStraight(DieCup dieCup)
         {
-            int enere = 0;
-            int toere = 0;
-            int treere = 0;
-            int firere = 0;
-            int femmere = 0;
-            int seksere = 0;
-            int score = 0;
-            foreach (Die d in dC.DieA)
+            Array.Sort(dieCup.DieArray);
+
+            for (int i = 0; i < 5; i++)
             {
-                if (d.Eyes == 1)
+                if (dieCup.DieArray[i].Eyes != i + 2) //checking if dice1 = 2, dice 2 = 3 and so on..
                 {
-                    enere++;
-                }
-                if (d.Eyes == 2)
-                {
-                    toere++;
-                }
-                if (d.Eyes == 3)
-                {
-                    treere++;
-                }
-                if (d.Eyes == 4)
-                {
-                    firere++;
-                }
-                if (d.Eyes == 5)
-                {
-                    femmere++;
+                    return 0;
                 }
             }
-            if (enere != 0 && toere != 0 && treere != 0 && firere != 0 && femmere != 0)
-            {
-                return 15;
-            }
-            return 0;
+            return 20;
         }
-        public int StorStraight(DieCup dC)
+        public int Chance(DieCup dC)
         {
-            int enere = 0;
-            int toere = 0;
-            int treere = 0;
-            int firere = 0;
-            int femmere = 0;
-            int seksere = 0;
-            int score = 0;
-            foreach (Die d in dC.DieA)
+            int sum = 0;
+            foreach (Die d in dC.DieArray)
             {
-                if (d.Eyes == 1)
-                {
-                    enere++;
-                }
-                if (d.Eyes == 2)
-                {
-                    toere++;
-                }
-                if (d.Eyes == 3)
-                {
-                    treere++;
-                }
-                if (d.Eyes == 4)
-                {
-                    firere++;
-                }
-                if (d.Eyes == 5)
-                {
-                    femmere++;
-                }
-                if (d.Eyes == 6)
-                {
-                    seksere++;
-                }
+                sum += d.Eyes;
             }
-            if (toere != 0 && treere != 0 && firere != 0 && femmere != 0 && seksere != 0)
-            {
-                return 20;
-            }
-            return 0;
-        }
-        public int Chancen(DieCup dC)
-        {
-            int i = 0;
-            foreach (Die d in dC.DieA)
-            {
-                i = i + d.Eyes;
-            }
-            return i;
+            return sum;
         }
         public int Yatzy(DieCup dC)
         {
-            int i = dC.DieA[0].Eyes;
-            foreach (Die d in dC.DieA)
+            int iEyes = dC.DieArray[0].Eyes;
+            foreach (Die d in dC.DieArray)
             {
-                if (d.Eyes != i)
+                if (d.Eyes != iEyes)
                 {
                     return 0;
                 }
@@ -558,9 +250,9 @@ namespace DieTest
         public void PrintDieEyes(int i, DieCup dC)
         {
             Console.WriteLine((i + 1) + ". Rul\n");
-            foreach (Die d in dC.DieA)
+            foreach (Die d in dC.DieArray)
             {
-                Console.WriteLine(PrintIsFrozen(d) + "Terning " + (Array.IndexOf(dC.DieA, d) + 1) + ": " + d.Eyes);
+                Console.WriteLine(PrintIsFrozen(d) + "Terning " + (Array.IndexOf(dC.DieArray, d) + 1) + ": " + d.Eyes);
             }
         }
         public void PrintSpecifiedScore(int i, bool b)

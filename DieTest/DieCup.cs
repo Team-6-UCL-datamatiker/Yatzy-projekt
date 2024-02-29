@@ -10,34 +10,34 @@ namespace DieTest
     {
         // Feltvariable/Properties:
         //
-        private Die[] dieA = new Die[5] { new Die(), new Die(), new Die(), new Die(), new Die() };
-        public Die[] DieA { get { return dieA; } }
+        private Die[] dieArray = new Die[5] { new Die(), new Die(), new Die(), new Die(), new Die() };
+        public Die[] DieArray { get { return dieArray; } }
 
         // Metoder:
         //
         public void Roll()
         {
-            foreach (Die d in dieA)
+            foreach (Die d in dieArray)
             {
                 d.Roll();
             }
 
         }
-        public void FreezeMultipleDice(string s)
+        public void FreezeMultipleDice(string specifiedDice)
         {
             for (int i = 0; i < 5; i++)
             {
-                if (s.Contains((i + 1).ToString()))
+                if (specifiedDice.Contains((i + 1).ToString()))
                 {
-                    dieA[i].SwitchIsFrozen();
+                    dieArray[i].SwitchIsFrozen();
                 }
             }
         }
         public void FreezeAllDice()
         {
-            foreach (Die d in dieA)
+            foreach (Die die in dieArray)
             {
-                d.IsFrozen = true;
+                die.IsFrozen = true;
             }
         }
     }
