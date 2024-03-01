@@ -134,7 +134,7 @@ namespace DieTest
 
 
         //Calculate points of relevant catagories:
-        
+
         private int CalculateOnesToSixes(int catagoryValue, int[] diceValues)
         {
             int sum = 0;
