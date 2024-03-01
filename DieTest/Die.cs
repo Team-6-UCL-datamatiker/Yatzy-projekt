@@ -10,9 +10,11 @@ namespace DieTest
     {
         // Feltvariable:
         private Random r = new Random();
+
         // Properties:
         public int Eyes { get; set; }
         public bool IsFrozen { get; set; }
+
         // Metoder:
         public void Roll()
         {
@@ -22,6 +24,7 @@ namespace DieTest
             }
         }
 
+        //Toggle freeze
         public void SwitchIsFrozen()
         {
             if (IsFrozen == true)
@@ -34,6 +37,7 @@ namespace DieTest
             }
         }
 
+        //Frozen die is indicated with an X
         public string PrintIsFrozen()
         {
             if (IsFrozen == true)
