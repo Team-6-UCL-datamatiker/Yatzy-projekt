@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.Metrics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -31,7 +32,7 @@ namespace DieTest
         {
             RegisterNames();
 
-            for (int i = currentRound; i == 1; i++) //Round (14 total)
+            for (int i = currentRound; i <= 2; i++) //Round (14 total)
             {
                 for (int j = 0; j < players.Count; j++) //Turn (1 for each player per round)
                 {
@@ -77,9 +78,6 @@ namespace DieTest
             {
                 RollAnimation(rollCount);
 
-                Console.WriteLine(currentPlayer.GetName() + "'s turn");
-                Console.WriteLine("Round: " + currentRound);
-
                 int[] diceValues = dieCup.GetDiceValues();
 
                 if (rollCount < 2) //after first and second roll
@@ -99,7 +97,7 @@ namespace DieTest
             for (int j = 0; j < 20; j++)
             {
                 dieCup.Roll();
-                dieCup.PrintEyes(rollCount);
+                dieCup.PrintEyes(rollCount, GetPlayerColor(currentPlayer));
                 Console.WriteLine("\nRafle rafle rafle...\n");
                 Thread.Sleep(25);
             }
@@ -115,7 +113,7 @@ namespace DieTest
                 Console.WriteLine("\nIndtast numrene på de terninger, du vil låse (op), eller tryk på Enter for at rafle.\n");
                 input = Console.ReadLine();
                 dieCup.FreezeMultipleDice(input);
-                dieCup.PrintEyes(rollCount);
+                dieCup.PrintEyes(rollCount, GetPlayerColor(currentPlayer));
             }
             while (input != "");
         }
@@ -125,12 +123,8 @@ namespace DieTest
         {
             Console.ForegroundColor = ConsoleColor.Red;
             dieCup.FreezeAllDice();
-            dieCup.PrintEyes(rollCount);
-            Console.Write("\nKlasse raflet ");
-            SetPlayerColor(currentPlayer); //print player name in the respective color
-            Console.Write(currentPlayer.GetName());
-            Console.ForegroundColor = ConsoleColor.Red; //switch back to red
-            Console.WriteLine("! Tryk på Enter for at vælge katagori.\n");
+            dieCup.PrintEyes(rollCount, GetPlayerColor(currentPlayer));
+            Console.WriteLine("\nKlasse raflet " + currentPlayer.GetName() + "! Tryk på Enter for at vælge katagori.\n");
             Console.ReadLine();
             Console.Clear();
             Console.ResetColor();
@@ -182,6 +176,25 @@ namespace DieTest
                 default:
                     Console.ForegroundColor = ConsoleColor.White;
                     break;
+            }
+        }
+
+        public ConsoleColor GetPlayerColor(Player player)
+        {
+            switch (players.IndexOf(player))
+            {
+                case 0:
+                    return ConsoleColor.Blue;
+                case 1:
+                    return ConsoleColor.Green;
+                case 2:
+                    return ConsoleColor.Yellow;
+                case 3:
+                    return ConsoleColor.Cyan;
+                case 4:
+                    return ConsoleColor.Magenta;
+                default:
+                    return ConsoleColor.White;
             }
         }
 
