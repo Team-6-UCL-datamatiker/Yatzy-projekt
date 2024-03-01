@@ -5,9 +5,9 @@
         static void Main(string[] args)
         {
             int numberOfPlayers;
-            Console.WriteLine("Welome to yatzy!");
-            Console.Write("How many players? ");
-            while (true)
+            TypeLine("Welome to yatzy! \n");
+            TypeLine("How many players? ");
+            while (true) //Takes input from player (must be between 2 and 5)
             {
                 try
                 {
@@ -18,9 +18,20 @@
                 catch (FormatException e) { Console.WriteLine("Enter a number between 2 and 5"); }
             }
 
+            //Make a new game with the specified amount of players
             YatzyGame game = new YatzyGame(numberOfPlayers);
             game.StartGame();
 
+        }
+
+        //Typing animation
+        public static void TypeLine(string line)
+        {
+            foreach (char c in line)
+            {
+                Console.Write(c);
+                System.Threading.Thread.Sleep(20);
+            }
         }
     }
 }
