@@ -9,14 +9,13 @@ namespace DieTest
     internal class Die
     {
         // Feltvariable:
-        //
         private Random r = new Random();
+
         // Properties:
-        //
         public int Eyes { get; set; }
         public bool IsFrozen { get; set; }
+
         // Metoder:
-        //
         public void Roll()
         {
             if (IsFrozen == false)

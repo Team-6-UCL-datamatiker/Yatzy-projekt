@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
+using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
 using static System.Formats.Asn1.AsnWriter;
@@ -10,9 +12,11 @@ namespace DieTest
 {
     internal class DataCruncher
     {
-        // Metoder:
-        //
+        // Farveordbog
+        Dictionary<string, ConsoleColor> colors = new Dictionary<string, ConsoleColor>()
+        {{"roed", ConsoleColor.DarkRed}, {"roeds", ConsoleColor.Red}, {"blå", ConsoleColor.DarkBlue}, {"blås", ConsoleColor.Blue}, {"groen", ConsoleColor.DarkGreen}, {"groens", ConsoleColor.Green}, {"turkis", ConsoleColor.DarkCyan}, {"turkiss", ConsoleColor.Cyan}, {"lilla", ConsoleColor.DarkMagenta}, {"lillas", ConsoleColor.Magenta}};
 
+        // Metoder:
         // Spilleroprettelse:
         public Player[] CreateNumberOfPlayers()
         {
@@ -43,67 +47,68 @@ namespace DieTest
             for (int i = iNumberOfPlayers; i > 0; i--)
             {
                 Console.Write("Spiller {0}: ", iNumberOfPlayers - i + 1);
-                playerArray[iNumberOfPlayers - i] = new Player();
-                
-                while (playerArray[iNumberOfPlayers - i].Name.Length > 9 || playerArray[iNumberOfPlayers - i].Name.Length < 3)
+                string sName = Console.ReadLine();
+                while (sName.Length > 9 || sName.Length < 3)
                 {
                     Console.Clear();
                     Console.WriteLine("Indtast et navn på mellem 3 og 9 tegn, spiller {0}:\n", iNumberOfPlayers - i + 1);
-                    playerArray[iNumberOfPlayers - i].Name = Console.ReadLine();
+                    sName = Console.ReadLine();
                 }
+                string sColor = "";
+                string sSecondaryColor = "";
+                bool bWhile = true;
+                do
+                {
+                    Console.Clear();
+                    Console.WriteLine("Hyggeligt at møde dig, {0}.", sName);
+                    Console.WriteLine("Er din yndlingsfarve blå, turkis, groen, lilla eller roed?\n");
+                    sColor = Console.ReadLine();
+                    bWhile = false;
+                    switch (sColor)
+                    {
+                        case "blå":
+                            sSecondaryColor = "blås";
+                            break;
+                        case "turkis":
+                            sSecondaryColor = "turkiss";
+                            break;
+                        case "groen":
+                            sSecondaryColor = "groens";
+                            break;
+                        case "lilla":
+                            sSecondaryColor = "lillas";
+                            break;
+                        case "roed":
+                            sSecondaryColor = "roeds";
+                            break;
+                        default:
+                            bWhile = true;
+                            break;
+                    }
+                }
+                while (bWhile == true);
+                playerArray[iNumberOfPlayers - i] = new Player(sName, sColor, sSecondaryColor);
                 Console.Clear();
             }
             return playerArray;
         }
 
         // Scoreberegning:
-        public int CalculateSpecifiedScore(DieCup dieCup, string s)
-        {
-            int[] dieArrayEyes = dieCup.GetDiceValues();
-            switch (s)
-            {
-                case "1":
-                case "2":
-                case "3":
-                case "4":
-                case "5":
-                case "6":
-                    return OnesToSixes(s, dieArrayEyes);
-                case "7":
-                    return Pair(dieArrayEyes);
-                case "8":
-                    return TwoPairs(dieArrayEyes);
-                case "9":
-                    return ThreeOfAKind(dieArrayEyes);
-                case "10":
-                    return FourOfAKind(dieArrayEyes);
-                case "11":
-                    return SmallStraight(dieArrayEyes);
-                case "12":
-                    return BigStraight(dieArrayEyes);
-                case "13":
-                    return Chance(dieArrayEyes);
-                case "14":
-                    return Yatzy(dieCup);
-                default:
-                    return 1000000;
-            }
-        }
-        public int OnesToSixes(string s, int[] dieArrayEyes) //check outofbouds erorors
+        private int OnesToSixes(string sOneToSix, int[] dieArrayEyes) //check outofbouds erorors
         {
             int sum = 0;
-            int categoryValue = int.Parse(s);
+            int oneToSix = int.Parse(sOneToSix);
 
             foreach (int i in dieArrayEyes)
             {
-                if (i == categoryValue)
+                if (i == oneToSix)
                 {
                     sum += i;
                 }
             }
             return sum;
         }
-        public int Pair(int[] dieArrayEyes)
+        private int Pair(int[] dieArrayEyes)
         {
             Array.Sort(dieArrayEyes); //sort by value
             Array.Reverse(dieArrayEyes); //get the highest value first
@@ -117,7 +122,7 @@ namespace DieTest
             }
             return 0;
         }
-        public int TwoPairs(int[] dieArrayEyes)
+        private int TwoPairs(int[] dieArrayEyes)
         {
             int sum = 0;
             int pairCount = 0;
@@ -147,7 +152,7 @@ namespace DieTest
                 return 0;
             }
         }//check outofbouds errors
-        public int ThreeOfAKind(int[] dieArrayEyes)
+        private int ThreeOfAKind(int[] dieArrayEyes)
         {
             Array.Sort(dieArrayEyes);
 
@@ -159,8 +164,8 @@ namespace DieTest
                 }
             }
             return 0;
-        } //check outofbouds erros outofbouds erros
-        public int FourOfAKind(int[] dieArrayEyes)
+        } //check outofbouds errors
+        private int FourOfAKind(int[] dieArrayEyes)
         {
             Array.Sort(dieArrayEyes);
 
@@ -173,7 +178,7 @@ namespace DieTest
             }
             return 0;
         }
-        public int SmallStraight(int[] dieArrayEyes)
+        private int SmallStraight(int[] dieArrayEyes)
         {
             Array.Sort(dieArrayEyes);
 
@@ -186,7 +191,7 @@ namespace DieTest
             }
             return 15;
         }
-        public int BigStraight(int[] dieArrayEyes)
+        private int BigStraight(int[] dieArrayEyes)
         {
             Array.Sort(dieArrayEyes);
 
@@ -199,47 +204,199 @@ namespace DieTest
             }
             return 20;
         }
-        public int Chance(int[] dieArrayEyes)
+        private int Chance(int[] dieArrayEyes)
         {
             int sum = 0;
-            foreach (int value in dieArrayEyes)
+            foreach (int Eyes in dieArrayEyes)
             {
-                sum += value;
+                sum += Eyes;
             }
             return sum;
         }
-        public int Yatzy(DieCup dC)
+        private int Yatzy(int[] dieArrayEyes)
         {
-            int iEyes = dC.DieArray[0].Eyes;
-            foreach (Die d in dC.DieArray)
+            int iEyes = dieArrayEyes[0];
+            foreach (int i in dieArrayEyes)
             {
-                if (d.Eyes != iEyes)
+                if (dieArrayEyes[i] != iEyes)
                 {
                     return 0;
                 }
             }
             return 50;
         }
-        public void CalculateBonus(Player p)
+        private int CalculateSpecifiedScore(DieCup dieCup, string sScoreIdentifier)
         {
-            if (p.ScoreArray[14] == 0 && p.ScoreArray[0] + p.ScoreArray[1] + p.ScoreArray[2] + p.ScoreArray[3] + p.ScoreArray[4] + p.ScoreArray[5] >= 63)
+            int[] dieArrayEyes = dieCup.GetDiceValues();
+            switch (sScoreIdentifier)
             {
-                p.ScoreArray[14] = 50;
-                p.ScoreArray[15] += p.ScoreArray[14];
+                case "1":
+                case "2":
+                case "3":
+                case "4":
+                case "5":
+                case "6":
+                    return OnesToSixes(sScoreIdentifier, dieArrayEyes);
+                case "7":
+                    return Pair(dieArrayEyes);
+                case "8":
+                    return TwoPairs(dieArrayEyes);
+                case "9":
+                    return ThreeOfAKind(dieArrayEyes);
+                case "10":
+                    return FourOfAKind(dieArrayEyes);
+                case "11":
+                    return SmallStraight(dieArrayEyes);
+                case "12":
+                    return BigStraight(dieArrayEyes);
+                case "13":
+                    return Chance(dieArrayEyes);
+                case "14":
+                    return Yatzy(dieArrayEyes);
+                default:
+                    return 1000000;
+            }
+        }
+        private void CalculateBonus(Player player)
+        {
+            if (player.ScoreArray[14] == 0 && player.ScoreArray[0] + player.ScoreArray[1] + player.ScoreArray[2] + player.ScoreArray[3] + player.ScoreArray[4] + player.ScoreArray[5] >= 63)
+            {
+                player.ScoreArray[14] = 50;
+                player.ScoreArray[15] += player.ScoreArray[14];
             }
         }
 
-        // Printere:
-        public void PrintName(Player p)
+        // Scoreopdatering:
+        public void SetScoreSorter(DieCup dieCup, Player player, Player[] playerArray, int iRunde, int iRollCounter)
         {
-            int l = 10 - p.Name.Length;
-            int hl = l / 2;
-            int ml = l % 2;
-            Console.Write(new string(' ', hl) + p.Name + new string(' ', hl + ml - 1) + " | ");
+            bool bStayinWhile = true;
+            while (bStayinWhile == true)
+            {
+                PrintTurn(dieCup, player, playerArray, iRunde, iRollCounter);
+                Console.Write("\n\n\n\n\n\n\n\n\n\nIndtast et tal mellem 1 og 14 for at vælge kombination: ");
+                string sScoreIdentifier = Console.ReadLine();
+                string sScoreNavn;
+                bStayinWhile = false;
+                switch (sScoreIdentifier)
+                {
+                    case "1":
+                        sScoreNavn = "1'ere";
+                        bStayinWhile = SetScore(sScoreIdentifier, sScoreNavn, bStayinWhile, dieCup, player);
+                        CalculateBonus(player);
+                        break;
+                    case "2":
+                        sScoreNavn = "2'ere";
+                        bStayinWhile = SetScore(sScoreIdentifier, sScoreNavn, bStayinWhile, dieCup, player);
+                        CalculateBonus(player);
+                        break;
+                    case "3":
+                        sScoreNavn = "3'ere";
+                        bStayinWhile = SetScore(sScoreIdentifier, sScoreNavn, bStayinWhile, dieCup, player);
+                        CalculateBonus(player);
+                        break;
+                    case "4":
+                        sScoreNavn = "4'ere";
+                        bStayinWhile = SetScore(sScoreIdentifier, sScoreNavn, bStayinWhile, dieCup, player);
+                        CalculateBonus(player);
+                        break;
+                    case "5":
+                        sScoreNavn = "5'ere";
+                        bStayinWhile = SetScore(sScoreIdentifier, sScoreNavn, bStayinWhile, dieCup, player);
+                        CalculateBonus(player);
+                        break;
+                    case "6":
+                        sScoreNavn = "6'ere";
+                        bStayinWhile = SetScore(sScoreIdentifier, sScoreNavn, bStayinWhile, dieCup, player);
+                        CalculateBonus(player);
+                        break;
+                    case "7":
+                        sScoreNavn = "Et par";
+                        bStayinWhile = SetScore(sScoreIdentifier, sScoreNavn, bStayinWhile, dieCup, player);
+                        break;
+                    case "8":
+                        sScoreNavn = "To par";
+                        bStayinWhile = SetScore(sScoreIdentifier, sScoreNavn, bStayinWhile, dieCup, player);
+                        break;
+                    case "9":
+                        sScoreNavn = "Tre ens";
+                        bStayinWhile = SetScore(sScoreIdentifier, sScoreNavn, bStayinWhile, dieCup, player);
+                        break;
+                    case "10":
+                        sScoreNavn = "Fire ens";
+                        bStayinWhile = SetScore(sScoreIdentifier, sScoreNavn, bStayinWhile, dieCup, player);
+                        break;
+                    case "11":
+                        sScoreNavn = "Lille straight";
+                        bStayinWhile = SetScore(sScoreIdentifier, sScoreNavn, bStayinWhile, dieCup, player);
+                        break;
+                    case "12":
+                        sScoreNavn = "Stor straight";
+                        bStayinWhile = SetScore(sScoreIdentifier, sScoreNavn, bStayinWhile, dieCup, player);
+                        break;
+                    case "13":
+                        sScoreNavn = "Chancen";
+                        bStayinWhile = SetScore(sScoreIdentifier, sScoreNavn, bStayinWhile, dieCup, player);
+                        break;
+                    case "14":
+                        sScoreNavn = "Yatzy";
+                        bStayinWhile = SetScore(sScoreIdentifier, sScoreNavn, bStayinWhile, dieCup, player);
+                        break;
+                    default:
+                        bStayinWhile = true;
+                        break;
+                }
+
+            }
+            Console.Clear();
         }
-        public string PrintIsFrozen(Die d)
+        private bool SetScore(string sScoreIdentifier, string scoreName, bool bStayInWhile, DieCup dieCup, Player player)
         {
-            if (d.IsFrozen == true)
+            int iScoreIdentifier = int.Parse(sScoreIdentifier) - 1;
+            if (player.BoolArray[iScoreIdentifier] == true)
+            {
+                Console.WriteLine("\nDu har allerede valgt {0}", scoreName);
+                bStayInWhile = true;
+            }
+            else
+            {
+                Console.Write("\nDin {0} score er {1}. \n\nTryk Enter for at bekræfte eller indtast \"hov\" for at vælge en anden kombination: ", scoreName, CalculateSpecifiedScore(dieCup, sScoreIdentifier));
+                while (true)
+                {
+                    string a = Console.ReadLine();
+                    if (a == "hov")
+                    {
+                        bStayInWhile = true;
+                        break;
+                    }
+                    else if (a != "")
+                    {
+                        Console.WriteLine("\n\"hov\" eller Enter, makker.\n");
+                    }
+                    else
+                    {
+                        player.ScoreArray[iScoreIdentifier] = CalculateSpecifiedScore(dieCup, sScoreIdentifier);
+                        player.BoolArray[iScoreIdentifier] = true;
+                        player.ScoreArray[15] += player.ScoreArray[iScoreIdentifier];
+                        break;
+                    }
+                }
+            }
+            return bStayInWhile;
+        }
+
+        // Printere:
+        private void PrintName(Player player)
+        {
+            int iSpace = 10 - player.Name.Length;
+            int iHalfSpace = iSpace / 2;
+            int iModuloSpace = iSpace % 2;
+            Console.BackgroundColor = colors.GetValueOrDefault(player.Color, ConsoleColor.Black);
+            Console.Write(new string(' ', iHalfSpace + 1) + player.Name + new string(' ', iHalfSpace + iModuloSpace));
+            Console.BackgroundColor = ConsoleColor.Black;
+        }
+        private string PrintIsFrozen(Die die)
+        {
+            if (die.IsFrozen == true)
             {
                 return "[X] ";
             }
@@ -248,256 +405,253 @@ namespace DieTest
                 return "[ ] ";
             }
         }
-        public void PrintDieEyes(int i, DieCup dC)
+        public void PrintTurn(DieCup dieCup, Player player, Player[] playerArray, int iStringParameter, int iTurnMinusOne)
         {
-            Console.WriteLine((i + 1) + ". Rul\n");
-            foreach (Die d in dC.DieArray)
+            Console.Clear();
+            PrintScoreCard(playerArray);
+            Console.WriteLine("Runde {0}\n", iStringParameter + 1);
+            Console.Write(player.Name + "s tur:\n\n");
+            Console.WriteLine((iTurnMinusOne + 1) + ". Kast\n");
+            foreach (Die die in dieCup.DieArray)
             {
-                Console.WriteLine(PrintIsFrozen(d) + "Terning " + (Array.IndexOf(dC.DieArray, d) + 1) + ": " + d.Eyes);
+                Console.WriteLine(PrintIsFrozen(die) + "Terning " + (Array.IndexOf(dieCup.DieArray, die) + 1) + ": " + die.Eyes);
             }
         }
-        public void PrintSpecifiedScore(int i, bool b)
+        private void PrintSpecifiedScore(int iScore, bool bScore, Player player, int row)
         {
-            if (b == false)
+            if (row % 2 != 0)
             {
-                int l = 10 - (i.ToString()).Length;
-                int hl = l / 2;
-                int ml = l % 2;
-                Console.Write(new string(' ', hl - 1) + " " + i + " " + new string(' ', hl + ml - 2) + " | ");
+                Console.BackgroundColor = colors.GetValueOrDefault(player.Color, ConsoleColor.Black);
             }
             else
             {
-                int l = 10 - (i.ToString()).Length;
-                int hl = l / 2;
-                int ml = l % 2;
-                Console.Write(new string(' ', hl - 1) + "[" + i + "]" + new string(' ', hl + ml - 2) + " | ");
+                Console.BackgroundColor = colors.GetValueOrDefault(player.SecondaryColor, ConsoleColor.Black);
             }
+            
+            if (bScore == false)
+            {
+                int iSpace = 10 - (iScore.ToString()).Length;
+                int iHalfSpace = iSpace / 2;
+                int iModuloSpace = iSpace % 2;
+                Console.Write(new string(' ', iHalfSpace) + " " + iScore + " " + new string(' ', iHalfSpace + iModuloSpace - 1));
+            }
+            else
+            {
+                int iSpace = 10 - (iScore.ToString()).Length;
+                int iHalfSpace = iSpace / 2;
+                int iModuloSpace = iSpace % 2;
+                Console.Write(new string(' ', iHalfSpace) + "[" + iScore + "]" + new string(' ', iHalfSpace + iModuloSpace - 1));
+            }
+            Console.BackgroundColor = ConsoleColor.Black;
         }
-        public void PrintScoreCard(Player[] pA)
+        public void PrintScoreCard(Player[] playerArray)
         {
             Console.Clear();
-            Console.Write(new string(' ', 40) + "Spillere:           " + "| ");
-            foreach (Player p in pA)
+            Console.BackgroundColor = ConsoleColor.Black;
+            Console.Write(new string(' ', 40) + "Spillere:          ");
+            Console.BackgroundColor = ConsoleColor.Black;
+            foreach (Player player in playerArray)
             {
-                PrintName(p);
+                PrintName(player);
             }
-            Console.Write("\n" + new string(' ', 60) + "| ");
-            foreach (Player p in pA)
+            Console.Write("\n" + new string(' ', 40));
+            Console.BackgroundColor = ConsoleColor.DarkGray;
+            Console.Write(new string(' ', 19));
+            Console.BackgroundColor = ConsoleColor.Black; 
+            foreach (Player player in playerArray)
             {
-                Console.Write(new string(' ', 10) + "| ");
+                Console.BackgroundColor = colors.GetValueOrDefault(player.SecondaryColor, ConsoleColor.Black);
+                Console.Write(new string(' ', 11));
             }
-            Console.Write("\n" + new string(' ', 40) + "1:  1’ere__________ " + "| ");
-            foreach (Player p in pA)
+            Console.BackgroundColor = ConsoleColor.Black;
+            Console.Write("\n" + new string(' ', 40) + "1:  1’ere          ");
+            Console.BackgroundColor = ConsoleColor.Black;
+            foreach (Player player in playerArray)
             {
-                PrintSpecifiedScore(p.ScoreArray[0], p.BoolArray[0]);
+                PrintSpecifiedScore(player.ScoreArray[0], player.BoolArray[0], player, 3);
+            } 
+            Console.Write("\n" + new string(' ', 40));
+            Console.BackgroundColor = ConsoleColor.DarkGray;
+            Console.Write("2:  2’ere          ");
+            Console.BackgroundColor = ConsoleColor.Black; 
+            foreach (Player player in playerArray)
+            {
+                PrintSpecifiedScore(player.ScoreArray[1], player.BoolArray[1], player, 4);
             }
-            Console.Write("\n" + new string(' ', 40) + "2:  2’ere__________ " + "| ");
-            foreach (Player p in pA)
+            Console.BackgroundColor = ConsoleColor.Black; 
+            Console.Write("\n" + new string(' ', 40) + "3:  3’ere          ");
+            Console.BackgroundColor = ConsoleColor.Black;
+            foreach (Player player in playerArray)
             {
-                PrintSpecifiedScore(p.ScoreArray[1], p.BoolArray[1]);
+                PrintSpecifiedScore(player.ScoreArray[2], player.BoolArray[2], player, 5);
+            } 
+            Console.Write("\n" + new string(' ', 40));
+            Console.BackgroundColor = ConsoleColor.DarkGray;
+            Console.Write("4:  4’ere          ");
+            Console.BackgroundColor = ConsoleColor.Black; 
+            foreach (Player player in playerArray)
+            {
+                PrintSpecifiedScore(player.ScoreArray[3], player.BoolArray[3], player, 6);
             }
-            Console.Write("\n" + new string(' ', 40) + "3:  3’ere__________ " + "| ");
-            foreach (Player p in pA)
+            Console.BackgroundColor = ConsoleColor.Black; 
+            Console.Write("\n" + new string(' ', 40) + "5:  5’ere          ");
+            Console.BackgroundColor = ConsoleColor.Black; 
+            foreach (Player player in playerArray)
             {
-                PrintSpecifiedScore(p.ScoreArray[2], p.BoolArray[2]);
+                PrintSpecifiedScore(player.ScoreArray[4], player.BoolArray[4], player, 7);
             }
-            Console.Write("\n" + new string(' ', 40) + "4:  4’ere__________ " + "| ");
-            foreach (Player p in pA)
+            Console.Write("\n" + new string(' ', 40));
+            Console.BackgroundColor = ConsoleColor.DarkGray;
+            Console.Write("6:  6’ere          ");
+            Console.BackgroundColor = ConsoleColor.Black; 
+            foreach (Player player in playerArray)
             {
-                PrintSpecifiedScore(p.ScoreArray[3], p.BoolArray[3]);
+                PrintSpecifiedScore(player.ScoreArray[5], player.BoolArray[5], player, 8);
             }
-            Console.Write("\n" + new string(' ', 40) + "5:  5’ere__________ " + "| ");
-            foreach (Player p in pA)
+            Console.BackgroundColor = ConsoleColor.Black; 
+            Console.Write("\n" + new string(' ', 40) + "    Bonus          ");
+            Console.BackgroundColor = ConsoleColor.Black; 
+            foreach (Player player in playerArray)
             {
-                PrintSpecifiedScore(p.ScoreArray[4], p.BoolArray[4]);
+                PrintSpecifiedScore(player.ScoreArray[14], player.BoolArray[14], player, 9);
             }
-            Console.Write("\n" + new string(' ', 40) + "6:  6’ere__________ " + "| ");
-            foreach (Player p in pA)
+            Console.Write("\n" + new string(' ', 40));
+            Console.BackgroundColor = ConsoleColor.DarkGray;
+            Console.Write("7:  Et par         ");
+            Console.BackgroundColor = ConsoleColor.Black; 
+            foreach (Player player in playerArray)
             {
-                PrintSpecifiedScore(p.ScoreArray[5], p.BoolArray[5]);
+                PrintSpecifiedScore(player.ScoreArray[6], player.BoolArray[6], player, 10);
             }
-            Console.Write("\n" + new string(' ', 40) + "    Bonus__________ " + "| ");
-            foreach (Player p in pA)
+            Console.BackgroundColor = ConsoleColor.Black; 
+            Console.Write("\n" + new string(' ', 40) + "8:  To par         ");
+            Console.BackgroundColor = ConsoleColor.Black; 
+            foreach (Player player in playerArray)
             {
-                PrintSpecifiedScore(p.ScoreArray[14], p.BoolArray[14]);
+                PrintSpecifiedScore(player.ScoreArray[7], player.BoolArray[7], player, 11);
             }
-            Console.Write("\n" + new string(' ', 40) + "7:  Et par_________ " + "| ");
-            foreach (Player p in pA)
+            Console.Write("\n" + new string(' ', 40));
+            Console.BackgroundColor = ConsoleColor.DarkGray;
+            Console.Write("9:  Tre ens        ");
+            Console.BackgroundColor = ConsoleColor.Black; 
+            foreach (Player player in playerArray)
             {
-                PrintSpecifiedScore(p.ScoreArray[6], p.BoolArray[6]);
+                PrintSpecifiedScore(player.ScoreArray[8], player.BoolArray[8], player, 12);
             }
-            Console.Write("\n" + new string(' ', 40) + "8:  To par_________ " + "| ");
-            foreach (Player p in pA)
+            Console.BackgroundColor = ConsoleColor.Black; 
+            Console.Write("\n" + new string(' ', 40) + "10: Fire ens       ");
+            Console.BackgroundColor = ConsoleColor.Black; 
+            foreach (Player player in playerArray)
             {
-                PrintSpecifiedScore(p.ScoreArray[7], p.BoolArray[7]);
+                PrintSpecifiedScore(player.ScoreArray[9], player.BoolArray[9], player, 13);
             }
-            Console.Write("\n" + new string(' ', 40) + "9:  Tre ens________ " + "| ");
-            foreach (Player p in pA)
+            Console.Write("\n" + new string(' ', 40));
+            Console.BackgroundColor = ConsoleColor.DarkGray;
+            Console.Write("11: Lille Straight ");
+            Console.BackgroundColor = ConsoleColor.Black; 
+            foreach (Player player in playerArray)
             {
-                PrintSpecifiedScore(p.ScoreArray[8], p.BoolArray[8]);
+                PrintSpecifiedScore(player.ScoreArray[10], player.BoolArray[10], player, 14);
             }
-            Console.Write("\n" + new string(' ', 40) + "10: Fire ens_______ " + "| ");
-            foreach (Player p in pA)
+            Console.BackgroundColor = ConsoleColor.Black; 
+            Console.Write("\n" + new string(' ', 40) + "12: Stor Straight  ");
+            Console.BackgroundColor = ConsoleColor.Black; 
+            foreach (Player player in playerArray)
             {
-                PrintSpecifiedScore(p.ScoreArray[9], p.BoolArray[9]);
+                PrintSpecifiedScore(player.ScoreArray[11], player.BoolArray[11], player, 15);
             }
-            Console.Write("\n" + new string(' ', 40) + "11: Lille Straight_ " + "| ");
-            foreach (Player p in pA)
+            Console.Write("\n" + new string(' ', 40));
+            Console.BackgroundColor = ConsoleColor.DarkGray;
+            Console.Write("13: Chancen        ");
+            Console.BackgroundColor = ConsoleColor.Black; 
+            foreach (Player player in playerArray)
             {
-                PrintSpecifiedScore(p.ScoreArray[10], p.BoolArray[10]);
+                PrintSpecifiedScore(player.ScoreArray[12], player.BoolArray[12], player, 16);
             }
-            Console.Write("\n" + new string(' ', 40) + "12: Stor Straight__ " + "| ");
-            foreach (Player p in pA)
+            Console.BackgroundColor = ConsoleColor.Black; 
+            Console.Write("\n" + new string(' ', 40) + "14: Yatzy          ");
+            Console.BackgroundColor = ConsoleColor.Black; 
+            foreach (Player player in playerArray)
             {
-                PrintSpecifiedScore(p.ScoreArray[11], p.BoolArray[11]);
+                PrintSpecifiedScore(player.ScoreArray[13], player.BoolArray[13], player, 17);
             }
-            Console.Write("\n" + new string(' ', 40) + "13: Chancen________ " + "| ");
-            foreach (Player p in pA)
+            Console.Write("\n" + new string(' ', 40));
+            Console.BackgroundColor = ConsoleColor.DarkGray;
+            Console.Write("    Samlet Score   ");
+            Console.BackgroundColor = ConsoleColor.Black;
+            foreach (Player player in playerArray)
             {
-                PrintSpecifiedScore(p.ScoreArray[12], p.BoolArray[12]);
-            }
-            Console.Write("\n" + new string(' ', 40) + "14: Yatzy__________ " + "| ");
-            foreach (Player p in pA)
-            {
-                PrintSpecifiedScore(p.ScoreArray[13], p.BoolArray[13]);
-            }
-            Console.Write("\n" + new string(' ', 60) + "| ");
-            foreach (Player p in pA)
-            {
-                Console.Write(new string(' ', 10) + "| ");
-            }
-            Console.Write("\n" + new string(' ', 40) + "Samlet Score:       " + "| ");
-            foreach (Player p in pA)
-            {
-                PrintSpecifiedScore(p.ScoreArray[15], p.BoolArray[15]);
+                PrintSpecifiedScore(player.ScoreArray[15], player.BoolArray[15], player, 18);
+                Console.BackgroundColor = ConsoleColor.Black;
             }
             Console.SetCursorPosition(0, 0);
         }
-        public void PrintTurn(Player[] pA, Player p)
+        public void PrintWinner(Player[] playerArray)
         {
+            int v = 0;
+            Player winner = new Player("vinder", "blå", "blås");
+            foreach (Player p in playerArray)
+            {
+                if (p.ScoreArray[15] > v)
+                {
+                    v = p.ScoreArray[15];
+                    winner = p;
+                }
+            }
             Console.Clear();
-            PrintScoreCard(pA);
-            Console.Write(p.Name + "s tur:\n\n");
+            PrintScoreCard(playerArray);
+            Console.WriteLine(winner.Name + " VINDER MED " + v + " POINT!");
+            Thread.Sleep(1500);
+            Console.SetCursorPosition(0, 2);
+            Random r = new Random();
+            for (int j = 0; j < 200; j++)
+            {
+                Thread.Sleep(500);
+                Console.ForegroundColor = (ConsoleColor)r.Next(0, 16);
+                Console.BackgroundColor = (ConsoleColor)r.Next(0, 16);
+                Console.WriteLine(new string(' ', j * 3) + "HAHAHA TABERE!");
+            }
+            Console.ReadLine();
         }
-
-        // Scoreopdatering:
-        public void SetScoreSorter(DieCup dC, Player p)
+        public void PrintFlowController(int iWriteIdentifier)
         {
-            bool b = true;
-            while (b == true)
+            switch (iWriteIdentifier)
             {
-                Console.Write("\nIndtast et tal mellem 1 og 14 for at vælge kombination: ");
-                string s = Console.ReadLine();
-                string scoreNavn;
-                b = false;
-                switch (s)
-                {
-                    case "1":
-                        scoreNavn = "1'ere";
-                        b = SetScore(s, scoreNavn, b, dC, p);
-                        CalculateBonus(p);
-                        break;
-                    case "2":
-                        scoreNavn = "2'ere";
-                        b = SetScore(s, scoreNavn, b, dC, p);
-                        CalculateBonus(p);
-                        break;
-                    case "3":
-                        scoreNavn = "3'ere";
-                        b = SetScore(s, scoreNavn, b, dC, p);
-                        CalculateBonus(p);
-                        break;
-                    case "4":
-                        scoreNavn = "4'ere";
-                        b = SetScore(s, scoreNavn, b, dC, p);
-                        CalculateBonus(p);
-                        break;
-                    case "5":
-                        scoreNavn = "5'ere";
-                        b = SetScore(s, scoreNavn, b, dC, p);
-                        CalculateBonus(p);
-                        break;
-                    case "6":
-                        scoreNavn = "6'ere";
-                        b = SetScore(s, scoreNavn, b, dC, p);
-                        CalculateBonus(p);
-                        break;
-                    case "7":
-                        scoreNavn = "Et par";
-                        b = SetScore(s, scoreNavn, b, dC, p);
-                        break;
-                    case "8":
-                        scoreNavn = "To par";
-                        b = SetScore(s, scoreNavn, b, dC, p);
-                        break;
-                    case "9":
-                        scoreNavn = "Tre ens";
-                        b = SetScore(s, scoreNavn, b, dC, p);
-                        break;
-                    case "10":
-                        scoreNavn = "Fire ens";
-                        b = SetScore(s, scoreNavn, b, dC, p);
-                        break;
-                    case "11":
-                        scoreNavn = "Lille straight";
-                        b = SetScore(s, scoreNavn, b, dC, p);
-                        break;
-                    case "12":
-                        scoreNavn = "Stor straight";
-                        b = SetScore(s, scoreNavn, b, dC, p);
-                        break;
-                    case "13":
-                        scoreNavn = "Chancen";
-                        b = SetScore(s, scoreNavn, b, dC, p);
-                        break;
-                    case "14":
-                        scoreNavn = "Yatzy";
-                        b = SetScore(s, scoreNavn, b, dC, p);
-                        break;
-                    default:
-                        b = true;
-                        break;
-                }
-
+                case 1:
+                    Console.WriteLine("Tryk på Enter for at rafle.\n");
+                    Console.ReadLine();
+                    break;
+                case 2:
+                    Console.WriteLine("\n\n\n\n\n\n\n\n\n\nRafle rafle rafle...\n");
+                    Console.SetCursorPosition(0, 0);
+                    Thread.Sleep(75);
+                    Console.SetCursorPosition(0, 0);
+                    break;
+                case 3:
+                    Console.WriteLine("\n\n\n\n\n\n\n\n\n\nIndtast numrene på de terninger, du vil låse (op), eller tryk på Enter for at rafle.\n");
+                    break;
+                case 4:
+                    Console.Clear();
+                    Console.SetCursorPosition(0, 0);
+                    break;
+                default:
+                    break;
             }
         }
-        public bool SetScore(string s, string scoreNavn, bool b, DieCup dC, Player p)
+        public void PrintFlowController(int iWriteIdentifier, Player[] playerArray, Player player, int iStringParameter, DieCup dieCup)
         {
-            int i = int.Parse(s) - 1;
-            if (p.BoolArray[i] == true)
+            switch (iWriteIdentifier)
             {
-                Console.WriteLine("\nDu har allerede valgt {0}", scoreNavn);
-                b = true;
+                case 1:
+                    dieCup.UnFreezeAllDice();
+                    Console.Clear();
+                    PrintScoreCard(playerArray);
+                    Console.WriteLine("Runde {0}\n", iStringParameter + 1);
+                    Console.Write(player.Name + "s tur:\n\n");
+                    break;
+                default:
+                    break;
             }
-            else
-            {
-                Console.Write("\nDin {0} score er {1}. \n\nTryk Enter for at bekræfte eller indtast \"hov vent\" for at vælge en anden kombination: ", scoreNavn, CalculateSpecifiedScore(dC, s));
-                while (true)
-                {
-                    string a = Console.ReadLine();
-                    if (a == "hov vent")
-                    {
-                        b = true;
-                        break;
-                    }
-                    else if (a != "")
-                    {
-                        Console.WriteLine("\n\"hov vent\" eller Enter, makker.\n");
-                    }
-                    else
-                    {
-                        p.ScoreArray[i] = CalculateSpecifiedScore(dC, s);
-                        p.BoolArray[i] = true;
-                        p.ScoreArray[15] += p.ScoreArray[i];
-                        break;
-                    }
-                }
-            }
-            return b;
         }
-
-
-
-
     }
 }

@@ -9,12 +9,10 @@ namespace DieTest
     internal class DieCup
     {
         // Feltvariable/Properties:
-        //
         private Die[] dieArray = new Die[5] { new Die(), new Die(), new Die(), new Die(), new Die() };
         public Die[] DieArray { get { return dieArray; } }
 
         // Metoder:
-        //
         public void Roll()
         {
             foreach (Die d in dieArray)
@@ -40,6 +38,14 @@ namespace DieTest
                 die.IsFrozen = true;
             }
         }
+        public void UnFreezeAllDice()
+        {
+            foreach (Die die in dieArray)
+            {
+                die.IsFrozen = false;
+            }
+        }
+
         public int[] GetDiceValues()
         {
             int[] dieArrayEyes = new int[5];

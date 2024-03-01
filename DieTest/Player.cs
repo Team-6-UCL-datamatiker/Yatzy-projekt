@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,8 +10,9 @@ namespace DieTest
     internal class Player
     {
         // Feltvariable/Properties:
-        //
         public string Name { get; set; }
+        public string Color { get; set; }
+        public string SecondaryColor { get; set; }
         //Oversigt over arrays
         // 0 = Enere
         // 1 = Toere
@@ -34,10 +36,12 @@ namespace DieTest
         public bool[] BoolArray { get { return boolArray; } }
 
         // Constructor:
-        //
-        public Player()
+        public Player(string sName, string sColor, string sSecondaryColor)
         {
-            Name = Console.ReadLine();
+            Name = sName;
+            Color = sColor;
+            SecondaryColor = sSecondaryColor;
+
         }
     }
 }
