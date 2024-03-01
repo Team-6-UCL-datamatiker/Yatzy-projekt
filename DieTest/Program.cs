@@ -5,8 +5,10 @@
         static void Main(string[] args)
         {
             int numberOfPlayers;
+
             TypeLine("Welome to yatzy! \n");
             TypeLine("How many players? ");
+
             while (true) //Takes input from player (must be between 2 and 5)
             {
                 try
