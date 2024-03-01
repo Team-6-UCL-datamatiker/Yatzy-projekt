@@ -25,11 +25,11 @@ namespace DieTest
         {
             int index = Array.IndexOf(this.catagoryNames, catagory); //the index of the selected catagory in the catagory array. retuns -1 if not found
 
-            if (index != -1)
+            if (index != -1) //if catagory does exist
             {
-                if (this.catagoryUpdated[index] == false)
+                if (this.catagoryUpdated[index] == false)  //if given catagory hasnt been updated
                 {
-                    switch (catagory)
+                    switch (catagory) //Uses relevant method to calculate score of given catagory
                     {
                         case "ONES":
                             this.scores[index] = CalculateOnesToSixes(1, diceValues);
@@ -75,8 +75,8 @@ namespace DieTest
                             this.scores[index] = CalculateYatzy(diceValues);
                             break;
                     }
-                    this.catagoryUpdated[index] = true;
-                    UpdateTotalScore();
+                    this.catagoryUpdated[index] = true; //Register that catagory has been updated
+                    UpdateTotalScore(); //updates totalScore
 
                 }
                 else //if catagory does exist but already has been updated
@@ -85,22 +85,57 @@ namespace DieTest
                     SetScore(Console.ReadLine().ToUpper(), diceValues);
                 }
             }
-            else
+            else //if catagory doesnt exist
             {
                 Console.WriteLine("Catagory not found!");
-                SetScore(Console.ReadLine().ToUpper(), diceValues);
+                SetScore(Console.ReadLine().ToUpper(), diceValues); //Calls the method again (Starts over)
             }
         }
 
-        public void UpDateTotalScore()
+        private void UpdateTotalScore()
         {
-            foreach (int score in this.scores)
+            this.totalScore = 0;
+            foreach (int score in scores)
             {
                 this.totalScore += score;
             }
         }
 
-        private int CalculateOnesToSixes(int catagoryValue, int[] diceValues) //check outofbouds erorors
+        public int GetTotalScore()
+        {
+            return this.totalScore;
+        }
+
+        public void PrintScoreboard()
+        {
+            Console.Clear();
+            Console.WriteLine("SCOREBOARD");
+            Console.WriteLine("----------------------------------");
+
+            for (int i = 0; i < this.catagoryNames.Length; i++)
+            {
+                if (this.catagoryUpdated[i] == true)
+                {
+                    Console.ForegroundColor = ConsoleColor.Red; //Makes updated score red in the console
+                }
+                else
+                {
+                    Console.ResetColor();
+                }
+                Console.WriteLine(String.Format("{0,-25} {1,-5}", this.catagoryNames[i], this.scores[i])); //-25 means minimum width of 25 chars (the '-' means left allignment)
+            }
+
+            Console.ResetColor();
+            Console.WriteLine("----------------------------------");
+            Console.WriteLine("Total score: " + this.totalScore);
+            Console.WriteLine();
+        }
+
+
+
+        //Calculate points of relevant catagories:
+        
+        private int CalculateOnesToSixes(int catagoryValue, int[] diceValues)
         {
             int sum = 0;
 
@@ -158,7 +193,7 @@ namespace DieTest
             {
                 return 0;
             }
-        }//check outofbouds errors
+        }
 
         private int CalculateTreeOfAKind(int[] diceValues)
         {
@@ -172,7 +207,7 @@ namespace DieTest
                 }
             }
             return 0;
-        } //check outofbouds erros
+        }
 
         private int CalculateFourOfAKind(int[] diceValues)
         {
@@ -234,45 +269,6 @@ namespace DieTest
                 sum += value;
             }
             return sum;
-        }
-
-        private void UpdateTotalScore()
-        {
-            this.totalScore = 0;
-            foreach (int score in scores)
-            {
-                this.totalScore += score;
-            }
-        }
-
-        public int GetTotalScore()
-        {
-            return this.totalScore;
-        }
-
-        public void PrintScoreboard()
-        {
-            Console.Clear();
-            Console.WriteLine("SCOREBOARD");
-            Console.WriteLine("----------------------------------");
-
-            for (int i = 0; i < this.catagoryNames.Length; i++)
-            {
-                if (this.catagoryUpdated[i] == true)
-                {
-                    Console.ForegroundColor = ConsoleColor.Red;
-                }
-                else
-                {
-                    Console.ResetColor();
-                }
-                Console.WriteLine(String.Format("{0,-25} {1,-5}", this.catagoryNames[i], this.scores[i])); //-25 means minimum width of 25 chars (the '-' means left allignment)
-            }
-
-            Console.ResetColor();
-            Console.WriteLine("----------------------------------");
-            Console.WriteLine($"Total score: {this.totalScore}");
-            Console.WriteLine();
         }
 
     }
