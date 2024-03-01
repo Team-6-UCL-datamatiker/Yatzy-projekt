@@ -14,7 +14,8 @@ namespace DieTest
         public DieCup()
         {
             //Make new dice and add to array
-            for(int i = 0; i < dice.Length; i++) {
+            for (int i = 0; i < dice.Length; i++)
+            {
                 dice[i] = new Die();
             }
         }
@@ -70,13 +71,17 @@ namespace DieTest
         }
 
         //Prints how many rerolls left, each die and if they are frozen or not
-        public void PrintEyes(int i)
+        public void PrintEyes(int i, ConsoleColor playerColor)
         {
             Console.Clear();
             Console.WriteLine((2 - i) + ". Rerolls left\n");
             foreach (Die d in dice)
             {
+                if (d.IsFrozen) {
+                    Console.ForegroundColor = ConsoleColor.DarkGray;
+                }
                 Console.WriteLine(d.PrintIsFrozen() + "Terning " + (Array.IndexOf(dice, d) + 1) + ": " + d.Eyes);
+                Console.ForegroundColor = playerColor;
             }
         }
     }
