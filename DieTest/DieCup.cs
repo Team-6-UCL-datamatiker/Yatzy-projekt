@@ -19,6 +19,7 @@ namespace DieTest
 
         public DieCup()
         {
+            //Add all the dice to the array
             dice[0] = die1;
             dice[1] = die2;
             dice[2] = die3;
@@ -26,6 +27,7 @@ namespace DieTest
             dice[4] = die5;
         }
 
+        //Rolls all dice in the diceCup
         public void Roll()
         {
             foreach (Die d in dice)
@@ -34,6 +36,7 @@ namespace DieTest
             }
         }
 
+        //Freezes the specified dice
         public void FreezeMultipleDice(string s)
         {
             for (int i = 0; i < 5; i++)
@@ -44,6 +47,8 @@ namespace DieTest
                 }
             }
         }
+
+        //Freeze all dice
         public void FreezeAllDice()
         {
             foreach (Die d in dice)
@@ -52,25 +57,27 @@ namespace DieTest
             }
         }
 
+        //Unfreeze all dice
         public void UnfreezeAllDice()
         {
-            foreach (Die d in dice) 
+            foreach (Die d in dice)
             {
                 d.IsFrozen = false;
             }
         }
 
-        //tilføjet
+        //Get the values of all dice in an array
         public int[] GetDiceValues()
         {
             int[] values = new int[5];
-            for(int i = 0;i < 5;i++)
+            for (int i = 0; i < 5; i++)
             {
                 values[i] = dice[i].Eyes;
             }
-            return values;         
+            return values;
         }
 
+        //Prints how many rerolls left, each die and if they are frozen or not
         public void PrintEyes(int i)
         {
             Console.Clear();
@@ -80,6 +87,5 @@ namespace DieTest
                 Console.WriteLine(d.PrintIsFrozen() + "Terning " + (Array.IndexOf(dice, d) + 1) + ": " + d.Eyes);
             }
         }
-
     }
 }
