@@ -29,7 +29,7 @@ namespace DieTest
 
         //:-)
         public void StartGame()
-        {
+        {           
             RegisterNames();
 
             for (int i = currentRound; i <= 2; i++) //Round (14 total)
@@ -101,6 +101,8 @@ namespace DieTest
                 Console.WriteLine("\nRafle rafle rafle...\n");
                 Thread.Sleep(25);
             }
+            Console.WriteLine("Round: " + currentRound);
+            Console.WriteLine(currentPlayer.GetName() + "'s turn");
         }
 
         //Freezes the selected dice
@@ -114,6 +116,8 @@ namespace DieTest
                 input = Console.ReadLine();
                 dieCup.FreezeMultipleDice(input);
                 dieCup.PrintEyes(rollCount, GetPlayerColor(currentPlayer));
+                Console.WriteLine("\nRound: " + currentRound);
+                Console.WriteLine(currentPlayer.GetName() + "'s turn");
             }
             while (input != "");
         }
@@ -121,13 +125,13 @@ namespace DieTest
         //Updates scoreboard, prints it and ends player turn
         public void UpdateScoreBoardAndEndTurn(int rollCount, int[] diceValues)
         {
-            Console.ForegroundColor = ConsoleColor.Red;
             dieCup.FreezeAllDice();
             dieCup.PrintEyes(rollCount, GetPlayerColor(currentPlayer));
             Console.WriteLine("\nKlasse raflet " + currentPlayer.GetName() + "! Tryk på Enter for at vælge katagori.\n");
             Console.ReadLine();
             Console.Clear();
             Console.ResetColor();
+
             //set scoreboard
             string selectedCategory = GetCatagory(); // Get the category from the player
             HandleScoreboardUpdate(selectedCategory, diceValues); //updates scoreboard
