@@ -126,7 +126,11 @@ namespace DieTest
             Console.ForegroundColor = ConsoleColor.Red;
             dieCup.FreezeAllDice();
             dieCup.PrintEyes(rollCount);
-            Console.WriteLine("\nKlasse raflet " + currentPlayer.GetName() + "! Tryk på Enter for at vælge katagori.\n");
+            Console.Write("\nKlasse raflet ");
+            SetPlayerColor(currentPlayer); //print player name in the respective color
+            Console.Write(currentPlayer.GetName());
+            Console.ForegroundColor = ConsoleColor.Red; //switch back to red
+            Console.WriteLine("! Tryk på Enter for at vælge katagori.\n");
             Console.ReadLine();
             Console.Clear();
             Console.ResetColor();
