@@ -11,20 +11,12 @@ namespace DieTest
     {
         private Die[] dice = new Die[5];
 
-        private Die die1 = new Die();
-        private Die die2 = new Die();
-        private Die die3 = new Die();
-        private Die die4 = new Die();
-        private Die die5 = new Die();
-
         public DieCup()
         {
-            //Add all the dice to the array
-            dice[0] = die1;
-            dice[1] = die2;
-            dice[2] = die3;
-            dice[3] = die4;
-            dice[4] = die5;
+            //Make new dice and add to array
+            for(int i = 0; i < dice.Length; i++) {
+                dice[i] = new Die();
+            }
         }
 
         //Rolls all dice in the diceCup
