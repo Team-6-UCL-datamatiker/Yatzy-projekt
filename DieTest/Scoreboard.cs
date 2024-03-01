@@ -60,7 +60,6 @@ namespace DieTest
                             break;
                         case "FOUR OF A KIND":
                             this.scores[index] = CalculateFourOfAKind(diceValues);
-                            this.catagoryUpdated[index] = true;
                             break;
                         case "SMALL STRAIGHT":
                             this.scores[index] = CalculateSmallStraight(diceValues);
