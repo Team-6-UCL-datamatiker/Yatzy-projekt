@@ -21,14 +21,16 @@ namespace DieTest
 
             for (int i = 0; i < numberOfPlayers; i++)
             {
-                players.Add(new Player());
+                players.Add(new Player()); //Makes how many new players specified and adds them to the list
             }
-            currentPlayer = players[0];
+            currentPlayer = players[0]; //Sets starting player to the first object in the list
         }
 
+        //:-)
         public void StartGame()
         {
             RegisterNames();
+
             for (int i = currentRound; i == 1; i++) //Round (14 total)
             {
                 for (int j = 0; j < players.Count; j++) //Turn (1 for each player per round)
@@ -37,7 +39,7 @@ namespace DieTest
                     ChangeTurn();
                 }
             }
-            EndGame(); //Prints winner
+            EndGame(); //Ends game and prints winner
         }
 
         //sets name of each player 
@@ -48,7 +50,7 @@ namespace DieTest
             {
                 while (true)
                 {
-                    Console.Write("Name of player" + i + ": ");
+                    TypeLine("Name of player" + i + ": ");
                     string name = Console.ReadLine();
                     if (name != null && name != "")
                     {
@@ -57,72 +59,83 @@ namespace DieTest
                     }
                     else
                     {
-                        Console.WriteLine("Please type something!");
+                        TypeLine("Please type something!\n");
                     }
                 }
             }
         }
 
+        //Hanldes each turn
         public void PlayTurn()
         {
             Console.Clear();
+            SetPlayerColor(currentPlayer); //Sets terminal color to the current players color
             dieCup.UnfreezeAllDice(); //starts with unfrozen dice on new turn
-            String s = "";
 
-
-            int rollCount = 0;
-            while (rollCount < 3) //1. roll
+            //rolling
+            for (int rollCount = 0; rollCount < 3; rollCount++)
             {
-                SetPlayerColor(currentPlayer);
+                RollAnimation(rollCount);
 
-                for (int j = 0; j < 20; j++)
-                {
-                    dieCup.Roll();
-                    dieCup.PrintEyes(rollCount);
-                    Console.WriteLine("\nRafle rafle rafle...\n");
-                    Thread.Sleep(25);
-                }
                 Console.WriteLine(currentPlayer.GetName() + "'s turn");
                 Console.WriteLine("Round: " + currentRound);
 
                 int[] diceValues = dieCup.GetDiceValues();
 
-                if (rollCount < 2) //next 2 rolls
+                if (rollCount < 2) //after first and second roll
                 {
-                    //Spillet fortsætter ikke, så længe der indtastes noget i terminalen (!= ""):
-                    //Derfor sættes strengen s til ikke at være tom (arbitrært sat til "a") før hver løkke:
-                    //Spillet fortsætter når der trykkes Enter uden input:
-                    s = "a";
-                    Console.WriteLine("\nIndtast numrene på de terninger, du vil låse (op), eller tryk på Enter for at rafle.\n");
-                    while (s != "")
-                    {
-                        s = Console.ReadLine();
-                        dieCup.FreezeMultipleDice(s);
-                        dieCup.PrintEyes(rollCount);
-                        Console.WriteLine("\nIndtast numrene på de terninger, du vil låse (op), eller tryk på Enter for at rafle.\n");
-                        Console.WriteLine(currentPlayer.GetName() + "'s turn");
-                        Console.WriteLine("Round: " + currentRound);
-
-                    }
+                    HandleFreeze(rollCount);
                 }
-                else
+                else //after final roll
                 {
-                    Console.ForegroundColor = ConsoleColor.Red;
-                    dieCup.FreezeAllDice();
-                    dieCup.PrintEyes(rollCount);
-                    Console.WriteLine("\nKlasse raflet " + currentPlayer.GetName() + "! Tryk på Enter for at vælge katagori.\n");
-                    Console.ReadLine();
-                    Console.Clear();
-                    Console.ResetColor();
-                    //set scoreboard
-                    string selectedCategory = GetCatagory(); // Get the category from the player
-                    HandleScoreboardUpdate(selectedCategory, diceValues); //updates scoreboard
+                    UpdateScoreBoardAndEndTurn(rollCount, diceValues);
                 }
-                rollCount++;
-
             }
         }
 
+        //Prints the roll animation
+        public void RollAnimation(int rollCount)
+        {
+            for (int j = 0; j < 20; j++)
+            {
+                dieCup.Roll();
+                dieCup.PrintEyes(rollCount);
+                Console.WriteLine("\nRafle rafle rafle...\n");
+                Thread.Sleep(25);
+            }
+        }
+
+        //Freezes the selected dice
+        public void HandleFreeze(int rollCount)
+        {
+            string input = "";
+
+            do
+            {
+                Console.WriteLine("\nIndtast numrene på de terninger, du vil låse (op), eller tryk på Enter for at rafle.\n");
+                input = Console.ReadLine();
+                dieCup.FreezeMultipleDice(input);
+                dieCup.PrintEyes(rollCount);
+            }
+            while (input != "");
+        }
+
+        //Updates scoreboard, prints it and ends player turn
+        public void UpdateScoreBoardAndEndTurn(int rollCount, int[] diceValues)
+        {
+            Console.ForegroundColor = ConsoleColor.Red;
+            dieCup.FreezeAllDice();
+            dieCup.PrintEyes(rollCount);
+            Console.WriteLine("\nKlasse raflet " + currentPlayer.GetName() + "! Tryk på Enter for at vælge katagori.\n");
+            Console.ReadLine();
+            Console.Clear();
+            Console.ResetColor();
+            //set scoreboard
+            string selectedCategory = GetCatagory(); // Get the category from the player
+            HandleScoreboardUpdate(selectedCategory, diceValues); //updates scoreboard
+        }
+
+        //Changes turn - sets currentPlayer to next player
         public void ChangeTurn()
         {
             int currentIndex = players.IndexOf(currentPlayer);
@@ -136,11 +149,13 @@ namespace DieTest
             currentPlayer = players[currentIndex];
         }
 
+        //Sets the name of the player on the given index
         public void SetPlayerName(int index, string name)
         {
             players[index].SetName(name);
         }
 
+        //Makes terminal color different depending on player
         public void SetPlayerColor(Player player)
         {
             switch (players.IndexOf(player))
@@ -166,7 +181,7 @@ namespace DieTest
             }
         }
 
-        //Updates and prints scoreboard of current player
+        //Updates and prints scoreboard of current player (used in UpdateScoreBoardAndEndTurn)
         public void HandleScoreboardUpdate(string catagory, int[] diceValues)
         {
             Scoreboard playerScoreboard = currentPlayer.PlayerScoreboard;
@@ -184,6 +199,7 @@ namespace DieTest
             return catagory;
         }
 
+        //Return the player with the highest total score
         public Player CalculateWinner()
         {
             Player winner = players[0];
@@ -198,6 +214,7 @@ namespace DieTest
             return winner;
         }
 
+        //Prints a wholesome end game message and player ranking
         public void EndGame()
         {
             Player winner = CalculateWinner();
@@ -229,6 +246,16 @@ namespace DieTest
                 Console.WriteLine(i + 1 + ". place: " + sortedPlayersArray[i].GetName() + " (" + sortedPlayersArray[i].PlayerScoreboard.GetTotalScore() + " points)");
             }
             Console.ResetColor();
+        }
+
+        //Typing animation!
+        public void TypeLine(String line)
+        {
+            foreach (char c in line)
+            {
+                Console.Write(c);
+                System.Threading.Thread.Sleep(20);
+            }
         }
     }
 }
