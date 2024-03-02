@@ -465,7 +465,11 @@ namespace DieTest
                 int iSpace = 10 - (iScore.ToString()).Length;
                 int iHalfSpace = iSpace / 2;
                 int iModuloSpace = iSpace % 2;
-                Console.Write(new string(' ', iHalfSpace) + "[" + iScore + "]" + new string(' ', iHalfSpace + iModuloSpace - 1));
+                ConsoleColor currentColor = Console.BackgroundColor;
+                Console.BackgroundColor = ConsoleColor.Gray;
+                Console.Write(" ");
+                Console.BackgroundColor = currentColor;
+                Console.Write(new string(' ', iHalfSpace - 1) + " " + iScore + " " + new string(' ', iHalfSpace + iModuloSpace - 1));
             }
             else
             {
@@ -484,7 +488,9 @@ namespace DieTest
             Console.BackgroundColor = ConsoleColor.Black;
             foreach (Player player in playerArray)
             {
+                Console.ForegroundColor = ConsoleColor.White;
                 PrintName(player);
+                Console.ForegroundColor = ConsoleColor.Gray;
             }
             Console.Write("\n" + new string(' ', 40));
             Console.BackgroundColor = ConsoleColor.DarkGray;
@@ -609,11 +615,13 @@ namespace DieTest
             }
             Console.Write("\n" + new string(' ', 40));
             Console.BackgroundColor = ConsoleColor.DarkGray;
+            Console.ForegroundColor = ConsoleColor.White; 
             Console.Write("    Samlet Score   ");
             Console.BackgroundColor = ConsoleColor.Black;
             foreach (Player player in playerArray)
             {
                 PrintSpecifiedScore(player.ScoreArray[15], player.BoolArray[15], player, 18);
+                Console.ForegroundColor = ConsoleColor.Gray;
                 Console.BackgroundColor = ConsoleColor.Black;
             }
             Console.SetCursorPosition(0, 0);
