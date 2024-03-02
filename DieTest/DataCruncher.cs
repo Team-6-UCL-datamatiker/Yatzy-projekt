@@ -469,14 +469,14 @@ namespace DieTest
                 Console.BackgroundColor = ConsoleColor.Gray;
                 Console.Write(" ");
                 Console.BackgroundColor = currentColor;
-                Console.Write(new string(' ', iHalfSpace - 1) + " " + iScore + " " + new string(' ', iHalfSpace + iModuloSpace - 1));
+                Console.Write(new string(' ', iHalfSpace) + iScore + new string(' ', iHalfSpace + iModuloSpace));
             }
             else
             {
                 int iSpace = 10 - (iScore.ToString()).Length;
                 int iHalfSpace = iSpace / 2;
                 int iModuloSpace = iSpace % 2;
-                Console.Write(new string(' ', iHalfSpace) + " " + iScore + " " + new string(' ', iHalfSpace + iModuloSpace - 1));
+                Console.Write(new string(' ', iHalfSpace + 1) + iScore + new string(' ', iHalfSpace + iModuloSpace));
             }
             Console.BackgroundColor = ConsoleColor.Black;
         }
