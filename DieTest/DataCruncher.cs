@@ -46,8 +46,7 @@ namespace DieTest
             Player[] playerArray = new Player[iNumberOfPlayers];
             for (int i = iNumberOfPlayers; i > 0; i--)
             {
-                TypeLine("Spiller");
-                Console.Write("{0}: ", iNumberOfPlayers - i + 1);
+                TypeLine("Spiller " + (iNumberOfPlayers - i + 1) + ": ");
                 string sName = Console.ReadLine();
                 while (sName.Length > 9 || sName.Length < 3)
                 {
@@ -68,7 +67,7 @@ namespace DieTest
                     Thread.Sleep(500);
                     TypeLine(", " + sName);
                     Thread.Sleep(500);
-                    TypeLine("\n\nKunne du tænke dig at være rød, blå, grøn, lilla eller turkis?\n\n");
+                    TypeLine("\n\nRød, blå, grøn, lilla eller turkis?\n\n");
                     Console.OutputEncoding = originalEncoding;
                     sColor = Console.ReadLine();
                     bWhile = false;
@@ -96,24 +95,23 @@ namespace DieTest
                 }
                 while (bWhile == true);
                 Console.Clear();
-                if (sColor == "rod")
-                { 
-                    TypeLine("Fortræffeligt valg");
-                    Thread.Sleep(500);
-                    TypeLine(", " + sName + "!");
-                    Thread.Sleep(500);
-                    TypeLine(" Den bedste farve!");
-                    Thread.Sleep(2500);
-                }
-                else
+                Random random = new Random();
+                int iRandom = random.Next(1,4);
+                switch (iRandom)
                 {
-                    TypeLine("Hmm");
-                    Thread.Sleep(500);
-                    TypeLine(", okay " + sName);
-                    Thread.Sleep(500);
-                    TypeLine(", interessant valg...");
-                    Thread.Sleep(2500);
+                    case 1:
+                        TypeLine("Fortræffeligt valg!");
+                        break;
+                    case 2:
+                        TypeLine("Interessant...");
+                        break;
+                    case 3:
+                        TypeLine("Fair nok, hver sin smag");
+                        break;
+                    default:
+                        break;
                 }
+                Thread.Sleep(1500);
                 playerArray[iNumberOfPlayers - i] = new Player(sName, sColor, sSecondaryColor);
                 Console.Clear();
             }
@@ -615,7 +613,7 @@ namespace DieTest
             }
             Console.Write("\n" + new string(' ', 40));
             Console.BackgroundColor = ConsoleColor.DarkGray;
-            Console.ForegroundColor = ConsoleColor.White; 
+            Console.ForegroundColor = ConsoleColor.White;
             Console.Write("    Samlet Score   ");
             Console.BackgroundColor = ConsoleColor.Black;
             foreach (Player player in playerArray)
