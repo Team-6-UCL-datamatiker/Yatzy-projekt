@@ -18,10 +18,10 @@ namespace DieTest
 
         // Metoder:
         // Spilleroprettelse:
-        public static Player[] CreateNumberOfPlayers()
+        public Player[] CreateNumberOfPlayers()
         {
-            Console.WriteLine("Velkommen til Yatzy.");
-            Console.WriteLine("\nIndtast antallet af spillere (1-5).\n");
+            TypeLine("Velkommen til Yatzy.\n");
+            TypeLine("\nIndtast antallet af spillere (1-5).\n\n");
             string sDeclaredPlayers = Console.ReadLine();
             int iNumberOfPlayers = 0;
             while (iNumberOfPlayers < 1 || iNumberOfPlayers > 5)
@@ -38,7 +38,7 @@ namespace DieTest
                         break;
                     default:
                         Console.Clear();
-                        Console.WriteLine("Indtast et tal mellem 1 og 5.\n");
+                        TypeLine("Indtast et tal mellem 1 og 5.\n\n");
                         sDeclaredPlayers = Console.ReadLine();
                         break;
                 }
@@ -46,12 +46,14 @@ namespace DieTest
             Player[] playerArray = new Player[iNumberOfPlayers];
             for (int i = iNumberOfPlayers; i > 0; i--)
             {
-                Console.Write("Spiller {0}: ", iNumberOfPlayers - i + 1);
+                TypeLine("Spiller");
+                Console.Write("{0}: ", iNumberOfPlayers - i + 1);
                 string sName = Console.ReadLine();
                 while (sName.Length > 9 || sName.Length < 3)
                 {
                     Console.Clear();
-                    Console.WriteLine("Indtast et navn på mellem 3 og 9 tegn, spiller {0}:\n", iNumberOfPlayers - i + 1);
+                    TypeLine("Indtast et navn på mellem 3 og 9 tegn, spiller ");
+                    Console.WriteLine("{0}:\n", iNumberOfPlayers - i + 1);
                     sName = Console.ReadLine();
                 }
                 string sColor = "";
@@ -62,8 +64,11 @@ namespace DieTest
                     Console.Clear();
                     Encoding originalEncoding = Console.OutputEncoding;
                     Console.OutputEncoding = Encoding.UTF8;
-                    Console.WriteLine("Hyggeligt at møde dig, {0}.", sName);
-                    Console.WriteLine("Er din yndlingsfarve blå, turkis, grøn, lilla eller rød?\n");
+                    TypeLine("Hyggeligt at møde dig");
+                    Thread.Sleep(500);
+                    TypeLine(", " + sName);
+                    Thread.Sleep(500);
+                    TypeLine("\n\nKunne du tænke dig at være rød, blå, grøn, lilla eller turkis?\n\n");
                     Console.OutputEncoding = originalEncoding;
                     sColor = Console.ReadLine();
                     bWhile = false;
@@ -90,6 +95,25 @@ namespace DieTest
                     }
                 }
                 while (bWhile == true);
+                Console.Clear();
+                if (sColor == "rod")
+                { 
+                    TypeLine("Fortræffeligt valg");
+                    Thread.Sleep(500);
+                    TypeLine(", " + sName + "!");
+                    Thread.Sleep(500);
+                    TypeLine(" Den bedste farve!");
+                    Thread.Sleep(2500);
+                }
+                else
+                {
+                    TypeLine("Hmm");
+                    Thread.Sleep(500);
+                    TypeLine(", okay " + sName);
+                    Thread.Sleep(500);
+                    TypeLine(", interessant valg...");
+                    Thread.Sleep(2500);
+                }
                 playerArray[iNumberOfPlayers - i] = new Player(sName, sColor, sSecondaryColor);
                 Console.Clear();
             }
@@ -373,7 +397,9 @@ namespace DieTest
                     }
                     else if (a != "")
                     {
-                        Console.WriteLine("\n\"hov\" eller Enter, makker.\n");
+                        TypeLine("\n\"hov\" eller Enter");
+                        Thread.Sleep(500);
+                        TypeLine(", makker.\n\n");
                     }
                     else
                     {
@@ -657,6 +683,15 @@ namespace DieTest
                     break;
                 default:
                     break;
+            }
+        }
+        // Jeppes printanimation:
+        private static void TypeLine(string line)
+        {
+            foreach (char c in line)
+            {
+                Console.Write(c);
+                System.Threading.Thread.Sleep(20);
             }
         }
     }
