@@ -18,7 +18,7 @@ namespace DieTest
 
         // Metoder:
         // Spilleroprettelse:
-        public Player[] CreateNumberOfPlayers()
+        public static Player[] CreateNumberOfPlayers()
         {
             Console.WriteLine("Velkommen til Yatzy.");
             Console.WriteLine("\nIndtast antallet af spillere (1-5).\n");
@@ -97,7 +97,7 @@ namespace DieTest
         }
 
         // Scoreberegning:
-        private int OnesToSixes(string sOneToSix, int[] dieArrayEyes) //check outofbouds erorors
+        private static int OnesToSixes(string sOneToSix, int[] dieArrayEyes)
         {
             int sum = 0;
             int oneToSix = int.Parse(sOneToSix);
@@ -111,7 +111,7 @@ namespace DieTest
             }
             return sum;
         }
-        private int Pair(int[] dieArrayEyes)
+        private static int Pair(int[] dieArrayEyes)
         {
             Array.Sort(dieArrayEyes); //sort by value
             Array.Reverse(dieArrayEyes); //get the highest value first
@@ -125,7 +125,7 @@ namespace DieTest
             }
             return 0;
         }
-        private int TwoPairs(int[] dieArrayEyes)
+        private static int TwoPairs(int[] dieArrayEyes)
         {
             int sum = 0;
             int pairCount = 0;
@@ -154,8 +154,8 @@ namespace DieTest
             {
                 return 0;
             }
-        }//check outofbouds errors
-        private int ThreeOfAKind(int[] dieArrayEyes)
+        }
+        private static int ThreeOfAKind(int[] dieArrayEyes)
         {
             Array.Sort(dieArrayEyes);
 
@@ -167,8 +167,8 @@ namespace DieTest
                 }
             }
             return 0;
-        } //check outofbouds errors
-        private int FourOfAKind(int[] dieArrayEyes)
+        }
+        private static int FourOfAKind(int[] dieArrayEyes)
         {
             Array.Sort(dieArrayEyes);
 
@@ -181,7 +181,7 @@ namespace DieTest
             }
             return 0;
         }
-        private int SmallStraight(int[] dieArrayEyes)
+        private static int SmallStraight(int[] dieArrayEyes)
         {
             Array.Sort(dieArrayEyes);
 
@@ -194,7 +194,7 @@ namespace DieTest
             }
             return 15;
         }
-        private int BigStraight(int[] dieArrayEyes)
+        private static int BigStraight(int[] dieArrayEyes)
         {
             Array.Sort(dieArrayEyes);
 
@@ -207,7 +207,7 @@ namespace DieTest
             }
             return 20;
         }
-        private int Chance(int[] dieArrayEyes)
+        private static int Chance(int[] dieArrayEyes)
         {
             int sum = 0;
             foreach (int Eyes in dieArrayEyes)
@@ -216,7 +216,7 @@ namespace DieTest
             }
             return sum;
         }
-        private int Yatzy(int[] dieArrayEyes)
+        private static int Yatzy(int[] dieArrayEyes)
         {
             int iEyes = dieArrayEyes[0];
             foreach (int i in dieArrayEyes)
@@ -228,7 +228,7 @@ namespace DieTest
             }
             return 50;
         }
-        private int CalculateSpecifiedScore(DieCup dieCup, string sScoreIdentifier)
+        private static int CalculateSpecifiedScore(DieCup dieCup, string sScoreIdentifier)
         {
             int[] dieArrayEyes = dieCup.GetDiceValues();
             switch (sScoreIdentifier)
@@ -260,7 +260,7 @@ namespace DieTest
                     return 1000000;
             }
         }
-        private void CalculateBonus(Player player)
+        private static void CalculateBonus(Player player)
         {
             if (player.ScoreArray[14] == 0 && player.ScoreArray[0] + player.ScoreArray[1] + player.ScoreArray[2] + player.ScoreArray[3] + player.ScoreArray[4] + player.ScoreArray[5] >= 63)
             {
@@ -352,7 +352,7 @@ namespace DieTest
             }
             Console.Clear();
         }
-        private bool SetScore(string sScoreIdentifier, string scoreName, bool bStayInWhile, DieCup dieCup, Player player)
+        private static bool SetScore(string sScoreIdentifier, string scoreName, bool bStayInWhile, DieCup dieCup, Player player)
         {
             int iScoreIdentifier = int.Parse(sScoreIdentifier) - 1;
             if (player.BoolArray[iScoreIdentifier] == true)
@@ -397,7 +397,7 @@ namespace DieTest
             Console.Write(new string(' ', iHalfSpace + 1) + player.Name + new string(' ', iHalfSpace + iModuloSpace));
             Console.BackgroundColor = ConsoleColor.Black;
         }
-        private void PrintIsFrozen(Die die)
+        private static void PrintIsFrozen(Die die)
         {
             if (die.IsFrozen == true)
             {
@@ -610,12 +610,12 @@ namespace DieTest
             Thread.Sleep(1500);
             Console.SetCursorPosition(0, 2);
             Random r = new Random();
-            for (int j = 0; j < 200; j++)
+            for (int j = 0; j < 60; j++)
             {
                 Thread.Sleep(500);
                 Console.ForegroundColor = (ConsoleColor)r.Next(0, 16);
                 Console.BackgroundColor = (ConsoleColor)r.Next(0, 16);
-                Console.WriteLine(new string(' ', j * 3) + "HAHAHA TABERE!");
+                Console.WriteLine(new string(' ', j * j) + "HAHAHA TABERE!");
             }
             Console.ReadLine();
         }

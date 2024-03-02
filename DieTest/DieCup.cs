@@ -45,7 +45,6 @@ namespace DieTest
                 die.IsFrozen = false;
             }
         }
-
         public int[] GetDiceValues()
         {
             int[] dieArrayEyes = new int[5];
