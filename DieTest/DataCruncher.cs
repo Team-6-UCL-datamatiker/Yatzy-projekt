@@ -106,12 +106,12 @@ namespace DieTest
                         TypeLine("Interessant...");
                         break;
                     case 3:
-                        TypeLine("Fair nok, hver sin smag");
+                        TypeLine("Fair nok, hver sin smag.");
                         break;
                     default:
                         break;
                 }
-                Thread.Sleep(1500);
+                Thread.Sleep(2000);
                 playerArray[iNumberOfPlayers - i] = new Player(sName, sColor, sSecondaryColor);
                 Console.Clear();
             }
@@ -417,7 +417,7 @@ namespace DieTest
             int iSpace = 10 - player.Name.Length;
             int iHalfSpace = iSpace / 2;
             int iModuloSpace = iSpace % 2;
-            Console.BackgroundColor = colors.GetValueOrDefault(player.Color, ConsoleColor.Black);
+            Console.BackgroundColor = colors.GetValueOrDefault(player.SecondaryColor, ConsoleColor.Black);
             Console.Write(new string(' ', iHalfSpace + 1) + player.Name + new string(' ', iHalfSpace + iModuloSpace));
             Console.BackgroundColor = ConsoleColor.Black;
         }
@@ -464,10 +464,12 @@ namespace DieTest
                 int iHalfSpace = iSpace / 2;
                 int iModuloSpace = iSpace % 2;
                 ConsoleColor currentColor = Console.BackgroundColor;
-                Console.BackgroundColor = ConsoleColor.Gray;
+                Console.BackgroundColor = ConsoleColor.White;
                 Console.Write(" ");
                 Console.BackgroundColor = currentColor;
+                Console.ForegroundColor = ConsoleColor.White;
                 Console.Write(new string(' ', iHalfSpace) + iScore + new string(' ', iHalfSpace + iModuloSpace));
+                Console.ForegroundColor = ConsoleColor.Gray;
             }
             else
             {
@@ -481,27 +483,19 @@ namespace DieTest
         public void PrintScoreCard(Player[] playerArray)
         {
             Console.Clear();
-            Console.BackgroundColor = ConsoleColor.Black;
-            Console.Write(new string(' ', 40) + "Spillere:          ");
+            Console.Write(new string(' ', 40));
+            Console.BackgroundColor = ConsoleColor.DarkGray;
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.Write("Spillere           ");
             Console.BackgroundColor = ConsoleColor.Black;
             foreach (Player player in playerArray)
             {
-                Console.ForegroundColor = ConsoleColor.White;
                 PrintName(player);
                 Console.ForegroundColor = ConsoleColor.Gray;
             }
             Console.Write("\n" + new string(' ', 40));
-            Console.BackgroundColor = ConsoleColor.DarkGray;
-            Console.Write(new string(' ', 19));
             Console.BackgroundColor = ConsoleColor.Black;
-            foreach (Player player in playerArray)
-            {
-                Console.BackgroundColor = colors.GetValueOrDefault(player.SecondaryColor, ConsoleColor.Black);
-                Console.Write(new string(' ', 11));
-            }
-            Console.BackgroundColor = ConsoleColor.Black;
-            Console.Write("\n" + new string(' ', 40) + "1:  1’ere          ");
-            Console.BackgroundColor = ConsoleColor.Black;
+            Console.Write("1:  1’ere          ");
             foreach (Player player in playerArray)
             {
                 PrintSpecifiedScore(player.ScoreArray[0], player.BoolArray[0], player, 3);
@@ -509,14 +503,13 @@ namespace DieTest
             Console.Write("\n" + new string(' ', 40));
             Console.BackgroundColor = ConsoleColor.DarkGray;
             Console.Write("2:  2’ere          ");
-            Console.BackgroundColor = ConsoleColor.Black;
             foreach (Player player in playerArray)
             {
                 PrintSpecifiedScore(player.ScoreArray[1], player.BoolArray[1], player, 4);
             }
             Console.BackgroundColor = ConsoleColor.Black;
-            Console.Write("\n" + new string(' ', 40) + "3:  3’ere          ");
-            Console.BackgroundColor = ConsoleColor.Black;
+            Console.Write("\n" + new string(' ', 40));
+            Console.Write("3:  3’ere          ");
             foreach (Player player in playerArray)
             {
                 PrintSpecifiedScore(player.ScoreArray[2], player.BoolArray[2], player, 5);
@@ -524,14 +517,13 @@ namespace DieTest
             Console.Write("\n" + new string(' ', 40));
             Console.BackgroundColor = ConsoleColor.DarkGray;
             Console.Write("4:  4’ere          ");
-            Console.BackgroundColor = ConsoleColor.Black;
             foreach (Player player in playerArray)
             {
                 PrintSpecifiedScore(player.ScoreArray[3], player.BoolArray[3], player, 6);
             }
             Console.BackgroundColor = ConsoleColor.Black;
-            Console.Write("\n" + new string(' ', 40) + "5:  5’ere          ");
-            Console.BackgroundColor = ConsoleColor.Black;
+            Console.Write("\n" + new string(' ', 40));
+            Console.Write("5:  5’ere          ");
             foreach (Player player in playerArray)
             {
                 PrintSpecifiedScore(player.ScoreArray[4], player.BoolArray[4], player, 7);
@@ -539,29 +531,29 @@ namespace DieTest
             Console.Write("\n" + new string(' ', 40));
             Console.BackgroundColor = ConsoleColor.DarkGray;
             Console.Write("6:  6’ere          ");
-            Console.BackgroundColor = ConsoleColor.Black;
             foreach (Player player in playerArray)
             {
                 PrintSpecifiedScore(player.ScoreArray[5], player.BoolArray[5], player, 8);
             }
             Console.BackgroundColor = ConsoleColor.Black;
-            Console.Write("\n" + new string(' ', 40) + "    Bonus          ");
-            Console.BackgroundColor = ConsoleColor.Black;
+            Console.Write("\n" + new string(' ', 40));
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.Write("Bonus              ");
             foreach (Player player in playerArray)
             {
                 PrintSpecifiedScore(player.ScoreArray[14], player.BoolArray[14], player, 9);
             }
+            Console.ForegroundColor = ConsoleColor.Gray; 
             Console.Write("\n" + new string(' ', 40));
             Console.BackgroundColor = ConsoleColor.DarkGray;
             Console.Write("7:  Et par         ");
-            Console.BackgroundColor = ConsoleColor.Black;
             foreach (Player player in playerArray)
             {
                 PrintSpecifiedScore(player.ScoreArray[6], player.BoolArray[6], player, 10);
             }
             Console.BackgroundColor = ConsoleColor.Black;
-            Console.Write("\n" + new string(' ', 40) + "8:  To par         ");
-            Console.BackgroundColor = ConsoleColor.Black;
+            Console.Write("\n" + new string(' ', 40));
+            Console.Write("8:  To par         ");
             foreach (Player player in playerArray)
             {
                 PrintSpecifiedScore(player.ScoreArray[7], player.BoolArray[7], player, 11);
@@ -569,14 +561,13 @@ namespace DieTest
             Console.Write("\n" + new string(' ', 40));
             Console.BackgroundColor = ConsoleColor.DarkGray;
             Console.Write("9:  Tre ens        ");
-            Console.BackgroundColor = ConsoleColor.Black;
             foreach (Player player in playerArray)
             {
                 PrintSpecifiedScore(player.ScoreArray[8], player.BoolArray[8], player, 12);
             }
             Console.BackgroundColor = ConsoleColor.Black;
-            Console.Write("\n" + new string(' ', 40) + "10: Fire ens       ");
-            Console.BackgroundColor = ConsoleColor.Black;
+            Console.Write("\n" + new string(' ', 40));
+            Console.Write("10: Fire ens       ");
             foreach (Player player in playerArray)
             {
                 PrintSpecifiedScore(player.ScoreArray[9], player.BoolArray[9], player, 13);
@@ -584,14 +575,13 @@ namespace DieTest
             Console.Write("\n" + new string(' ', 40));
             Console.BackgroundColor = ConsoleColor.DarkGray;
             Console.Write("11: Lille Straight ");
-            Console.BackgroundColor = ConsoleColor.Black;
             foreach (Player player in playerArray)
             {
                 PrintSpecifiedScore(player.ScoreArray[10], player.BoolArray[10], player, 14);
             }
             Console.BackgroundColor = ConsoleColor.Black;
-            Console.Write("\n" + new string(' ', 40) + "12: Stor Straight  ");
-            Console.BackgroundColor = ConsoleColor.Black;
+            Console.Write("\n" + new string(' ', 40));
+            Console.Write("12: Stor Straight  ");
             foreach (Player player in playerArray)
             {
                 PrintSpecifiedScore(player.ScoreArray[11], player.BoolArray[11], player, 15);
@@ -599,14 +589,13 @@ namespace DieTest
             Console.Write("\n" + new string(' ', 40));
             Console.BackgroundColor = ConsoleColor.DarkGray;
             Console.Write("13: Chancen        ");
-            Console.BackgroundColor = ConsoleColor.Black;
             foreach (Player player in playerArray)
             {
                 PrintSpecifiedScore(player.ScoreArray[12], player.BoolArray[12], player, 16);
             }
             Console.BackgroundColor = ConsoleColor.Black;
-            Console.Write("\n" + new string(' ', 40) + "14: Yatzy          ");
-            Console.BackgroundColor = ConsoleColor.Black;
+            Console.Write("\n" + new string(' ', 40));
+            Console.Write("14: Yatzy          ");
             foreach (Player player in playerArray)
             {
                 PrintSpecifiedScore(player.ScoreArray[13], player.BoolArray[13], player, 17);
@@ -614,7 +603,7 @@ namespace DieTest
             Console.Write("\n" + new string(' ', 40));
             Console.BackgroundColor = ConsoleColor.DarkGray;
             Console.ForegroundColor = ConsoleColor.White;
-            Console.Write("    Samlet Score   ");
+            Console.Write("Samlet Score       ");
             Console.BackgroundColor = ConsoleColor.Black;
             foreach (Player player in playerArray)
             {
