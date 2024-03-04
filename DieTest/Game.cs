@@ -20,11 +20,11 @@ namespace DieTest
 
             //  Intro and set up
 
-            //misc.Title();
-            //System.Threading.Thread.Sleep(1000);
-            //Console.WriteLine("\n \n Press any key to continue...");
-            //Console.ReadKey();
-            //Console.Clear();
+            misc.Title();
+            System.Threading.Thread.Sleep(1000);
+            Console.WriteLine("\n \n Press any key to continue...");
+            Console.ReadKey();
+            Console.Clear();
 
             Console.WriteLine("How many players?");
             int numberofplayers = int.Parse(Console.ReadLine());
