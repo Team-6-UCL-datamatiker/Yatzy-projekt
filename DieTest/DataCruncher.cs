@@ -412,6 +412,77 @@ namespace DieTest
         }
 
         // Printere:
+        public void PrintTitle()
+        {
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine(" __     __          _                 ");
+            Console.WriteLine(" \\ \\   / /         | |                ");
+            Console.WriteLine("  \\ \\_/ /    __ _  | |_   ____  _   _ ");
+            Console.WriteLine("   \\   /    / _` | | __| |_  / | | | |");
+            Console.WriteLine("    | |    | (_| | | |_   / /  | |_| |");
+            Console.WriteLine("    |_|     \\__,_|  \\__| /___|  \\__, |");
+            Console.WriteLine("                                 __/ |");
+            Console.WriteLine("                                |___/ ");
+            System.Threading.Thread.Sleep(200);
+            Console.Clear();
+            Console.ForegroundColor = ConsoleColor.Blue;
+            Console.WriteLine(" __     __          _                 ");
+            Console.WriteLine(" \\ \\   / /         | |                ");
+            Console.WriteLine("  \\ \\_/ /    __ _  | |_   ____  _   _ ");
+            Console.WriteLine("   \\   /    / _` | | __| |_  / | | | |");
+            Console.WriteLine("    | |    | (_| | | |_   / /  | |_| |");
+            Console.WriteLine("    |_|     \\__,_|  \\__| /___|  \\__, |");
+            Console.WriteLine("                                 __/ |");
+            Console.WriteLine("                                |___/ ");
+            System.Threading.Thread.Sleep(200);
+            Console.Clear();
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.WriteLine(" __     __          _                 ");
+            Console.WriteLine(" \\ \\   / /         | |                ");
+            Console.WriteLine("  \\ \\_/ /    __ _  | |_   ____  _   _ ");
+            Console.WriteLine("   \\   /    / _` | | __| |_  / | | | |");
+            Console.WriteLine("    | |    | (_| | | |_   / /  | |_| |");
+            Console.WriteLine("    |_|     \\__,_|  \\__| /___|  \\__, |");
+            Console.WriteLine("                                 __/ |");
+            Console.WriteLine("                                |___/ ");
+            System.Threading.Thread.Sleep(200);
+            Console.Clear();
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine(" __     __          _                 ");
+            Console.WriteLine(" \\ \\   / /         | |                ");
+            Console.WriteLine("  \\ \\_/ /    __ _  | |_   ____  _   _ ");
+            Console.WriteLine("   \\   /    / _` | | __| |_  / | | | |");
+            Console.WriteLine("    | |    | (_| | | |_   / /  | |_| |");
+            Console.WriteLine("    |_|     \\__,_|  \\__| /___|  \\__, |");
+            Console.WriteLine("                                 __/ |");
+            Console.WriteLine("                                |___/ ");
+            System.Threading.Thread.Sleep(200);
+            Console.Clear();
+            Console.ForegroundColor = ConsoleColor.Cyan;
+            Console.WriteLine(" __     __          _                 ");
+            Console.WriteLine(" \\ \\   / /         | |                ");
+            Console.WriteLine("  \\ \\_/ /    __ _  | |_   ____  _   _ ");
+            Console.WriteLine("   \\   /    / _` | | __| |_  / | | | |");
+            Console.WriteLine("    | |    | (_| | | |_   / /  | |_| |");
+            Console.WriteLine("    |_|     \\__,_|  \\__| /___|  \\__, |");
+            Console.WriteLine("                                 __/ |");
+            Console.WriteLine("                                |___/ ");
+            System.Threading.Thread.Sleep(200);
+            Console.Clear();
+            Console.ForegroundColor = ConsoleColor.Magenta;
+            Console.WriteLine(" __     __          _                 ");
+            Console.WriteLine(" \\ \\   / /         | |                ");
+            Console.WriteLine("  \\ \\_/ /    __ _  | |_   ____  _   _ ");
+            Console.WriteLine("   \\   /    / _` | | __| |_  / | | | |");
+            Console.WriteLine("    | |    | (_| | | |_   / /  | |_| |");
+            Console.WriteLine("    |_|     \\__,_|  \\__| /___|  \\__, |");
+            Console.WriteLine("                                 __/ |");
+            Console.WriteLine("                                |___/ ");
+            System.Threading.Thread.Sleep(200);
+            Console.Clear();
+            Console.ResetColor();
+            Console.Clear();
+        }
         private void PrintName(Player player)
         {
             int iSpace = 10 - player.Name.Length;

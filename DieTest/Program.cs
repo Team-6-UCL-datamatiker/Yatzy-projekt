@@ -7,6 +7,9 @@
             // Instantiering
             DataCruncher crunch = new DataCruncher();
             DieCup dieCup = new DieCup();
+
+            crunch.PrintTitle();
+
             Player[] playerArray = crunch.CreateNumberOfPlayers();
 
             //Løkke der kører 14 runder af spillet:
