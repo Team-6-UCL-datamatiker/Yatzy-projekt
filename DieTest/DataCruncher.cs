@@ -138,7 +138,7 @@ namespace DieTest
             Array.Sort(dieArrayEyes); //sort by value
             Array.Reverse(dieArrayEyes); //get the highest value first
 
-            for (int i = 0; i < dieArrayEyes.Length; i++)
+            for (int i = 0; i < dieArrayEyes.Length - 1; i++) //ændring
             {
                 if (dieArrayEyes[i] == dieArrayEyes[i + 1])
                 {
@@ -154,7 +154,7 @@ namespace DieTest
             Array.Sort(dieArrayEyes);
             Array.Reverse(dieArrayEyes);
 
-            for (int i = 0; i < dieArrayEyes.Length; i++)
+            for (int i = 0; i < dieArrayEyes.Length - 1; i++) //ændring
             {
                 if (dieArrayEyes[i] == dieArrayEyes[i + 1])
                 {
@@ -181,7 +181,7 @@ namespace DieTest
         {
             Array.Sort(dieArrayEyes);
 
-            for (int i = 0; i < dieArrayEyes.Length; i++)
+            for (int i = 0; i < dieArrayEyes.Length - 2; i++) //ændring
             {
                 if (dieArrayEyes[i] == dieArrayEyes[i + 1] && dieArrayEyes[i] == dieArrayEyes[i + 2])
                 {
@@ -194,7 +194,7 @@ namespace DieTest
         {
             Array.Sort(dieArrayEyes);
 
-            for (int i = 0; i < dieArrayEyes.Length; i++)
+            for (int i = 0; i < dieArrayEyes.Length - 3; i++) //ændring
             {
                 if (dieArrayEyes[i] == dieArrayEyes[i + 1] && dieArrayEyes[i] == dieArrayEyes[i + 2] && dieArrayEyes[i] == dieArrayEyes[i + 3])
                 {
