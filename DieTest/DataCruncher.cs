@@ -569,6 +569,7 @@ namespace DieTest
             Console.BackgroundColor = ConsoleColor.Black;
             foreach (Player player in playerArray)
             {
+                Console.ForegroundColor = ConsoleColor.White;
                 PrintName(player);
                 Console.ForegroundColor = ConsoleColor.Gray;
             }
@@ -686,6 +687,7 @@ namespace DieTest
             Console.BackgroundColor = ConsoleColor.Black;
             foreach (Player player in playerArray)
             {
+                Console.ForegroundColor = ConsoleColor.White; 
                 PrintSpecifiedScore(player.ScoreArray[15], player.BoolArray[15], player, 18);
                 Console.ForegroundColor = ConsoleColor.Gray;
                 Console.BackgroundColor = ConsoleColor.Black;
