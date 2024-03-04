@@ -10,9 +10,11 @@ namespace DieTest
     {
         // Feltvariable:
         private Random r = new Random();
+
         // Properties:
         public int Eyes { get; set; }
         public bool IsFrozen { get; set; }
+
         // Metoder:
         public void Roll()
         {
@@ -21,7 +23,6 @@ namespace DieTest
                 Eyes = r.Next(1, 7);
             }
         }
-
         public void SwitchIsFrozen()
         {
             if (IsFrozen == true)
@@ -31,18 +32,6 @@ namespace DieTest
             else
             {
                 IsFrozen = true;
-            }
-        }
-
-        public string PrintIsFrozen()
-        {
-            if (IsFrozen == true)
-            {
-                return "[X] ";
-            }
-            else
-            {
-                return "[ ] ";
             }
         }
 

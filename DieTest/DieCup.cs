@@ -8,65 +8,51 @@ namespace DieTest
 {
     internal class DieCup
     {
-        private Die[] dice = new Die[5];
+        // Feltvariable/Properties:
+        private Die[] dieArray = new Die[5] { new Die(), new Die(), new Die(), new Die(), new Die() };
+        public Die[] DieArray { get { return dieArray; } }
 
-        private Die die1 = new Die();
-        private Die die2 = new Die();
-        private Die die3 = new Die();
-        private Die die4 = new Die();
-        private Die die5 = new Die();
-
-        public DieCup()
-        {
-            dice[0] = die1;
-            dice[1] = die2;
-            dice[2] = die3;
-            dice[3] = die4;
-            dice[4] = die5;
-        }
-
+        // Metoder:
         public void Roll()
         {
-            foreach (Die d in dice)
+            foreach (Die d in dieArray)
             {
                 d.Roll();
             }
-        }
 
-        public void FreezeMultipleDice(string s)
+        }
+        public void FreezeMultipleDice(string specifiedDice)
         {
             for (int i = 0; i < 5; i++)
             {
-                if (s.Contains((i + 1).ToString()))
+                if (specifiedDice.Contains((i + 1).ToString()))
                 {
-                    dice[i].SwitchIsFrozen();
+                    dieArray[i].SwitchIsFrozen();
                 }
             }
         }
         public void FreezeAllDice()
         {
-            foreach (Die d in dice)
+            foreach (Die die in dieArray)
             {
-                d.IsFrozen = true;
+                die.IsFrozen = true;
             }
         }
-
-        public void UnfreezeAllDice()
+        public void UnFreezeAllDice()
         {
-            foreach (Die d in dice) 
+            foreach (Die die in dieArray)
             {
-                d.IsFrozen = false;
+                die.IsFrozen = false;
             }
         }
-
-        public void PrintEyes(int i)
+        public int[] GetDiceValues()
         {
-            Console.Clear();
-            Console.WriteLine((2 - i) + ". Rerolls left\n");
-            foreach (Die d in dice)
+            int[] dieArrayEyes = new int[5];
+            for (int i = 0; i < 5; i++)
             {
-                Console.WriteLine(d.PrintIsFrozen() + "Terning " + (Array.IndexOf(dice, d) + 1) + ": " + d.Eyes);
+                dieArrayEyes[i] = DieArray[i].Eyes;
             }
+            return dieArrayEyes;
         }
 
     }
