@@ -508,14 +508,14 @@ namespace DieTest
             Console.Clear();
             PrintScoreCard(playerArray);
             Console.WriteLine("Runde {0}\n", iStringParameter + 1);
-            Console.Write(player.Name + "s tur:\n\n");
-                if (63 - (player.ScoreArray[1] + player.ScoreArray[2] + player.ScoreArray[3] + player.ScoreArray[4] + player.ScoreArray[5] + player.ScoreArray[6]) <= 0)
+            Console.Write(player.Name + "s tur:\n");
+                if ( 63 <= (player.ScoreArray[0] + player.ScoreArray[1] + player.ScoreArray[2] + player.ScoreArray[3] + player.ScoreArray[4] + player.ScoreArray[5]))
             {
-                Console.Write("Du mangler 0 for at få bonus.\n\n");
+                Console.Write(" \n\n");
             }
             else
             {
-                Console.Write("Du mangler {0} for at få bonus.\n\n", 63 - (player.ScoreArray[1] + player.ScoreArray[2] + player.ScoreArray[3] + player.ScoreArray[4] + player.ScoreArray[5] + player.ScoreArray[6]));
+                Console.Write("({0} fra bonus)\n\n", 63 - (player.ScoreArray[0] + player.ScoreArray[1] + player.ScoreArray[2] + player.ScoreArray[3] + player.ScoreArray[4] + player.ScoreArray[5]));
             }
             Console.WriteLine((iTurnMinusOne + 1) + ". Kast\n");
             foreach (Die die in dieCup.DieArray)
@@ -733,23 +733,23 @@ namespace DieTest
             }
             Console.ResetColor();
             Console.ReadLine();
-        }//Return the player with the highest total score
+        }
         public void PrintFlowController(int iWriteIdentifier)
         {
             switch (iWriteIdentifier)
             {
                 case 1:
-                    Console.WriteLine("Tryk på Enter for at rafle.\n");
+                    Console.WriteLine("Tryk Enter for at rafle.\n");
                     Console.ReadLine();
                     break;
                 case 2:
                     Console.WriteLine("\n\n\n\n\n\nRafle rafle rafle...\n");
                     Console.SetCursorPosition(0, 0);
-                    Thread.Sleep(75);
+                    Thread.Sleep(75);   
                     Console.SetCursorPosition(0, 0);
                     break;
                 case 3:
-                    Console.WriteLine("\n\n\n\n\n\nIndtast numrene på de terninger, du vil låse (op), eller tryk på Enter for at rafle.\n");
+                    Console.WriteLine("\n\n\n\n\n\nIndtast numrene på de terninger, du vil låse (op), eller tryk Enter for at rafle.\n");
                     break;
                 case 4:
                     Console.Clear();
@@ -774,7 +774,7 @@ namespace DieTest
                     break;
             }
         }
-        // Jeppes printanimation:
+        // Printanimation:
         private static void TypeLine(string line)
         {
             foreach (char c in line)
