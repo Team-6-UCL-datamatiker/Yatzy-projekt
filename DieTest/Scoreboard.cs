@@ -153,7 +153,7 @@ namespace DieTest
             Array.Sort(diceValues); //sort by value
             Array.Reverse(diceValues); //get the highest value first
 
-            for (int i = 0; i < diceValues.Length; i++)
+            for (int i = 0; i < diceValues.Length - 1; i++)
             {
                 if (diceValues[i] == diceValues[i + 1])
                 {
@@ -163,42 +163,42 @@ namespace DieTest
             return 0;
         }
 
-        private int CalculateTwoPairs(int[] diceValues)
-        {
-            int sum = 0;
-            int pairCount = 0;
-            Array.Sort(diceValues);
-            Array.Reverse(diceValues);
-
-            for (int i = 0; i < diceValues.Length; i++)
+            private int CalculateTwoPairs(int[] diceValues)
             {
-                if (diceValues[i] == diceValues[i + 1])
-                {
-                    sum += diceValues[i] * 2;
-                    pairCount++;
+                int sum = 0;
+                int pairCount = 0;
+                Array.Sort(diceValues);
+                Array.Reverse(diceValues);
 
-                    if (pairCount == 2)
+                for (int i = 0; i < diceValues.Length - 1; i++)
+                {
+                    if (diceValues[i] == diceValues[i + 1])
                     {
-                        break;
+                        sum += diceValues[i] * 2;
+                        pairCount++;
+
+                        if (pairCount == 2)
+                        {
+                            break;
+                        }
+                        i++;
                     }
-                    i++;
+                }
+                if (pairCount == 2)
+                {
+                    return sum;
+                }
+                else
+                {
+                    return 0;
                 }
             }
-            if (pairCount == 2)
-            {
-                return sum;
-            }
-            else
-            {
-                return 0;
-            }
-        }
 
         private int CalculateTreeOfAKind(int[] diceValues)
         {
             Array.Sort(diceValues);
 
-            for (int i = 0; i < diceValues.Length; i++)
+            for (int i = 0; i < diceValues.Length - 2; i++)
             {
                 if (diceValues[i] == diceValues[i + 1] && diceValues[i] == diceValues[i + 2])
                 {
@@ -212,7 +212,7 @@ namespace DieTest
         {
             Array.Sort(diceValues);
 
-            for (int i = 0; i < diceValues.Length; i++)
+            for (int i = 0; i < diceValues.Length - 3; i++)
             {
                 if (diceValues[i] == diceValues[i + 1] && diceValues[i] == diceValues[i + 2] && diceValues[i] == diceValues[i + 3])
                 {
