@@ -684,33 +684,46 @@ namespace DieTest
             }
             Console.SetCursorPosition(0, 0);
         }
-        public void PrintWinner(Player[] playerArray)
+        public void PrintEndGame(Player[] playerArray)
         {
-            int v = 0;
-            Player winner = new Player("vinder", "blå", "blås");
-            foreach (Player p in playerArray)
+            Player winner = playerArray[0];
+            foreach (Player player in playerArray)
             {
-                if (p.ScoreArray[15] > v)
+                if (player.ScoreArray[15] > winner.ScoreArray[15])
                 {
-                    v = p.ScoreArray[15];
-                    winner = p;
+                    winner = player;
                 }
             }
-            Console.Clear();
-            PrintScoreCard(playerArray);
-            Console.WriteLine(winner.Name + " VINDER MED " + v + " POINT!");
-            Thread.Sleep(1500);
-            Console.SetCursorPosition(0, 2);
-            Random r = new Random();
-            for (int j = 0; j < 60; j++)
+            for (int i = 0; i < 10; i++)
             {
-                Thread.Sleep(500);
-                Console.ForegroundColor = (ConsoleColor)r.Next(0, 16);
-                Console.BackgroundColor = (ConsoleColor)r.Next(0, 16);
-                Console.WriteLine(new string(' ', j * j) + "HAHAHA TABERE!");
+                Console.Clear();
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("CONGRATULATIONS " + winner.Name + " YOU WON!!!!!! \n Points: " + winner.ScoreArray[15]);
+                System.Threading.Thread.Sleep(100);
+                Console.Clear();
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine("\nCONGRATULATIONS " + winner.Name + " YOU WON!!!!!! \n Points: " + winner.ScoreArray[15]);
+                System.Threading.Thread.Sleep(100);
+                Console.Clear();
+                Console.ForegroundColor = ConsoleColor.Blue;
+                Console.WriteLine("\n\nCONGRATULATIONS " + winner.Name + " YOU WON!!!!!! \n Points: " + winner.ScoreArray[15]);
+                System.Threading.Thread.Sleep(100);
+                Console.Clear();
+                Console.ForegroundColor = ConsoleColor.Yellow;
+                Console.WriteLine("\nCONGRATULATIONS " + winner.Name + " YOU WON!!!!!! \n Points: " + winner.ScoreArray[15]);
+                System.Threading.Thread.Sleep(100);
             }
+            Console.Clear();
+            Console.ResetColor();
+            Player[] sortedPlayersArray = playerArray.OrderByDescending(player => player.ScoreArray[15]).ToArray();
+            for (int i = 0; i < sortedPlayersArray.Length; i++)
+            {
+                Console.ForegroundColor = colors.GetValueOrDefault(sortedPlayersArray[i].Color, ConsoleColor.Black);
+                Console.WriteLine(i + 1 + ". place: " + sortedPlayersArray[i].Name + " (" + sortedPlayersArray[i].ScoreArray[15] + " points)");
+            }
+            Console.ResetColor();
             Console.ReadLine();
-        }
+        }//Return the player with the highest total score
         public void PrintFlowController(int iWriteIdentifier)
         {
             switch (iWriteIdentifier)

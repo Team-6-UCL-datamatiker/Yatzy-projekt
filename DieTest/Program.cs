@@ -61,7 +61,7 @@
                 crunch.PrintScoreCard(playerArray);
             }
             // Vinderanimation:
-            crunch.PrintWinner(playerArray);
+            crunch.PrintEndGame(playerArray);
         }
     }
 }
