@@ -89,11 +89,7 @@
             Console.WriteLine("                                |___/ ");
             System.Threading.Thread.Sleep(200);
             Console.Clear();
-
-
-
             Console.ResetColor();
-            Console.Clear();
         }
 
 
