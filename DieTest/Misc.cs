@@ -1,15 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace DieTest
+﻿namespace DieTest
 {
     public class Misc
     {
 
-        public  void Loading()
+        public void Loading()
         {
             for (int i = 0; i < 3; i++)
             {

@@ -1,15 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml.Schema;
-
-namespace DieTest
+﻿namespace DieTest
 {
     public class Scoreboard
     {
-        public static void showScoreboard(Player[] players) 
+        public static void showScoreboard(Player[] players)
         {
             int cat = 1;
             //Creating Header

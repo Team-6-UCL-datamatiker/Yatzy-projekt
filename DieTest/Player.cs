@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace DieTest
+﻿namespace DieTest
 {
     public class Player
     {
@@ -14,7 +8,7 @@ namespace DieTest
         public int number;
 
         public Player(string playerName, int playerNumber)
-        
+
         {
 
             name = playerName;
@@ -55,7 +49,7 @@ namespace DieTest
             if (!scoresModified[slot])
             {
                 scores[slot] = value;
-                scoresModified[slot] = true; 
+                scoresModified[slot] = true;
             }
             else
             {

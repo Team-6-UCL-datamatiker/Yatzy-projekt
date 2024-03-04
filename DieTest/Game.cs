@@ -1,16 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Cryptography.X509Certificates;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace DieTest
+﻿namespace DieTest
 {
     internal class Game
     {
-        
-        
+
+
         static void Main(string[] args)
 
         {
@@ -45,11 +38,11 @@ namespace DieTest
                     }
                 }
                 while (x.Length > maxLength);
-                
+
                 players[i] = new Player(x, i);
 
 
-                
+
             }
 
             Console.Clear();
@@ -57,7 +50,7 @@ namespace DieTest
 
             //Turn 1
 
-            for (int i = 0;i < 3; i++)
+            for (int i = 0; i < 3; i++)
             {
                 dieCup.Roll();
                 Console.Clear();
@@ -80,7 +73,7 @@ namespace DieTest
                     }
                     else if (keyInfo.Key == ConsoleKey.N)
                     {
-                
+
                     }
 
 
@@ -92,7 +85,7 @@ namespace DieTest
             Console.WriteLine();
             dieCup.PrintEyes(2);
             Console.WriteLine("Choose where to save the results (Type the number of the catagory you'd like to save the result in):");
-            
+
 
 
 

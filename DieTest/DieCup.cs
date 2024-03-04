@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace DieTest
+﻿namespace DieTest
 {
     internal class DieCup
     {
@@ -53,7 +47,7 @@ namespace DieTest
 
         public void UnfreezeAllDice()
         {
-            foreach (Die d in dice) 
+            foreach (Die d in dice)
             {
                 d.IsFrozen = false;
             }
