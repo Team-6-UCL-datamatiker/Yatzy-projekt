@@ -69,7 +69,7 @@ namespace DieTest
                     Thread.Sleep(500);
                     TypeLine("\n\nRød, blå, grøn, lilla eller turkis?\n\n");
                     Console.OutputEncoding = originalEncoding;
-                    sColor = Console.ReadLine();
+                    sColor = Console.ReadLine().ToLower();
                     bWhile = false;
                     switch (sColor)
                     {
@@ -387,7 +387,7 @@ namespace DieTest
                 Console.Write("\nDin {0} score er {1}. \n\nTryk Enter for at bekræfte eller indtast \"hov\" for at vælge en anden kombination: ", scoreName, CalculateSpecifiedScore(dieCup, sScoreIdentifier));
                 while (true)
                 {
-                    string a = Console.ReadLine();
+                    string a = Console.ReadLine().ToLower();
                     if (a == "hov")
                     {
                         bStayInWhile = true;
