@@ -15,23 +15,8 @@ namespace DieTest
 
         {
             Misc misc = new Misc();
-            //Working part, for reference
-
-            //Console.WriteLine("How many players?");
-            //int numberofplayers = int.Parse(Console.ReadLine());
-            //Player[] players = new Player[numberofplayers];
-
-            //for (int i = 0; i < numberofplayers; i++)
-            //{
-            //   Console.WriteLine("Name of player " + (i+1) + "?:");
-            //    string x = Console.ReadLine();
-            //    players[i] = new Player(x, i);
-            //}
-
-            //Console.Clear();
-            //Scoreboard.showScoreboard(players);
-
-            //
+            DieCup dieCup = new DieCup();
+            int maxLength = 10;
 
             //  Intro and set up
 
@@ -40,6 +25,42 @@ namespace DieTest
             Console.WriteLine("\n \n Press any key to continue...");
             Console.ReadKey();
             Console.Clear();
+
+            Console.WriteLine("How many players?");
+            int numberofplayers = int.Parse(Console.ReadLine());
+            Player[] players = new Player[numberofplayers];
+
+            for (int i = 0; i < numberofplayers; i++)
+            {
+                string x;
+
+                do
+                {
+                    Console.WriteLine("Name of player " + (i + 1) + "?:");
+                    x = Console.ReadLine();
+
+                    if (x.Length > maxLength)
+                    {
+                        Console.WriteLine($"Input exceeds maximum length of {maxLength} characters. Please try again.");
+                    }
+                }
+                while (x.Length > maxLength);
+                
+                players[i] = new Player(x, i);
+
+
+                
+            }
+
+            Console.Clear();
+            Scoreboard.showScoreboard(players);
+
+            //Turn 1
+
+            dieCup.Roll();
+
+
+
 
 
         }
