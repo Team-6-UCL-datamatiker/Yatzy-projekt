@@ -11,8 +11,9 @@ namespace DieTest
     {
         public static void showScoreboard(Player[] players) 
         {
+            int cat = 1;
             //Creating Header
-            Console.Write("Kombination".PadRight(25));
+            Console.Write("".PadRight(4) + "Kombination".PadRight(25));
             foreach (var player in players)
             {
                 Console.Write($"{player.name}".PadRight(10));
@@ -21,8 +22,8 @@ namespace DieTest
             //Creating Rows
             foreach (var key in players[0].scores.Keys)
             {
-                Console.Write(key.PadRight(25));
-
+                Console.Write((cat + ": ").PadRight(4) + key.PadRight(25));
+                cat++;
                 foreach (var player in players)
                 {
                     Console.Write($"{player.scores[key]}".PadRight(10));
@@ -30,14 +31,6 @@ namespace DieTest
                 Console.WriteLine();
 
             }
-            
-
-            //for (int i = 1; i < 14; i++)
-            //{
-            //    Console.Write();
-            //}
-
-
         }
     }
 }

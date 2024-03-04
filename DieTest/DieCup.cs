@@ -61,8 +61,12 @@ namespace DieTest
 
         public void PrintEyes(int i)
         {
-            Console.Clear();
-            Console.WriteLine((2 - i) + ". Rerolls left\n");
+
+            //Console.Clear();
+            if (i != 2)
+            {
+                Console.WriteLine((2 - i) + ". Rerolls left\n");
+            }
             foreach (Die d in dice)
             {
                 Console.WriteLine(d.PrintIsFrozen() + "Terning " + (Array.IndexOf(dice, d) + 1) + ": " + d.Eyes);
