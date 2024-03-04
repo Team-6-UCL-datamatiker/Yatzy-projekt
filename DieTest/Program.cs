@@ -4,12 +4,14 @@
     {
         static void Main(string[] args)
         {
-            // Instantiering
+            // Instantiering:
             DataCruncher crunch = new DataCruncher();
             DieCup dieCup = new DieCup();
 
+            // Titelanimation:
             crunch.PrintTitle();
 
+            // Spilleroprettelse:
             Player[] playerArray = crunch.CreateNumberOfPlayers();
 
             //Løkke der kører 14 runder af spillet:
