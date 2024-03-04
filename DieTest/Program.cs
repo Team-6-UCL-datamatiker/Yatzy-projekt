@@ -5,7 +5,7 @@
         static void Main(string[] args)
         {
             Console.ResetColor(); //Reset color before game starts
-           
+
             int numberOfPlayers;
 
             TypeLine("Welome to yatzy! \n");
