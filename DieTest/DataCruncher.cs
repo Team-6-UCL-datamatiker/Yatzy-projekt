@@ -298,7 +298,7 @@ namespace DieTest
             while (bStayinWhile == true)
             {
                 PrintTurn(dieCup, player, playerArray, iRunde, iRollCounter);
-                Console.Write("\n\n\n\n\n\n\n\n\n\nIndtast et tal mellem 1 og 14 for at vælge kombination: ");
+                Console.Write("\n\n\n\n\n\nIndtast et tal mellem 1 og 14 for at vælge kombination: ");
                 string sScoreIdentifier = Console.ReadLine();
                 string sScoreNavn;
                 bStayinWhile = false;
@@ -509,6 +509,14 @@ namespace DieTest
             PrintScoreCard(playerArray);
             Console.WriteLine("Runde {0}\n", iStringParameter + 1);
             Console.Write(player.Name + "s tur:\n\n");
+                if (63 - (player.ScoreArray[1] + player.ScoreArray[2] + player.ScoreArray[3] + player.ScoreArray[4] + player.ScoreArray[5] + player.ScoreArray[6]) <= 0)
+            {
+                Console.Write("Du mangler 0 for at få bonus.\n\n");
+            }
+            else
+            {
+                Console.Write("Du mangler {0} for at få bonus.\n\n", 63 - (player.ScoreArray[1] + player.ScoreArray[2] + player.ScoreArray[3] + player.ScoreArray[4] + player.ScoreArray[5] + player.ScoreArray[6]));
+            }
             Console.WriteLine((iTurnMinusOne + 1) + ". Kast\n");
             foreach (Die die in dieCup.DieArray)
             {
@@ -733,13 +741,13 @@ namespace DieTest
                     Console.ReadLine();
                     break;
                 case 2:
-                    Console.WriteLine("\n\n\n\n\n\n\n\n\n\nRafle rafle rafle...\n");
+                    Console.WriteLine("\n\n\n\n\n\nRafle rafle rafle...\n");
                     Console.SetCursorPosition(0, 0);
                     Thread.Sleep(75);
                     Console.SetCursorPosition(0, 0);
                     break;
                 case 3:
-                    Console.WriteLine("\n\n\n\n\n\n\n\n\n\nIndtast numrene på de terninger, du vil låse (op), eller tryk på Enter for at rafle.\n");
+                    Console.WriteLine("\n\n\n\n\n\nIndtast numrene på de terninger, du vil låse (op), eller tryk på Enter for at rafle.\n");
                     break;
                 case 4:
                     Console.Clear();

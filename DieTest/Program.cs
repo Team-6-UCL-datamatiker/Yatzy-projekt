@@ -14,7 +14,7 @@
             // Spilleroprettelse:
             Player[] playerArray = crunch.CreateNumberOfPlayers();
 
-            //Løkke der kører 14 runder af spillet:
+            // Løkke der kører 14 runder af spillet:
             for (int iRunde = 0; iRunde < 14; iRunde++)
             {
                 // Alle får en tur hver af de 14 runder:
