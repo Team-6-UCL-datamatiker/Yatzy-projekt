@@ -514,7 +514,9 @@ namespace DieTest
             }
             else
             {
-                Console.Write("({0} fra bonus)\n\n", 63 - (player.ScoreArray[0] + player.ScoreArray[1] + player.ScoreArray[2] + player.ScoreArray[3] + player.ScoreArray[4] + player.ScoreArray[5]));
+                Console.ForegroundColor = ConsoleColor.DarkYellow;
+                Console.Write("{0} fra bonus\n\n", 63 - (player.ScoreArray[0] + player.ScoreArray[1] + player.ScoreArray[2] + player.ScoreArray[3] + player.ScoreArray[4] + player.ScoreArray[5]));
+                Console.ForegroundColor = ConsoleColor.Gray;
             }
             Console.WriteLine((iTurnMinusOne + 1) + ". Kast\n");
             foreach (Die die in dieCup.DieArray)
