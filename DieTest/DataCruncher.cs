@@ -478,8 +478,7 @@ namespace DieTest
             Console.WriteLine("    |_|     \\__,_|  \\__| /___|  \\__, |");
             Console.WriteLine("                                 __/ |");
             Console.WriteLine("                                |___/ ");
-            System.Threading.Thread.Sleep(200);
-            Console.Clear();
+            System.Threading.Thread.Sleep(1800);
             Console.ResetColor();
             Console.Clear();
         }
