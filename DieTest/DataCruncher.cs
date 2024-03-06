@@ -240,15 +240,11 @@ namespace DieTest
         }
         private static int Yatzy(int[] dieArrayEyes)
         {
-            int iEyes = dieArrayEyes[0];
-            foreach (int i in dieArrayEyes)
+            if (dieArrayEyes[0] == dieArrayEyes[1] && dieArrayEyes[0] == dieArrayEyes[2] && dieArrayEyes[0] == dieArrayEyes[3] && dieArrayEyes[0] == dieArrayEyes[4])
             {
-                if (dieArrayEyes[i] != iEyes)
-                {
-                    return 0;
-                }
+                return 50;
             }
-            return 50;
+            return 0;
         }
         private static int CalculateSpecifiedScore(DieCup dieCup, string sScoreIdentifier)
         {
