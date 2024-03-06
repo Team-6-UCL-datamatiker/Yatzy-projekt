@@ -8,7 +8,7 @@
             DataCruncher crunch = new DataCruncher();
             DieCup dieCup = new DieCup();
 
-            // Titelanimation:
+            // Titelanimation  
             crunch.PrintTitle();
 
             // Spilleroprettelse:
